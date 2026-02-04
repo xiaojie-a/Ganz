@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://sparkly-frangollo-7c1e65.netlify.app/*"
+  to = "http://sparkly-frangollo-7c1e65.netlify.app/:splat"
+  status = 301
+  force = true

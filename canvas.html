@@ -886,11 +886,11 @@
                         try {
                             // 使用 Promise.all 并行执行所有请求
                             const [sryResponse, historicalResponse, mtResponse, wxResponse, blResponse] = await Promise.all([
-                                fetch('http://1z624868f2.wicp.vip/api/users/sry'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/historical'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/mt'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/wx'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/bl')
+                                fetch('https://nodecanvas.w1.luyouxia.net/api/users/sry'),
+                                fetch('https://nodecanvas.w1.luyouxia.net/api/users/historical'),
+                                fetch('https://nodecanvas.w1.luyouxia.net/api/users/mt'),
+                                fetch('https://nodecanvas.w1.luyouxia.net/api/users/wx'),
+                                fetch('https://nodecanvas.w1.luyouxia.net/api/users/bl')
                             ]);
 
                             // 检查所有响应是否成功
@@ -1069,7 +1069,7 @@
                         zfz = parseFloat((parseFloat(this.amount || 0) + parseFloat(this.amountmt || 0) + parseFloat(this.amountwx ||
                             0) + 3000).toFixed(2));
                         console.log(zfz);
-                        axios.post('http://1z624868f2.wicp.vip/broadcast', {
+                        axios.post('https://nodecanvas.w1.luyouxia.net/broadcast', {
                             amount: zfz,
                             sry: this.sry
                         })

@@ -1,5 +1,6 @@
 [[redirects]]
-  from = "https://sparkly-frangollo-7c1e65.netlify.app/*"
+  from = "/*"
   to = "http://sparkly-frangollo-7c1e65.netlify.app/:splat"
   status = 301
   force = true
+  conditions = {Scheme = "https"}

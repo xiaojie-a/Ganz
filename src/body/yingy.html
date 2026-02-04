@@ -1,0 +1,274 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+	<style type="text/css">
+		#c1 {
+			width: 100%;
+
+			margin-top: 130px;
+		}
+
+		#c1 #gq {
+			width: 90%;
+			height: 100px;
+			border-radius: 15px;
+			border-bottom: 1px solid #999999;
+			margin: 0 auto;
+			will-change: transform;
+			transition: all 0.3s ease;
+
+
+		}
+
+		#tx {
+			float: right;
+			border-radius: 15px;
+		}
+
+		#c1 #gq #bt {
+			font-size: 20px;
+			font-family: "粗黑体";
+
+		}
+
+		#c1 #gq #xx {
+			color: #ff000057;
+			font-size: 15px;
+
+		}
+
+		#c1 #gq #gj {
+			margin-left: 150px;
+			color: #999999;
+
+		}
+
+		#c1 #gq #text {
+
+			margin-left: 15px;
+		}
+
+		#gq:hover {
+			background: #f3f3f3;
+			cursor: pointer;
+			filter: drop-shadow(2px 4px 6px #DBDBDB);
+
+			transform: scale(1.01);
+
+		}
+
+		#c1 #gq #lj {
+			float: right;
+		}
+
+		.search-container {
+			background: #ffffff;
+			position: fixed;
+			top: 40px;
+			z-index: 1;
+			width: 100%;
+			height: 80px;
+		}
+
+		.search {
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		.search-input {
+			margin-top: 20px;
+			flex: 1;
+			padding: 12px 30px;
+			width: 85%;
+			border: 2px solid #ddd;
+			border-radius: 25px;
+			font-size: 16px;
+			outline: none;
+			transition: all 0.3s;
+		}
+
+		.search-input:focus {
+			border-color: #4CAF50;
+			box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+		}
+
+		.search-button {
+			margin-top: 20px;
+			padding: 12px 30px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 25px;
+			cursor: pointer;
+			font-size: 16px;
+			transition: background-color 0.3s;
+		}
+
+		.search-button:hover {
+			background-color: #45a049;
+		}
+
+		/* 移动端适配 */
+		@media (max-width: 480px) {
+			.search-box {
+				flex-direction: column;
+			}
+
+			.search-button {
+				width: 100%;
+			}
+		}
+
+		#jz {
+			position: absolute;
+			top: 50%;
+			/* 相对于父元素顶部偏移 50% */
+			left: 50%;
+			/* 相对于父元素左侧偏移 50% */
+			transform: translate(-50%, -50%);
+			/* 通过自身宽高的一半修正位置 */
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="c1">
+		<div class="search-container">
+			<div class="search">
+
+				<input @click="SS()" v-model="userInput" type="search" class="search-input" name="q"
+					placeholder="请输入搜索内容..." aria-label="搜索" required>
+				<button type="submit" class="search-button" @click="myFunction()">刷新</button>
+			</div>
+		</div>
+
+		<template v-for="(item, index) in items.songs">
+			<div id="gq" @click="URLS(items.songs[index])" style="cursor:hand">
+				<img id="tx" :src="items.songs[index].al.picUrl" width="100px" height="100px" alt="" />
+				<div id="text">
+					<p></p><br><samp id="bt">{{items.songs[index].name}}</samp><samp
+						id="gj">作者：{{items.songs[index].ar[0].name}}</samp><br><br>
+					<samp id="xx">所有歌曲资源都来源于网易云音乐，解析方式来源于网络!</samp>
+				</div>
+
+			</div>
+		</template><br>
+		<div id="jz">正在加载……</div>
+
+	</div>
+
+
+
+	<script>
+
+		new Vue({
+			el: '#c1',
+			data: function () {
+				return {
+					GDid: '',
+					userInput: '',
+					content: '',
+					items: [],
+					// items: JSON.parse(adb4),
+				}
+			},
+			created() {
+
+				fetch('https://apis.netstart.cn/music/top/playlist/highquality')
+					.then(response => response.json())
+					.then(data => {
+						let SJid = Math.floor(Math.random() * 20);
+						this.GDid = data.playlists[SJid].id;
+						this.fetchData();
+					})
+
+			},
+			methods: {
+				SS() {
+					document.querySelector('.search-button').textContent = '搜索';
+				},
+				fetchData() {
+					console.log(this.GDid)
+					fetch('https://apis.netstart.cn/music/playlist/track/all?id=' + this.GDid + '&limit=50')
+						.then(response => response.json())
+						.then(data => {
+							this.items = data;
+							document.getElementById('jz').style.display = 'none';
+							const elements = document.querySelectorAll('#gq');
+							elements.forEach(element => {
+								element.style.filter = 'blur(0px)';
+							});
+						})
+
+				},
+
+				URLS(value) {
+
+
+					localStorage.setItem('YYURL', JSON.stringify(value));
+
+					console.log('Received URL:', value);
+					//   //window.location.href = value; 将当前页面转为其他链接（直连可触发下载窗口）
+					// 		audio.src = value;
+					// // 重新加载音频
+					// audio.load();
+					// // 自动播放（可选）
+					// audio.play().catch(error => {
+					//   console.error('Autoplay failed:', error);
+					// });
+
+
+				},
+				myFunction() {
+
+					document.querySelector('.search-button').textContent = '刷新';
+					const elements = document.querySelectorAll('#gq');
+					elements.forEach(element => {
+						element.style.filter = 'blur(50px)';
+					});
+					if (this.userInput != '') {
+						document.getElementById('jz').style.display = 'block';
+						this.content = 'https://apis.netstart.cn/music/cloudsearch?keywords=' + this.userInput;
+						fetch(this.content)
+							.then(response => response.json())
+							.then(data => {
+								this.items = data.result;
+								console.log(data.result);
+								document.getElementById('jz').style.display = 'none';
+								const elements = document.querySelectorAll('#gq');
+								elements.forEach(element => {
+									element.style.filter = 'blur(0px)';
+									this.userInput = '';
+								});
+							})
+					} else {
+						document.getElementById('jz').style.display = 'block';
+						fetch('https://apis.netstart.cn/music/top/playlist/highquality')
+							.then(response => response.json())
+							.then(data => {
+								let SJid = Math.floor(Math.random() * 20);
+								this.GDid = data.playlists[SJid].id;
+								this.fetchData();
+
+							})
+
+					}
+
+				}
+			}
+
+
+		});
+		// console.log(JSON.parse(adb4)); 
+
+
+
+	</script>
+</body>
+
+</html>

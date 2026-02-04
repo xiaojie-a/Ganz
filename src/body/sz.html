@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 引入 Bootstrap JS 和依赖项（Popper.js 和 jQuery） -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
+    <!-- <script src="./renderer.js" type="text/javascript"></script> -->
+</head>
+
+<body style="background-color:  rgb(108, 199, 225);">
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 10%; flex-direction: column;">
+        <img src="img/logo.png" style="width: 50%; margin-bottom: 5%; margin-right: 5%;">
+        <p id="bb"></p>
+        <p>联系我：3190919078@qq.com</p>
+        <button type="button" class="btn btn-danger" onclick="gx()" style="width: 30%; ">检查更新</button>
+    </div>
+    <script>
+
+        var wlgx = sessionStorage.getItem('wlgx');
+        var bdgx = sessionStorage.getItem('bdgx');
+        console.log(wlgx);
+        console.log(bdgx)
+        document.getElementById("bb").innerHTML = "当前版本：DEM" + bdgx;
+        function gx() {
+            if (wlgx == bdgx) {
+                alert("当前是最新版本！")
+            } else {
+                alert("检测到有版本更新，请重启应用会提示更新，若无法更新可以通过设置页面的“联系我”进行反馈！")
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

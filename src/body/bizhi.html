@@ -1,0 +1,442 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+	<style type="text/css">
+		#c1 {
+			width: 95%;
+			margin: 0px auto;
+			margin-top: 150px;
+			display: flex;
+			/* 启用 Flex 布局 */
+			justify-content: space-between;
+			/* 图片均匀分布，两端对齐 */
+			align-items: center;
+			/* 垂直居中（可选） */
+			gap: 12px;
+			/* 图片间距（推荐方式） */
+			flex-wrap: wrap;
+			/* 允许换行（如果图片太多） */
+
+		}
+
+		#c2 {
+			width: 200px;
+			height: 300px;
+			box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			will-change: transform;
+			transition: all 0.3s ease;
+		}
+
+		#c1 img {
+			border-radius: 5px;
+		}
+
+		#c2:hover {
+			cursor: pointer;
+
+			transform: scale(1.01);
+
+		}
+
+		.search-button {
+			position: fixed;
+			bottom: 0;
+			right: 30;
+
+			z-index: 1000;
+			margin-left: 5px;
+			margin-bottom: 5px;
+			padding: 12px 12px;
+			background-color: #ced1ce;
+			color: white;
+			border: none;
+			border-radius: 25px;
+			cursor: pointer;
+			font-size: 15px;
+			transition: background-color 0.3s;
+		}
+
+		.search-button:hover {
+			background-color: #ced1ce;
+		}
+
+		/* 移动端适配 */
+		@media (max-width: 480px) {
+			.search-box {
+				flex-direction: column;
+			}
+
+			.search-button {
+				width: 100%;
+			}
+		}
+
+		#jz {
+			position: absolute;
+			top: 50%;
+			/* 相对于父元素顶部偏移 50% */
+			left: 50%;
+			/* 相对于父元素左侧偏移 50% */
+			transform: translate(-50%, -50%);
+			/* 通过自身宽高的一半修正位置 */
+		}
+
+		#dhl {
+			width: 80%;
+			height: 50px;
+			border-radius: 50px;
+			box-shadow: 6px 6px 6px 6px #DBDBDB;
+			position: fixed;
+			top: 50px;
+			/* 相对于父元素顶部偏移 50% */
+			left: 10%;
+			/* 相对于父元素左侧偏移 50% */
+			z-index: 10;
+			background: #ffffff;
+		}
+
+		#gd {
+			width: 50%;
+			height: 100%;
+			background: #008807;
+			border-radius: 50px;
+			transition: margin-left 0.5s ease-in-out;
+			margin-left: 0%;
+		}
+
+		#L {
+			transition: color 0.5s ease-in-out;
+			border-radius: 50px;
+			width: 40%;
+			height: 50px;
+			position: fixed;
+			top: 50px;
+			/* 相对于父元素顶部偏移 50% */
+			left: 10%;
+			/* 相对于父元素左侧偏移 50% */
+			z-index: 20;
+			text-align: center;
+			line-height: 50px;
+			color: #ffffff;
+		}
+
+		#R {
+			transition: color 0.5s ease-in-out;
+			border-radius: 50px;
+			width: 40%;
+			height: 50px;
+			position: fixed;
+			top: 50px;
+			/* 相对于父元素顶部偏移 50% */
+			right: 10%;
+			/* 相对于父元素左侧偏移 50% */
+			z-index: 20;
+			text-align: center;
+			line-height: 50px;
+		}
+
+		#L:hover {
+			cursor: pointer;
+		}
+
+		#R:hover {
+			cursor: pointer;
+		}
+
+		#FL {
+			transition: top 0.5s ease-in-out;
+			width: 70%;
+			height: 20px;
+			border-radius: 50px;
+			box-shadow: 3px 3px 3px 3px #DBDBDB;
+			position: fixed;
+			top: 60px;
+			/* 相对于父元素顶部偏移 50% */
+			left: 15%;
+			/* 相对于父元素左侧偏移 50% */
+			z-index: 5;
+			background: #ffffff;
+		}
+
+		#F {
+			width: 10%;
+			height: 100%;
+			font-size: 14px;
+			float: left;
+			text-align: center;
+		}
+
+		#F:hover {
+			cursor: pointer;
+			background: #d6d6d6;
+			filter: blur(10px);
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="c1">
+
+		<template v-for="(item, index) in items">
+			<div id="c2" @click="downloadImage('http://img5.adesk.com/'+item.id,item.id,item.img)">
+				<img :src="getThumb(item)" id="myImage" width="100%" height="100%" alt="" />
+			</div>
+		</template>
+		<button type="submit" class="search-button" @click="myFunction()"><svg t="1741875293561" class="icon"
+				viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2580" width="20"
+				height="20">
+				<path
+					d="M861.866667 349.866667l-102.4 102.4C733.866667 341.333333 631.466667 256 512 256c-140.8 0-256 115.2-256 256s115.2 256 256 256c136.533333 0 251.733333-106.666667 256-243.2l76.8-76.8c4.266667 21.333333 8.533333 42.666667 8.533333 68.266667 0 187.733333-153.6 341.333333-341.333333 341.333333s-341.333333-153.6-341.333333-341.333333 153.6-341.333333 341.333333-341.333334c110.933333 0 213.333333 55.466667 273.066667 136.533334l8.533333-12.8h119.466667l-51.2 51.2z"
+					fill="#444444" p-id="2581"></path>
+			</svg></button>
+
+		<div id="L" @click="SJ()">手机壁纸</div>
+		<div id="R" @click="DN()">电脑壁纸</div>
+		<div id="dhl">
+			<div id="gd"></div>
+		</div>
+		<div id="FL">
+			<div id="F" @click="FLX('67')">精选</div>
+			<div id="F" @click="FLX('2')">宠物</div>
+			<div id="F" @click="FLX('92')">动漫</div>
+			<div id="F" @click="FLX('62')">插画</div>
+			<div id="F" @click="FLX('109')">游戏</div>
+			<div id="F" @click="FLX('6')">风格</div>
+			<div id="F" @click="FLX('70')">美女</div>
+			<div id="F" @click="FLX('9')">色系</div>
+			<div id="F" @click="FLX('5')">汽车</div>
+			<div id="F" @click="FLX('86')">影视</div>
+		</div>
+	</div>
+	<div id="jz">正在加载……</div>
+	<script>
+
+
+		// vertical
+
+		// let datas=JSON.parse(localStorage.getItem('bizhiData'))
+		// const adb4 = sessionStorage.getItem('adb2');
+		new Vue({
+			el: '#c1',
+			data: function () {
+				return {
+					items: [],
+					skip: 0,
+					page: 1,
+					tid: '70',
+					res: '',
+				}
+			},
+			created() {
+				this.fetchData();
+
+			},
+			methods: {
+				fetchData() {
+					fetch('http://service.aibizhi.adesk.com/v1/vertical/vertical?limit=28&skip=' + this.skip + '&adult=false&first=0&order=hot')
+						.then(response => response.json())
+						.then(data => {
+							this.skip = this.skip + 1;
+							fetch('http://service.aibizhi.adesk.com/v1/vertical/vertical?limit=28&skip=' + this.skip + '&adult=false&first=0&order=hot')
+								.then(response => response.json())
+								.then(data2 => {
+									data.res.vertical.push(...data2.res.vertical);
+									if (this.res != 'vertical/vertical') {
+										this.res = 'vertical/vertical';
+										console.log(data.res.vertical)
+										const element = document.querySelectorAll('#myImage');
+										element.forEach(element => {
+											element.src = 'img/SJ.png';
+										});
+										this.items = data.res.vertical;
+									}
+									document.getElementById('jz').style.display = 'none';
+									const elements = document.querySelectorAll('#c2');
+									elements.forEach(element => {
+										element.style.filter = 'blur(0px)';
+									})
+
+								})
+
+
+						})
+
+				},
+				FLX(int) {
+
+
+					this.page = 1
+					this.tid = int;
+					this.DN();
+
+				},
+				getThumb(item) {
+					if (this.res == 'vertical/category') {
+						console.log('tu')
+						return `${item.img}`;
+
+
+					} else {
+						console.log('tu2')
+						return `${item.thumb}`;
+
+					}
+
+				},
+				myFunction() {
+					const elements = document.querySelectorAll('#c2');
+					elements.forEach(element => {
+						element.style.filter = 'blur(50px)';
+					});
+					if (this.res == 'vertical/category') {
+						this.page = this.page + 1
+						this.DN();
+					} else {
+						this.skip = this.skip + 28
+						this.res = 'vertical/category';
+						console.log("sj")
+						this.fetchData();
+
+					}
+
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth' // 可选，使滚动平滑
+					});
+				},
+				async downloadImage(url, id, img) {
+					const elements = document.querySelectorAll('#c2');
+					elements.forEach(element => {
+						element.style.cursor = 'wait';
+					})
+
+					if (img.slice(-3) == "jpg") {
+						console.log(img);
+						const a = document.createElement('a');
+						a.href = img;
+						a.download = 'download';
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						const elements = document.querySelectorAll('#c2');
+						elements.forEach(element => {
+							element.style.cursor = 'pointer';
+						})
+					} else {
+						try {
+							// 添加 Referer 头绕过防盗链（根据服务器需求）
+							const response = await fetch(url, {
+								headers: {
+									Referer: window.location.href // 关键：部分图床需要 Referer
+								}
+							});
+
+							if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+
+							// 安全获取文件类型（处理可能的空值）
+							const contentType = response.headers.get('content-type') || '';
+							const extension = contentType.split('/')[1] || 'jpg'; // 默认后缀为jpg
+
+							const blob = await response.blob();
+							const objectURL = URL.createObjectURL(blob);
+
+							// 创建虚拟链接并触发下载
+							const a = document.createElement('a');
+							a.href = objectURL;
+							a.download = `${id}.${extension}`;  // 使用模板字符串（反引号！）
+							document.body.appendChild(a);       // 必须将元素添加到DOM
+							a.click();
+							document.body.removeChild(a);       // 清理临时元素
+							URL.revokeObjectURL(objectURL);     // 释放内存
+							const elements = document.querySelectorAll('#c2');
+							elements.forEach(element => {
+								element.style.cursor = 'pointer';
+							})
+						} catch (error) {
+							console.error('下载失败:', error);
+							// 可选：显示用户提示（如 Toast/Vue 弹窗）
+						}
+					}
+				},
+				SJ() {
+					const elements = document.querySelectorAll('#c2');
+					elements.forEach(element => {
+						element.style.width = '200px';
+						element.style.height = '300px';
+						element.style.filter = 'blur(50px)';
+					});
+					//res:'vertical/vertical',
+					this.fetchData();
+					document.getElementById('gd').style.marginLeft = '0%';
+					document.getElementById('L').style.color = '#FFFF';
+					document.getElementById('R').style.color = '#000000';
+					document.getElementById('FL').style.top = '60px';
+
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth' // 可选，使滚动平滑
+					});
+				},
+				DN() {
+
+
+					const elements = document.querySelectorAll('#c2');
+					elements.forEach(element => {
+						element.style.width = '400px';
+						element.style.height = '250px';
+						element.style.filter = 'blur(50px)';
+					});
+
+					document.getElementById('gd').style.marginLeft = '50%';
+					document.getElementById('L').style.color = '#000000';
+					document.getElementById('R').style.color = '#FFFF';
+					document.getElementById('FL').style.top = '110px';
+
+
+					fetch('https://mini.browser.360.cn/newtab/imgsx?tid=' + this.tid + '&page=' + this.page + '&uid=0')
+						.then(response => response.json())
+						.then(data => {
+							if (this.items[0].id != data.data.list[0].id) {
+								const element = document.querySelectorAll('#myImage');
+								element.forEach(element => {
+									element.src = 'img/DN.png';
+									this.items = data.data.list;
+								});
+							}
+							const elements = document.querySelectorAll('#c2');
+							elements.forEach(element => {
+								element.style.filter = 'blur(0px)';
+							})
+						})
+
+
+					this.res = 'vertical/category';
+
+					// document.querySelectorAll('c2').style.width = '40%';
+
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth' // 可选，使滚动平滑
+
+					});
+
+				}
+
+			}
+
+		});
+
+
+
+
+	</script>
+
+</body>
+
+</html>

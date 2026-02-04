@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>我们的情侣空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .couple-names {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .TOPnames {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .hearts {
+            color: #ff6b6b;
+            font-size: 1.5em;
+            margin: 0 10px;
+            animation: fadeInFadeOut 1s infinite;
+        }
+
+        @keyframes fadeInFadeOut {
+            0% {
+                font-size: 1.5em;
+                /* 动画开始时透明度为0 */
+            }
+
+            50% {
+                font-size: 2em;
+                /* 动画中间时透明度为1 */
+            }
+
+            100% {
+                font-size: 1.5em;
+                /* 动画结束时透明度回到0 */
+            }
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            flex-basis: 100%;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ffecec;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .date {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .rounded-image {
+            max-width: 100px;
+            ;
+            object-fit: cover;
+            /* 确保图像按比例缩放 */
+            border-radius: 100%;
+            /* 设置圆角半径 */
+            border: 1px solid #ff0202;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.8);
+        }
+
+        .love-counter {
+            font-size: 2em;
+            margin: 10px 0;
+
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                flex-basis: 100%;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .search-input {
+            float: left;
+            width: 50vw;
+            margin-top: 20px;
+            flex: 1;
+            padding: 5px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+
+            border-color: #ff9a9e;
+            box-shadow: 0 0 8px rgba(255, 0, 140, 0.3);
+        }
+
+        .search-button {
+            margin-left: 10px;
+            margin-top: 20px;
+            padding: 5px 15px;
+            background-color: #ff9a9e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .inputs {
+            width: 100%;
+            float: left;
+        }
+
+        .yux {
+            border-radius: 100px;
+            margin: 10px;
+            float: left;
+            padding: 2px 10px;
+            box-shadow: 0 0 8px rgba(255, 0, 140, 0.3);
+            font-size: 0.6em;
+        }
+
+        .yux:hover {
+            cursor: pointer;
+        }
+
+        .ly {
+            color: #ff9a9e;
+            font-size: 0.6em;
+        }
+
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: float 2s ease-out forwards;
+            opacity: 0;
+            z-index: 9999;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -150%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .child {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #messages {
+            height: 300px;
+            overflow: auto;
+            padding: 5px 10px;
+            scroll-behavior: smooth;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>我们的情侣空间</h1>
+            <div class="couple-names">
+                <img class="rounded-image"
+                    src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745663721946/n.jpg">
+                <span class="hearts">❤</span>
+                <img class="rounded-image"
+                    src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745663722126/v.jpg">
+
+            </div>
+            <div class="TOPnames">
+                <div>
+                    <H2>@杰</H2>
+                    <P style="font-size: 1em;">凉城少年意娶她</P>
+                </div>
+                <div>
+                    <H2>@慧</H2>
+                    <P style="font-size: 1em;">旧城少女花嫁他</P>
+                </div>
+            </div>
+        </header>
+
+        <div id="c1" class="main-content">
+            <section class="section">
+                <h2>我们的故事❤</h2>
+                <p>真正的爱情不是一见钟情的电光火石，而是漫长岁月里的相濡以沫。</p>
+                <div class="photo-gallery">
+                    <img src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745665209188/beauty_20240701010228.jpg"
+                        alt="我们的照片">
+                    <img src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745665209394/DJI_0035.JPG.jpg"
+                        alt="我们的照片">
+                    <img src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745665209556/IMG_20240417_234923.jpg"
+                        alt="我们的照片">
+                    <img src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1745772902143/c.jpg"
+                        alt="我们的照片">
+
+                </div>
+            </section>
+
+            <section class="section">
+
+
+                <h2>留下祝福❤</h2>
+                <template v-for="(item, index) in blessing.slice().reverse()">
+                    <p class="ly">{{item.created_at}}</p>
+                    <p class="ly">{{item.message}}</p><br>
+                </template>
+                <div class="inputs">
+                    <input id="input" type="search" class="search-input" placeholder="发送你的专属祝福...">
+                    <button @click="message()" id="button" type="submit" style="float: left;"
+                        class="search-button">发送</button>
+                </div>
+
+
+                <div class="yux" @click="DX('祝你们甜甜蜜蜜，长长久久！❤')">祝你们甜甜蜜蜜，长长久久！❤</div>
+                <div class="yux" @click="DX('愿你们携手并肩，白头到老 🌸')">愿你们携手并肩，白头到老 🌸</div>
+                <div class="yux" @click="DX('天生一对，地造一双，永远幸福！')">天生一对，地造一双，永远幸福！</div>
+                <div class="yux" @click="DX('祝你们的爱情像美酒，越久越醇香 🍷')">祝你们的爱情像美酒，越久越醇香 🍷</div>
+                <div class="yux" @click="DX('愿你们互相扶持，恩爱一生 🤵👰')">愿你们互相扶持，恩爱一生 🤵👰</div>
+                <div class="yux" @click="DX('祝福你们的爱情永远新鲜如初 🌹')">祝福你们的爱情永远新鲜如初 🌹</div>
+                <div class="yux" @click="DX('愿你们的生活比蜜还甜 🍯')">愿你们的生活比蜜还甜 🍯</div>
+                <div class="yux" @click="DX('愿你们互相理解，彼此包容 🤝')">愿你们互相理解，彼此包容 🤝</div>
+
+            </section>
+
+            <section class="section">
+                <div style="color: #888;">
+                    <div id="zx"></div>
+                </div>
+                <h2>讨论区💬</h2>
+                <div id="messages"></div>
+                <div class="inputs">
+                    <input id="inputtl" type="search" class="search-input" placeholder="输入讨论话题...">
+                    <button @click="tlq()" id="button" type="submit" style="float: left;"
+                        class="search-button">发送</button>
+                </div>
+
+            </section>
+
+        </div>
+
+        <footer id="myFooter">
+            <div class="love-counter">
+                我们已经相爱 <span id="days-together">000</span> 天
+            </div>
+            <p>爱是恒久忍耐，又有恩慈；爱是不嫉妒，爱是不自夸，不张狂，不做害羞的事，不求自己的益处，不轻易发怒，不计算人的恶，不喜欢不义，只喜欢真理；凡事包容，凡事相信，凡事盼望，凡事忍耐。爱是永不止息。</p>
+        </footer>
+    </div>
+    <canvas id="petals"></canvas>
+
+    <script>
+        let result = '';
+        new Vue({
+            el: '#c1',
+            data: function () {
+                return {
+                    items: [],
+                    blessing: []
+                }
+            },
+            created() {
+                this.fetchData();
+
+            },
+            methods: {
+                fetchData() {
+                    fetch('http://jie.free.idcfengye.com/api/users/blessing')
+                        .then(response => response.json())
+                        .then(data => {
+
+
+                            this.blessing = data;
+                            for (let i = 0; i < this.blessing.length; i++) {
+                                this.blessing[i].created_at = this.time(this.blessing[i].created_at);
+                            }
+                            console.log(this.blessing)
+                        });
+                    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    if (result === '') {
+                        for (let i = 0; i < 3; i++) {
+                            const randomIndex = Math.floor(Math.random() * letters.length);
+                            result += letters[randomIndex];
+                        }
+                    }
+                },
+
+                message() {
+
+
+                    const input = document.getElementById('input').value;
+                    if (input != '') {
+                        axios.post('http://jie.free.idcfengye.com/api/users/blessing', {
+
+
+                            message: result + '：' + input,
+
+                        })
+                            .then(response => {
+
+                                this.fetchData();
+                                document.getElementById('input').value = '';
+                            })
+                            .catch(error => console.error('Error:', error.response.data));
+                    }
+
+
+
+                }, DX(text) {
+
+
+                    const input = document.getElementById('input').value;
+                    axios.post('http://jie.free.idcfengye.com/api/users/blessing', {
+
+                        message: result + '：' + text,
+
+                    })
+                        .then(response => {
+
+                            this.fetchData();
+                        })
+                        .catch(error => console.error('Error:', error.response.data));
+
+                },
+                time(times) {
+                    const utcString = times;
+                    const utcDate = new Date(utcString);
+
+                    const formatter = new Intl.DateTimeFormat('zh-CN', {
+                        timeZone: 'Asia/Shanghai',
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false
+                    });
+
+                    return formatter.format(utcDate);
+                },
+                tlq() {
+                    const input = document.getElementById('inputtl').value;
+                    if (input != '') {
+                        axios.post('http://jie.free.idcfengye.com/broadcast', {
+                            username: input,
+                            name: result,
+
+
+
+                        })
+                        document.getElementById('inputtl').value = '';
+                        document.getElementById('inputtl').focus();
+                    }
+
+
+
+                }
+
+
+            }
+
+
+        })
+        let i = 0;
+
+
+        //接受广播与发送
+        const eventSource = new EventSource('http://jie.free.idcfengye.com/events');
+
+
+        eventSource.onmessage = (e) => {
+
+            console.log(JSON.parse(e.data))
+            const datas = JSON.parse(e.data).tas;
+            console.log(datas)
+            if (datas != undefined) {
+                let datar = [];
+
+                for (i; i < datas.length; i++) {
+                    const name = JSON.parse(e.data).tas.name;
+                    const messages = document.getElementById('messages');
+                    const messag = document.createElement('div');
+                    const message = document.createElement('div');
+                    message.classList.add('child');
+                    messag.classList.add('child');
+                    messag.style.cssText = `
+                color:#888;
+                font-size: 0.6em;
+                margin-top: 10px;
+                    `;
+
+                    if (name === result) {
+
+                        message.style.cssText = `
+                    color: red;
+                    display: inline-block;
+                    border-radius: 0px 20px 20px 20px;
+                    padding: 2px 10px;
+                    box-shadow: 0 0 8px rgba(255, 0, 140, 0.3);
+                    font-size: 1em;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    white-space: normal;
+                    max-width: 70vw;
+                    
+                    `;
+                    } else {
+                        message.style.cssText = `
+                display: inline-block;
+                border-radius: 0px 20px 20px 20px;
+                padding: 2px 10px;
+                box-shadow: 0 0 8px rgba(255, 0, 140, 0.3);
+                font-size: 1em;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
+                max-width: 70vw;
+                    `;
+                    }
+                    messag.textContent = datas[i].name + '：' + datas[i].datetime;
+                    message.textContent = datas[i].username;
+                    messages.appendChild(messag);
+                    messages.appendChild(message);
+
+                }
+            }
+
+            const elements = document.querySelectorAll('div.child');
+            setTimeout(() => {
+                elements.forEach(element => {
+                    element.style.opacity = '1'; // 对每个元素单独设置
+                    element.style.transform = 'translateX(0)';
+                });
+            }, 500);
+            const container = document.getElementById('messages');
+            const isAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight <= 100;
+            if (isAtBottom) {
+                container.scrollTop = container.scrollHeight;
+            };
+
+
+            document.getElementById('zx').innerText = '当前在线人数：' + (JSON.parse(e.data).ljs);
+            i = datas.length;
+            console.log(i);
+        };
+        
+        //设置进入空间访问记录的点击事件
+        const footer = document.getElementById('myFooter');
+
+        // 添加点击事件
+        footer.addEventListener('click', () => {
+             window.location.href = "http://jie.free.idcfengye.com/record";
+        });
+
+        // 计算在一起的天数
+        function updateDaysTogether() {
+            const startDate = new Date('2023-04-18'); // 修改为你们的纪念日
+            const today = new Date();
+            const diffTime = today - startDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('days-together').textContent = diffDays;
+            console.log(startDate)
+            console.log(today)
+            console.log(diffTime)
+            console.log(diffDays)
+
+
+        }
+
+        // 页面加载时更新天数
+        window.onload = function () {
+            updateDaysTogether();
+
+            // 可以在这里添加更多交互功能
+
+        };
+
+
+        // 修改后的桃花飘落代码
+        const canvas = document.getElementById('petals');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const petalImages = [
+            'https://cdn.pixabay.com/photo/2018/04/28/16/40/cherry-blossom-3357880_960_720.png',
+        ];
+
+        // 加载所有图片
+        let loadedImages = 0;
+        const petals = petalImages.map(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedImages++;
+                if (loadedImages === petalImages.length) {
+                    initPetals();
+                }
+            };
+            img.onerror = () => {
+                console.error('Failed to load image:', src);
+                loadedImages++; // 即使加载失败也计数
+                if (loadedImages === petalImages.length) {
+                    initPetals();
+                }
+            };
+            return img;
+        });
+
+        let fallingPetals = [];
+
+        function initPetals() {
+            // 初始化花瓣
+            for (let i = 0; i < 20; i++) {
+                fallingPetals.push(new Petal());
+            }
+            animate();
+        }
+
+        class Petal {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -50;
+                this.size = 10 + Math.random() * 20;
+                this.speed = 1 + Math.random() * 3;
+                this.angle = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 4 - 2;
+                this.swing = Math.random() * 2;
+                this.swingSpeed = Math.random() * 0.02;
+                this.swingPos = Math.random() * 100;
+                this.image = petals[Math.floor(Math.random() * petals.length)];
+            }
+
+            update() {
+                this.y += this.speed;
+                this.angle += this.rotationSpeed;
+                this.swingPos += this.swingSpeed;
+                this.x += Math.sin(this.swingPos) * this.swing;
+
+                if (this.y > canvas.height + 50) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle * Math.PI / 180);
+                ctx.globalAlpha = 0.7;
+
+                // 只有在图片完全加载且没有错误时才绘制
+                if (this.image.complete && this.image.naturalWidth !== 0) {
+                    ctx.drawImage(this.image, -this.size / 2, -this.size / 2, this.size, this.size);
+                } else {
+                    // 绘制备用图形
+                    ctx.fillStyle = '#ffb6c1';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, this.size / 2, this.size / 3, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < fallingPetals.length; i++) {
+                fallingPetals[i].update();
+                fallingPetals[i].draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        //点击出现爱心代码
+        document.addEventListener('click', function (e) {
+            createHeart(e.pageX, e.pageY); // 使用pageX和pageY而不是clientX和clientY
+        });
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+
+            // 随机选择爱心颜色
+            const colors = ['#ff0000', '#ff69b4', '#ff1493', '#ff00ff', '#ff6347'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+            // 随机大小
+            const size = Math.random() * 30 + 20;
+
+            // 设置爱心样式
+            heart.innerHTML = `
+                <svg width="${size}" height="${size}" viewBox="0 0 24 24">
+                    <path fill="${randomColor}" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            `;
+
+            // 设置位置 - 使用绝对定位
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+
+            document.body.appendChild(heart);
+
+            // 动画结束后移除元素
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        // 移动端触摸支持
+        document.addEventListener('touchstart', function (e) {
+            const touch = e.touches[0];
+            createHeart(touch.pageX, touch.pageY); // 同样使用pageX和pageY
+        });
+    </script>
+</body>
+
+</html>

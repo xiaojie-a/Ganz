@@ -1,0 +1,170 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<style type="text/css">
+#c1 {
+	width: 98%;
+	margin-left: 25px;
+	margin-top: 25px;
+}
+#c2 {
+	width: 22%;
+	height: 300px;
+	float: left;
+	right: 10px;
+	margin-left: 12px;
+	filter: drop-shadow(2px 4px 6px #DBDBDB);
+	border-radius: 5px;
+	margin-bottom: 10px;
+	will-change: transform;
+	transition: all 0.3s ease;
+}
+#c1  img {
+	border-radius: 5px;
+}
+#c2:hover
+{
+cursor: pointer;
+filter: drop-shadow(2px 4px 6px #DBDBDB);
+		
+            transform: scale(1.01);
+			
+}
+.search-button {
+	position: fixed;
+	bottom:0;
+	
+	z-index:1000;
+			margin-left: 5px;
+			margin-bottom: 5px;
+            padding: 12px 12px;
+            background-color:  #ced1ce;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #ced1ce;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .search-button {
+                width: 100%;
+            }
+        }
+		#jz{
+			position: absolute;
+            top: 50%; /* 相对于父元素顶部偏移 50% */
+            left: 50%; /* 相对于父元素左侧偏移 50% */
+            transform: translate(-50%, -50%); /* 通过自身宽高的一半修正位置 */
+		}
+
+</style>
+</head>
+<body>
+	
+<div id="c1">
+	<template v-for="(item, index) in items.res.vertical">
+<div id="c2" @click="downloadImage('http://img5.adesk.com/'+item.id,item.id)">
+	<img :src="item.thumb"
+	 width="100%" height="300px"  alt=""/>
+</div>
+</template>
+<button type="submit" class="search-button" @click="myFunction()"><svg t="1741875293561" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2580" width="20" height="20"><path d="M861.866667 349.866667l-102.4 102.4C733.866667 341.333333 631.466667 256 512 256c-140.8 0-256 115.2-256 256s115.2 256 256 256c136.533333 0 251.733333-106.666667 256-243.2l76.8-76.8c4.266667 21.333333 8.533333 42.666667 8.533333 68.266667 0 187.733333-153.6 341.333333-341.333333 341.333333s-341.333333-153.6-341.333333-341.333333 153.6-341.333333 341.333333-341.333334c110.933333 0 213.333333 55.466667 273.066667 136.533334l8.533333-12.8h119.466667l-51.2 51.2z" fill="#444444" p-id="2581"></path></svg></button>
+</div>
+<div id="jz">正在加载……</div>
+<script>
+
+
+// vertical
+
+		// let datas=JSON.parse(localStorage.getItem('bizhiData'))
+			// const adb4 = sessionStorage.getItem('adb2');
+			new Vue({
+	  el: '#c1',
+	  data: function() {
+		return {
+			items:[],
+			skip: 0
+		// items: JSON.parse(adb4),
+	  }
+	},
+	created(){
+		this.fetchData();
+
+	},
+	methods: {
+		fetchData(){
+			fetch('http://service.aibizhi.adesk.com/v1/vertical/vertical?limit=28&skip='+this.skip+'&adult=false&first=0&order=hot')
+  .then(response => response.json())
+  .then(data => {
+	this.items=data;
+	console.log(data)
+	document.getElementById('jz').style.display='none';
+  })
+
+		},
+	myFunction() {
+		this.skip=this.skip+28
+		fetch('http://service.aibizhi.adesk.com/v1/vertical/vertical?limit=28&skip='+this.skip+'&adult=false&first=0&order=hot')
+  .then(response => response.json())
+  .then(data => {
+this.items=data;
+  })
+	},
+	async downloadImage(url, id) {
+  try {
+    // 添加 Referer 头绕过防盗链（根据服务器需求）
+    const response = await fetch(url, {
+      headers: {
+        Referer: window.location.href // 关键：部分图床需要 Referer
+      }
+    });
+
+    if (!response.ok) throw new Error(`HTTP错误: ${response.status}`);
+
+    // 安全获取文件类型（处理可能的空值）
+    const contentType = response.headers.get('content-type') || '';
+    const extension = contentType.split('/')[1] || 'jpg'; // 默认后缀为jpg
+
+    const blob = await response.blob();
+    const objectURL = URL.createObjectURL(blob);
+
+    // 创建虚拟链接并触发下载
+    const a = document.createElement('a');
+    a.href = objectURL;
+    a.download = `${id}.${extension}`;  // 使用模板字符串（反引号！）
+    document.body.appendChild(a);       // 必须将元素添加到DOM
+    a.click();
+    document.body.removeChild(a);       // 清理临时元素
+    URL.revokeObjectURL(objectURL);     // 释放内存
+
+  } catch (error) {
+    console.error('下载失败:', error);
+    // 可选：显示用户提示（如 Toast/Vue 弹窗）
+  }
+  
+}
+}
+	
+	});
+
+
+
+	
+			   </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空间访问记录</title>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <h1>Recording Page</h1>
+    <div id="data-container"></div>
+    <script>
+        fetch('/api/record-data')
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            for (i=0; i < data.length; i++) {
+                const html = data.map(item => `<p>${item.currentTime}</p>`).join('');
+                document.getElementById('data-container').innerHTML = html;
+
+            }
+           
+          });
+      </script>
+</body>
+
+</html>

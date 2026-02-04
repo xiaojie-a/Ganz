@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>按钮点击</title>
+</head>
+<style>
+  #img {
+    position: fixed;
+    top: 0;
+
+    z-index: -1;
+    filter: blur(50px) brightness(50%);
+  }
+  #bigImage {
+    width: 100%;
+
+  }
+
+  #zz {
+    text-align: center;
+    font-size: 30px;
+    width: 70%;
+    margin: 0 auto;
+    line-height: 2;
+    color: #FFFF;
+  }
+
+  #zw {
+    width: 100%;
+    height: 200px;
+  }
+</style>
+
+<body style="background-color: #FFFF; width: 100%;">
+
+  <div id="bigImage">
+    <div id="zz">
+
+    </div>
+    <div id="zw"><samp></samp></div>
+    <img id="img" src="" style="width: 100%; height: 100%;">
+
+  </div>
+
+  <script>
+    window.addEventListener('storage', function (event) {
+      if (event.key === 'YYURL') {
+        fetch('https://apis.netstart.cn/music/lyric?id=' + JSON.parse(localStorage.getItem('YYURL')).id)
+          .then(response => response.json())
+          .then(data => {
+            console.log(typeof data.lrc.lyric);
+            const lyricsText = data.lrc.lyric;
+            const formattedLyrics = lyricsText.replace(/\[\d{2}:\d{2}\.\d{2,3}\]/g, "<br>");
+            document.getElementById('zz').innerHTML = formattedLyrics
+            console.log(formattedLyrics)
+          })
+        document.getElementById('img').src = JSON.parse(localStorage.getItem('YYURL')).al.picUrl
+
+      }
+    });
+  </script>
+</body>
+
+</html>

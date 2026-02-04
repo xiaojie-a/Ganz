@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>粒子动画背景</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* 隐藏滚动条 */
+      font-family: Arial, sans-serif;
+      background-color: #cccccc; /* 深色背景 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container2 {
+      text-align: center;
+      background-color: rgb(255, 255, 255); /* 半透明背景 */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1; /* 确保内容在背景之上 */
+      color: #000000; /* 文字颜色 */
+    }
+
+    .container2 img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .container2 h1 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    .container2 p {
+      font-size: 16px;
+      color: #ccc; /* 浅灰色文字 */
+    }
+
+    .container2 .apps {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .container2 .apps div {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000; /* 白色文字 */
+    }
+
+    .container2 .download-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .container2 .download-button:hover {
+      background-color: #0056b3;
+    }
+
+    .container2 .note {
+      font-size: 14px;
+      color: #999;
+      margin-top: 10px;
+    }
+
+    /* 粒子动画背景 */
+    #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* 确保背景在内容之下 */
+    }
+    #xx{
+            z-index: 1000;
+            border-radius: 2rem
+        }
+  </style>
+</head>
+<body>
+  <!-- 粒子动画背景 -->
+  <div id="particles-js"></div>
+
+  <!-- 内容容器 -->
+  <div class="container2">
+    <img src="3.jpeg" alt="CDR全家桶">
+    <h1>CDR全家桶</h1>
+    <p>所有破解版软件均来源于网络本站不承担任何责任</p>
+    <div class="apps">
+      <div>CDR常用全家桶</div>
+     
+    </div>
+    <button  class="download-button" data-bs-toggle="modal" data-bs-target="#myModal">下载链接为百度云网盘链接</button>
+    <button  class="download-button" data-bs-toggle="modal" style="background-color: #ccc;" onclick="javascript:history.go(-1);">返回上级</button>
+    <p class="note">本站所有软件暂不支持直连下载<br>后续可能会更新<br>敬请期待</p>
+  </div>
+<!-- 模态 -->
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态标题 -->
+      <div class="modal-header">
+        <h4 class="modal-title">CDR全家桶</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- 模态主体 -->
+      <div class="modal-body">
+        <h6 id="textToCopy">https://pan.baidu.com/s/12egZWBBN4M6eZpKcEUEYow?pwd=xryz</h6>
+      </div>
+
+      <!-- 模态页脚 -->
+      <div class="modal-footer">
+        <button id="myButton" type="button" class="btn btn-danger" data-bs-dismiss="modal">复制链接</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="xx" class="position-fixed bottom-0 end-0 p-3">
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+          <strong class="me-auto">内部消息</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          恭喜您复制成功，快去浏览器下载吧！
+      </div>
+  </div>
+</div>
+  <!-- 引入 particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    const button = document.getElementById('myButton');
+ 
+ // 为按钮添加点击事件监听器
+ button.addEventListener('click', function() {
+  const text = document.getElementById('textToCopy').textContent;
+   navigator.clipboard.writeText(text).then(function() {
+
+           var toast = new bootstrap.Toast(document.getElementById('toast'));
+           toast.show();
+       
+   }).catch(function(err) {
+       console.error('无法复制文本：', err);
+       alert('无法复制文本，请手动复制。');
+   });
+   
+ });
+
+
+
+    // 初始化粒子动画
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 80, // 粒子数量
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#ffffff' // 粒子颜色
+        },
+        shape: {
+          type: 'circle', // 粒子形状
+          stroke: {
+            width: 0,
+            color: '#000000'
+          },
+          polygon: {
+            nb_sides: 5
+          }
+        },
+        opacity: {
+          value: 0.5, // 粒子透明度
+          random: false,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3, // 粒子大小
+          random: true,
+          anim: {
+            enable: false,
+            speed: 40,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true, // 启用粒子连线
+          distance: 150,
+          color: '#ffffff',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true, // 启用粒子运动
+          speed: 6,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true, // 鼠标悬停时启用交互
+            mode: 'repulse'
+          },
+          onclick: {
+            enable: true, // 点击时启用交互
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1
+            }
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 3
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          },
+          remove: {
+            particles_nb: 2
+          }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: #f5f5f5;
+}
+
+/*滚动条 阴影~圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(128, 128, 128, 0.7);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+/*滑块 阴影~圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(128, 128, 128, 0.7);
+  background-color: rgb(149, 147, 147);
+}
+body {
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+    
+  /* max-width: 38rem;
+  padding: 2rem; */
+
+}
+
+#logo{
+  float: left;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+*{
+
+
+    -moz-user-select: none;
+
+    -o-user-select:none;
+
+    -khtml-user-select:none;
+
+    -webkit-user-select:none;
+
+    -ms-user-select:none;
+
+    user-select:none;
+}
+#tab_1{
+  width: 100%;
+height: 100%;
+margin-left: 40px;
+position: fixed;
+bottom: 0;
+z-index: -1;
+}
+#URL{
+  margin-left: 0%;
+  opacity: 1;
+  transition: margin-left 0.5s ease-in-out,opacity 0.5s,filter 0.3s ease-in-out;
+}
+#URL.fade-out {
+  opacity: 0;
+  margin-left: 50%;
+}
+#URL2{
+  position: fixed;
+bottom: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+#URL3{
+  transition: top 0.5s ease-in-out;
+  position: fixed;
+  top: 100%;
+z-index: 10;
+}
+#URL2.fade2-out {
+  opacity: 1;
+}
+
+#meun{
+     position: fixed;
+     z-index:"1";
+
+       top: 0;
+  background: rgb(240, 240, 240);
+width: 100%;
+height: 40px;
+-webkit-app-region: drag;
+/* margin-top: 10px; */
+/* border: 1px solid #000; */
+}
+.ziji,.zijit,.FH{
+  -webkit-app-region: no-drag;
+  width: 40px;
+  height: 40px;
+  /* border: 1px solid #000; */
+  float: right;}
+#max,#mini,#EXT{
+  width: 20px;
+  height: 20px;
+  float: right;
+  /* border: 1px solid #000; */
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.zijit:hover{
+  background-color: red;
+  cursor: pointer;
+}
+.ziji:hover,.FH:hover{
+  background-color:rgb(207, 207, 207);
+  cursor: pointer;
+}
+#le{
+     position: fixed;
+       left: 0;
+    margin-top: 16px;
+     float: left;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+  width: 55px;
+  border: 1px solid rgb(240, 240, 240) ;
+
+}
+.lt{
+  margin-left: 5px;
+}
+#sz{
+  width: 55px;
+  position: fixed;
+  bottom: 10px;
+}
+#home,#sp,#mz{
+  margin-top: 30px;
+}
+
+#home:hover{
+  background:#ffffff;
+cursor: pointer;
+filter: drop-shadow(2px 4px 6px #DBDBDB);
+ transform: scale(1.01);
+  
+}
+#sp:hover{
+  background:#ffffff;
+  cursor: pointer;
+  filter: drop-shadow(2px 4px 6px #DBDBDB);
+   transform: scale(1.01);
+  
+}
+#sz:hover{
+  background:#ffffff;
+cursor: pointer;
+filter: drop-shadow(2px 4px 6px #DBDBDB);
+ transform: scale(1.01);
+  
+}
+#mz:hover{
+  background:#ffffff;
+  cursor: pointer;
+  filter: drop-shadow(2px 4px 6px #DBDBDB);
+   transform: scale(1.01);
+  
+}
+#home:hover{
+  cursor: pointer;
+}
+#sz:hover{
+  cursor: pointer;
+}
+#sp:hover{
+  cursor: pointer;
+}
+#mz:hover{
+  cursor: pointer;
+}
+.TZ{
+  height: 60px;
+  width: 3px;
+  margin-left: 5px;
+  float: left;
+}
+.zst{
+  transition: height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+  will-change: transform;
+	transition: all 1s ease;
+  border-radius: 15px;
+
+  height: 60px;
+  width: 3px;
+  /* background: rgb(0, 196, 0); */
+
+}
+.zst.fade-out2 {
+  margin-top: 30px;
+  height: 0px;
+}
+#home,#sz,#sp,#mz{
+	border-radius: 10px;
+  will-change: transform;
+	transition: all 0.3s ease;
+
+}
+
+#audio-container{
+  filter: drop-shadow(2px 4px 6px #7a7a7a);
+  transition: bottom 0.5s ease-in-out;
+  width: calc(100% - 55px);
+  height: 80px;
+  background:rgb(240, 240, 240);
+  position: fixed;
+bottom: -90px ;
+left: 55px;
+float: right;
+}
+#audio{
+	width: calc(100% - 80px);
+ 
+}
+#zx:hover{
+  cursor: pointer;
+}
+#YT:hover{
+  cursor: pointer;
+}
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+#YTS{
+  animation: spin 2s linear infinite;
+}
+#YTS:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+	<div>
+		<h2 class="monsterText">稍等<br> 在加载中~~~</h2>
+		<h3 id="opText">今天你吃了么</h3>
+	</div>
+
+	<div class="monster">
+		<div class="eye">
+			<div class="eyeball"></div>
+		</div>
+		<div class="mouth"></div>
+	</div>
+	<div class="monster blue">
+		<div class="eye">
+			<div class="eyeball"></div>
+		</div>
+		<div class="mouth"></div>
+	</div>
+
+	<script>
+		fetch('https://v1.hitokoto.cn/?max_length=10')
+			.then(response => response.json())
+			.then(data => {
+				console.log(data.hitokoto);
+				document.getElementById("opText").innerHTML = data.hitokoto;
+			})
+	</script>
+</body>
+
+</html>

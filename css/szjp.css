@@ -1,0 +1,113 @@
+   .containers {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none;
+            margin-top: 20px;
+
+        }
+        
+        .display {
+
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+
+            font-size: 2.2rem;
+            font-weight: 300;
+            min-height: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-value {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+        }
+        
+        .placeholder {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+        }
+        
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 25px 20px;
+
+        }
+        
+        .key {
+            border: none;
+            border-radius: 12px;
+            padding: 18px 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        
+        .key:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .key.number {
+            background-color: #ffffff;
+        }
+        
+        .key.operation {
+            background-color: #eef1f5;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .key.backspace {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .key.confirm {
+            background-color: #2ecc71;
+            color: white;
+            grid-column: span 2;
+        }
+        
+        .key.zero {
+            grid-column: span 2;
+        }
+        
+        .instructions {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .key {
+                padding: 15px 0;
+                font-size: 1.3rem;
+            }
+            
+            .display {
+                font-size: 1.8rem;
+                padding: 20px 15px;
+            }
+        }

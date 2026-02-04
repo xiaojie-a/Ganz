@@ -1,12 +1,5 @@
 [[redirects]]
-  from = "https://yourdomain.netlify.app/*"
-  to = "http://yourdomain.netlify.app/:splat"
-  status = 301
-  force = true
-
-# 或者针对自定义域名
-[[redirects]]
-  from = "https://yourcustomdomain.com/*"
-  to = "http://yourcustomdomain.com/:splat"
+  from = "https://sparkly-frangollo-7c1e65.netlify.app/*"
+  to = "http://sparkly-frangollo-7c1e65.netlify.app/:splat"
   status = 301
   force = true

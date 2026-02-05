@@ -966,6 +966,7 @@
                             // }
                         } catch (networkError) {
                             console.warn('网络请求失败，尝试从本地缓存加载数据:', networkError);
+                            document.querySelector('footer').style.color = '#000';
                             hasNetworkError = true;
 
                             // 从 localStorage 获取缓存数据'

@@ -577,6 +577,39 @@
             },
             methods: {
                 mrzc() {
+                    fetch('/.netlify/functions/proxy', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            path: 'users/sry',
+                            method: 'GET'
+                        })
+                    })
+                        .then(response => {
+                            // 检查响应状态
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            // 解析JSON数据
+                            return response.json();
+                        })
+                        .then(data => {
+                            // 在这里处理数据
+                            console.log('API响应数据:', data);
+
+                          
+                        })
+                        .catch(error => {
+                            console.error('请求失败:', error);
+
+                            // 显示错误信息
+                            const outputDiv = document.getElementById('output');
+                            if (outputDiv) {
+                                outputDiv.innerHTML = `错误: ${error.message}`;
+                            }
+                        });
                     //每日支出
 
 
@@ -915,38 +948,38 @@
                             localStorage.setItem('wxData', JSON.stringify(wxData));
                             localStorage.setItem('blData', JSON.stringify(blData));
 
-                            if(localStorage.getItem('srysDB') != null){
+                            if (localStorage.getItem('srysDB') != null) {
                                 let storedSryData = JSON.parse(localStorage.getItem('srysDB'));
-                            let storedHistoricalData = JSON.parse(localStorage.getItem('historicalDB'));
-                            let storedMtData = JSON.parse(localStorage.getItem('mtDB'));
-                            let storedWxData = JSON.parse(localStorage.getItem('wxDB'));
-                            let lb = [storedSryData, storedHistoricalData, storedMtData, storedWxData]
-                            let cs = ['srys', 'historical', 'mt', 'wx']
+                                let storedHistoricalData = JSON.parse(localStorage.getItem('historicalDB'));
+                                let storedMtData = JSON.parse(localStorage.getItem('mtDB'));
+                                let storedWxData = JSON.parse(localStorage.getItem('wxDB'));
+                                let lb = [storedSryData, storedHistoricalData, storedMtData, storedWxData]
+                                let cs = ['srys', 'historical', 'mt', 'wx']
 
-                            for (var b = 0; b < lb.length; b++) {
-                                let bl = lb[b];
-                                for (let a = 0; a < bl.length; a++) {
-                                    axios.post('http://1z624868f2.wicp.vip/api/users/' + cs[b], {
-                                        historical: bl[a].historical,
-                                        amount: bl[a].amount
-                                    })
-                                        .then(response => {
-                                            console.log('所有数据添加成功')
+                                for (var b = 0; b < lb.length; b++) {
+                                    let bl = lb[b];
+                                    for (let a = 0; a < bl.length; a++) {
+                                        axios.post('http://1z624868f2.wicp.vip/api/users/' + cs[b], {
+                                            historical: bl[a].historical,
+                                            amount: bl[a].amount
                                         })
-                                        .catch(error => {
-                                            console.log(bl[a].historical)
-                                        })
+                                            .then(response => {
+                                                console.log('所有数据添加成功')
+                                            })
+                                            .catch(error => {
+                                                console.log(bl[a].historical)
+                                            })
+
+                                    }
 
                                 }
+                                ['srysDB', 'historicalDB', 'mtDB', 'wxDB',].forEach(key => {
+                                    localStorage.removeItem(key);
+                                    console.log(`已删除: ${key}`);
+                                });
 
                             }
-                            ['srysDB', 'historicalDB', 'mtDB', 'wxDB',].forEach(key => {
-                                localStorage.removeItem(key);
-                                console.log(`已删除: ${key}`);
-                            });
 
-                            }
-                            
 
 
                             //let storedBlData = localStorage.getItem('blData');

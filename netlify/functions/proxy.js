@@ -6,22 +6,25 @@ const BACKEND_URL = 'http://1z624868f2.wicp.vip';
 
 exports.handler = async function(event, context) {
   // 1. 处理 OPTIONS 预检请求
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Max-Age': '86400'  // 预检缓存24小时
-      },
-      body: ''
-    };
-  }
+   // 动态导入 ES Module
+   const fetch = (await import('node-fetch')).default;
+    
+   // 处理 OPTIONS 预检请求
+   if (event.httpMethod === 'OPTIONS') {
+     return {
+       statusCode: 200,
+       headers: {
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+         'Access-Control-Max-Age': '86400'
+       },
+       body: ''
+     };
+   }
 
   // 2. 解析请求路径
-  const path = event.path.replace('/.netlify/functions/backend-proxy', '');
+  const path = event.path.replace('/.netlify/functions/proxy', '');
   const targetUrl = `${BACKEND_URL}${path}`;
   
   console.log(`代理请求: ${event.httpMethod} ${targetUrl}`);

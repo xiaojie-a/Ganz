@@ -5,6 +5,10 @@
 [functions]
   directory = "netlify/functions"
 
+[[functions.timeout]]
+  duration = 5
+  pattern = "*"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/proxy/:splat"

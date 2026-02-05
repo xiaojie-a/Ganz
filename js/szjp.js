@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(amount);
 
 
-                    axios.post('https://api.allorigins.win/raw?url=http://1z624868f2.wicp.vip/api/users/' + uurls, {
+                    axios.post('http://1z624868f2.wicp.vip/api/users/' + uurls, {
                         historical: window.lsjls,
                         amount: amount
                     })

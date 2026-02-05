@@ -881,39 +881,7 @@
                     }
                 },
                 async fetchData() {
-                    fetch('/.netlify/functions/proxy', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            path: 'users/sry',
-                            method: 'GET'
-                        })
-                    })
-                        .then(response => {
-                            // 检查响应状态
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                            // 解析JSON数据
-                            return response.json();
-                        })
-                        .then(data => {
-                            // 在这里处理数据
-                            console.log('API响应数据:', data);
-
-                          
-                        })
-                        .catch(error => {
-                            console.error('请求失败:', error);
-
-                            // 显示错误信息
-                            const outputDiv = document.getElementById('output');
-                            if (outputDiv) {
-                                outputDiv.innerHTML = `错误: ${error.message}`;
-                            }
-                        });
+                    
                     try {
                         let sryData, historicalData, mtData, wxData, blData;
                         let hasNetworkError = false;
@@ -921,11 +889,11 @@
                         try {
                             // 使用 Promise.all 并行执行所有请求
                             const [sryResponse, historicalResponse, mtResponse, wxResponse, blResponse] = await Promise.all([
-                                fetch('http://1z624868f2.wicp.vip/api/users/sry'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/historical'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/mt'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/wx'),
-                                fetch('http://1z624868f2.wicp.vip/api/users/bl')
+                                fetch('https://corsproxy.io/?url=http://1z624868f2.wicp.vip/api/users/sry'),
+                                fetch('https://corsproxy.io/?url=http://1z624868f2.wicp.vip/api/users/historical'),
+                                fetch('https://corsproxy.io/?url=http://1z624868f2.wicp.vip/api/users/mt'),
+                                fetch('https://corsproxy.io/?url=http://1z624868f2.wicp.vip/api/users/wx'),
+                                fetch('https://corsproxy.io/?url=http://1z624868f2.wicp.vip/api/users/bl')
                             ]);
 
                             // 检查所有响应是否成功

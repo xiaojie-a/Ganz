@@ -888,11 +888,11 @@
                         try {
                             // 使用 Promise.all 并行执行所有请求
                             const [sryResponse, historicalResponse, mtResponse, wxResponse, blResponse] = await Promise.all([
-                                fetch('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/sry'),
-                                fetch('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/historical'),
-                                fetch('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/mt'),
-                                fetch('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/wx'),
-                                fetch('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/bl')
+                                fetch('/api/api/users/sry'),
+                                fetch('/api/api/users/historical'),
+                                fetch('/api/api/users/mt'),
+                                fetch('/api/api/users/wx'),
+                                fetch('/api/api/users/bl')
                             ]);
 
                             // 检查所有响应是否成功

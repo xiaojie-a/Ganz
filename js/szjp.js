@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     }
 
-                    console.log('http://127.0.0.1:3000/api/users/' + uurls);
+                    //console.log('http://127.0.0.1:3000/api/users/' + uurls);
                     console.log(window.lsjls);
                     console.log(amount);
 

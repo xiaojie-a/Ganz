@@ -916,6 +916,7 @@
                             localStorage.setItem('wxData', JSON.stringify(wxData));
                             localStorage.setItem('blData', JSON.stringify(blData));
 
+                            // 处理 srysDB 等数据的异步上传
                             if (localStorage.getItem('srysDB') != null) {
                                 let storedSryData = JSON.parse(localStorage.getItem('srysDB'));
                                 let storedHistoricalData = JSON.parse(localStorage.getItem('historicalDB'));
@@ -929,55 +930,42 @@
 
                                 for (var b = 0; b < lb.length; b++) {
                                     let bl = lb[b];
-                                    for (let a = 0; a < bl.length; a++) {
-                                        // 将每个请求添加到数组中
-                                        requests.push(
-                                            axios.post('api/users/' + cs[b], {
-                                                historical: bl[a].historical,
-                                                amount: bl[a].amount
-                                            })
-                                        );
+                                    if (bl && Array.isArray(bl)) { // 添加安全检查
+                                        for (let a = 0; a < bl.length; a++) {
+                                            // 将每个请求添加到数组中
+                                            requests.push(
+                                                axios.post('api/users/' + cs[b], {
+                                                    historical: bl[a].historical,
+                                                    amount: bl[a].amount
+                                                })
+                                            );
+                                        }
                                     }
                                 }
 
                                 // 等待所有请求完成
-                                Promise.all(requests)
-                                    .then(() => {
-                                        console.log('所有数据添加成功');
+                                try {
+                                    await Promise.all(requests);
+                                    console.log('所有数据添加成功');
 
-                                        // 等所有请求成功后再删除 localStorage
-                                        ['srysDB', 'historicalDB', 'mtDB', 'wxDB'].forEach(key => {
-                                            localStorage.removeItem(key);
-                                            console.log(`已删除: ${key}`);
-                                        });
-                                    })
-                                    .catch(error => {
-                                        console.error('部分请求失败:', error);
-                                        // 可以根据需要决定失败时是否还要删除 localStorage
+                                    // 等所有请求成功后再删除 localStorage
+                                    ['srysDB', 'historicalDB', 'mtDB', 'wxDB'].forEach(key => {
+                                        localStorage.removeItem(key);
+                                        console.log(`已删除: ${key}`);
                                     });
+                                } catch (axiosError) {
+                                    console.error('数据上传失败:', axiosError);
+                                    // 这里可以选择不抛出错误，继续使用主流程
+                                    // 或者根据需要处理错误
+                                }
                             }
 
-
-
-                            //let storedBlData = localStorage.getItem('blData');
-                            // let lb = [storedSryData, storedHistoricalData, storedMtData, storedWxData, storedBlData]
-                            // console.log(storedSryData.length);
-                            // for (var b = 0; b < lb.length; b++) {
-                            //     for (let a = 0; a < lb[b].length; a++) {
-                            //         let bl =lb[b];
-                            //         if (bl[a].hasOwnProperty('id')) {
-                            //             console.log('id存在:', lb[b][a]);
-                            //         } else {
-                            //             console.log('id不存在或对象不存在');
-                            //         }
-                            //     }
-                            // }
                         } catch (networkError) {
                             console.warn('网络请求失败，尝试从本地缓存加载数据:', networkError);
                             document.querySelector('footer').style.color = '#000';
                             hasNetworkError = true;
 
-                            // 从 localStorage 获取缓存数据'
+                            // 从 localStorage 获取缓存数据
                             const storedSryData = localStorage.getItem('srysData');
                             const storedHistoricalData = localStorage.getItem('historicalData');
                             const storedMtData = localStorage.getItem('mtData');
@@ -999,7 +987,6 @@
                             // 可以在这里添加一个标记，表明使用的是缓存数据
                             console.log('正在使用本地缓存数据');
                         }
-
                         // console.log(sryData);
                         // console.log(historicalData);
                         // console.log(mtData);

@@ -881,6 +881,7 @@
                 },
                 async fetchData() {
 
+
                     try {
                         let sryData, historicalData, mtData, wxData, blData;
                         let hasNetworkError = false;
@@ -953,6 +954,11 @@
                                         localStorage.removeItem(key);
                                         console.log(`已删除: ${key}`);
                                     });
+                                    console.log('跳转成功');
+                                    this.fetchData();
+
+
+
                                 } catch (axiosError) {
                                     console.error('数据上传失败:', axiosError);
                                     // 这里可以选择不抛出错误，继续使用主流程

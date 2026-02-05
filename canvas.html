@@ -918,7 +918,13 @@
                             localStorage.setItem('blData', JSON.stringify(blData));
 
                             // 处理 srysDB 等数据的异步上传
-                            if (localStorage.getItem('srysDB') != null) {
+                            const hasDB =
+                                localStorage.getItem('srysDB') !== null ||
+                                localStorage.getItem('historicalDB') !== null ||
+                                localStorage.getItem('mtDB') !== null ||
+                                localStorage.getItem('wxDB') !== null;
+
+                            if (hasDB) {
                                 let storedSryData = JSON.parse(localStorage.getItem('srysDB'));
                                 let storedHistoricalData = JSON.parse(localStorage.getItem('historicalDB'));
                                 let storedMtData = JSON.parse(localStorage.getItem('mtDB'));

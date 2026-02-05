@@ -21,7 +21,7 @@ exports.handler = async function(event, context) {
 
     // ... 其余代码保持不变
     const path = event.path.replace('/.netlify/functions/proxy', '');
-    const targetUrl = `http://1z624868f2.wicp.vip${path}`;
+    const targetUrl = `http://nodecanvas.w1.luyouxia.net${path}`;
     
     const response = await fetch(targetUrl, {
       method: event.httpMethod,

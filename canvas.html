@@ -577,39 +577,7 @@
             },
             methods: {
                 mrzc() {
-                    fetch('/.netlify/functions/proxy', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            path: 'users/sry',
-                            method: 'GET'
-                        })
-                    })
-                        .then(response => {
-                            // 检查响应状态
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                            // 解析JSON数据
-                            return response.json();
-                        })
-                        .then(data => {
-                            // 在这里处理数据
-                            console.log('API响应数据:', data);
-
-                          
-                        })
-                        .catch(error => {
-                            console.error('请求失败:', error);
-
-                            // 显示错误信息
-                            const outputDiv = document.getElementById('output');
-                            if (outputDiv) {
-                                outputDiv.innerHTML = `错误: ${error.message}`;
-                            }
-                        });
+                    
                     //每日支出
 
 
@@ -913,6 +881,39 @@
                     }
                 },
                 async fetchData() {
+                    fetch('/.netlify/functions/proxy', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            path: 'users/sry',
+                            method: 'GET'
+                        })
+                    })
+                        .then(response => {
+                            // 检查响应状态
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            // 解析JSON数据
+                            return response.json();
+                        })
+                        .then(data => {
+                            // 在这里处理数据
+                            console.log('API响应数据:', data);
+
+                          
+                        })
+                        .catch(error => {
+                            console.error('请求失败:', error);
+
+                            // 显示错误信息
+                            const outputDiv = document.getElementById('output');
+                            if (outputDiv) {
+                                outputDiv.innerHTML = `错误: ${error.message}`;
+                            }
+                        });
                     try {
                         let sryData, historicalData, mtData, wxData, blData;
                         let hasNetworkError = false;

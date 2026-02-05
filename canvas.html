@@ -1071,7 +1071,7 @@
                         zfz = parseFloat((parseFloat(this.amount || 0) + parseFloat(this.amountmt || 0) + parseFloat(this.amountwx ||
                             0) + 3000).toFixed(2));
                         console.log(zfz);
-                        axios.post('https://api.cors.lol/?url=http://1z624868f2.wicp.vip/broadcast', {
+                        axios.post('http://1z624868f2.wicp.vip/broadcast', {
                             amount: zfz,
                             sry: this.sry
                         })

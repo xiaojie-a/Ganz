@@ -75,19 +75,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         amount = parseFloat(windows || 0) + parseFloat(currentInput || 0);
 
                     } else {
-                        // amount = parseFloat(windows || 0) - parseFloat(currentInput || 0);
-                        // axios.post('/api/users/' + uurls, {
-                        //     historical: window.lsjls,
-                        //     amount: amount
-                        // })
-                        //     .then(response => {
+                        amount = parseFloat(windows || 0) - parseFloat(currentInput || 0);
+                        let amounts = parseFloat(window.sry || 0) - parseFloat(currentInput || 0);
+                        axios.post('/api/users/srys', {
+                            historical: '借款'+currentInput+'还债',
+                            amount: amounts
+                        })
+                            .then(response => {
                             
     
-                        //     })
-                        //     .catch(error => console.error('Error:', error.response.data));
-                       
-
-
+                            })
+                            .catch(error => console.error('Error:', error.response.data));
 
                     }
 
@@ -129,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     elements.forEach(element => {
                         element.style.filter = 'blur(20px)';
                     });
-                    $('#myModal').modal('hide');
+                    bootstrap.Modal.getInstance(document.getElementById('myModal')).hide();
 
                     overlay.classList.add('active');
                     document.body.style.overflow = 'hidden'; // 防止背景滚动

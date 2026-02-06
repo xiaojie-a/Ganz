@@ -76,17 +76,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     } else {
                         amount = parseFloat(windows || 0) - parseFloat(currentInput || 0);
-                        let amounts = parseFloat(window.sry || 0) - parseFloat(currentInput || 0);
-                        axios.post('/api/users/srys', {
-                            historical: '借款'+currentInput+'还债',
-                            amount: amounts
-                        })
-                            .then(response => {
-                            
-    
+                        if (uurls != 'srys') {
+                            let amounts = parseFloat(window.sry || 0) - parseFloat(currentInput || 0);
+                            axios.post('/api/users/srys', {
+                                historical: '借款' + currentInput + '还债',
+                                amount: amounts
                             })
-                            .catch(error => console.error('Error:', error.response.data));
+                                .then(response => {
 
+
+                                })
+                                .catch(error => console.error('Error:', error.response.data));
+                        }
                     }
 
                     console.log('/api/users/' + uurls);

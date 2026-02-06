@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const display = document.querySelector('.display');
     const inputValue = document.querySelector('.input-value');
-    const placeholder = document.querySelector('.placeholder');
+    const placeholder = document.querySelector('.placeholders');
     const keys = document.querySelectorAll('.key');
     let currentInput = '';
     window.lx = '借款';
@@ -75,11 +75,23 @@ document.addEventListener('DOMContentLoaded', function () {
                         amount = parseFloat(windows || 0) + parseFloat(currentInput || 0);
 
                     } else {
-                        amount = parseFloat(windows || 0) - parseFloat(currentInput || 0);
+                        // amount = parseFloat(windows || 0) - parseFloat(currentInput || 0);
+                        // axios.post('/api/users/' + uurls, {
+                        //     historical: window.lsjls,
+                        //     amount: amount
+                        // })
+                        //     .then(response => {
+                            
+    
+                        //     })
+                        //     .catch(error => console.error('Error:', error.response.data));
+                       
+
+
 
                     }
 
-                    //console.log('http://127.0.0.1:3000/api/users/' + uurls);
+                    console.log('/api/users/' + uurls);
                     console.log(window.lsjls);
                     console.log(amount);
 
@@ -89,84 +101,30 @@ document.addEventListener('DOMContentLoaded', function () {
                         amount: amount
                     })
                         .then(response => {
-                            wancheng();
+                            vueInstance?.fetchData();
+
+
+                            document.getElementById('input').value = '';
+                            currentInput = ''
+                            updateDisplay()
+                            if (window.platforms != 'sry') {
+                                if (lx == '借款') {
+                                    document.getElementById('containers').style.display = 'none';
+
+
+                                }
+                            }
+                            const elements = document.querySelectorAll('#container');
+                            elements.forEach(element => {
+                                element.style.filter = 'blur(0px)';
+                            });
+                            const overlay = document.getElementById('overlay');
+
+                            overlay.classList.remove('active');
+                            document.body.style.overflow = ''; // 恢复背景滚动
 
                         })
-                        .catch(error => {
-                            console.error('无网络链接，转接到本地储存:', error)
-                            console.log(uurls + 'DB');
-                            if(localStorage.getItem(uurls + 'DB') === null)
-                            {
-                                let data = [{ 
-                                    historical: window.lsjls,
-                                    created_at: time(),
-                                    amount: amount
-                                }]
-                                localStorage.setItem(uurls+'DB', JSON.stringify(data));
-                            }else{
-                                let adddb = JSON.parse(localStorage.getItem(uurls + 'DB'));
-                                adddb.push({
-                                    historical: window.lsjls,
-                                    created_at: time(),
-                                    amount: amount
-                                });
-                                console.log(adddb)
-                                localStorage.setItem(uurls+'DB', JSON.stringify(adddb));
-
-                            }
-                            
-                            
-
-                            let savedUser = JSON.parse(localStorage.getItem(uurls + 'Data'));
-                            savedUser.push({
-                                historical: window.lsjls,
-                                created_at: time(),
-                                amount: amount
-                            });
-                            localStorage.setItem(uurls + 'Data', JSON.stringify(savedUser));
-                            wancheng();
-                        });
-
-                    function time() {
-                        // 获取当前日期时间
-                        const now = new Date();
-
-                        // 获取各个部分
-                        const year = now.getFullYear();       // 年份（如 2024）
-                        const month = now.getMonth() + 1;     // 月份（0-11，需要+1）
-                        const date = now.getDate();           // 日期（1-31）
-                        const hours = now.getHours();         // 小时（0-23）
-                        const minutes = now.getMinutes();     // 分钟（0-59）
-                        const seconds = now.getSeconds();     // 秒数（0-59）
-                        return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
-
-                    };
-                    function wancheng() {
-                        vueInstance?.fetchData();
-
-
-                        document.getElementById('input').value = '';
-                        currentInput = ''
-                        updateDisplay()
-                        if (window.platforms != 'sry') {
-                            if (lx == '借款') {
-                                document.getElementById('containers').style.display = 'none';
-
-
-                            }
-                        }
-                        const elements = document.querySelectorAll('#container');
-                        elements.forEach(element => {
-                            element.style.filter = 'blur(0px)';
-                        });
-                        const overlay = document.getElementById('overlay');
-
-                        overlay.classList.remove('active');
-                        document.body.style.overflow = ''; // 恢复背景滚动
-                    };
-
-
-
+                        .catch(error => console.error('Error:', error.response.data));
                     const elements = document.querySelectorAll('#container');
                     elements.forEach(element => {
                         element.style.filter = 'blur(20px)';
@@ -184,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             updateDisplay();
         });
-
     });
 
 

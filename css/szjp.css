@@ -29,7 +29,7 @@
             font-size: 1.8rem;
         }
         
-        .placeholder {
+        .placeholders {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);

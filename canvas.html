@@ -34,14 +34,6 @@
             padding: 20px;
         }
 
-        header {
-
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background: #ffffff;
-        }
-
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
@@ -325,6 +317,44 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            gap: 20px;
+            /* 添加间距 */
+        }
+
+        #can>header {
+            flex: 1;
+            min-width: 400px;
+            /* 设置最小宽度 */
+            margin-bottom: 30px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        @media (max-width: 1600px) {
+            #can {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #can>header {
+                width: 100%;
+                max-width: 100%;
+                min-width: auto;
+                /* 移除最小宽度限制 */
+                margin-bottom: 20px;
+            }
+
+            #lineChartto,
+            #lineChart {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 300px !important;
+                /* 确保高度 */
+            }
         }
     </style>
 </head>
@@ -494,12 +524,12 @@
                         </select>
                         <div id="lsjl">共收入：{{srsum}}共消费：{{zcsum}}</div>
                     </div>
-                    <canvas id="lineChartto" width="800" height="700"></canvas>
+                    <canvas id="lineChartto"></canvas>
 
                 </header>
 
                 <header>
-                    <canvas id="lineChart" width="800" height="700"></canvas>
+                    <canvas id="lineChart"></canvas>
 
                 </header>
             </div>

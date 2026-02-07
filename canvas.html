@@ -750,6 +750,8 @@
                     if (myChartto) {
                         myChartto.destroy();
                         myChartto = null;
+                        myChart.destroy();
+                        myChart = null;
                     }
                     const data = this.itemsz
                     const ctx = document.getElementById('lineChart');

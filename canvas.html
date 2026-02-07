@@ -320,6 +320,12 @@
         #xsfw {
             margin-left: 15px;
         }
+
+        #can {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -476,20 +482,27 @@
             </div>
 
 
-            <header>
-                <div id="xsfw">
-                    <label id="lsjl" for="skill-level">范围：</label>
-                    <select id="skill-level" name="skill-level">
-                        <option value="yizhou">一周</option>
-                        <option value="yiyue">一月</option>
-                        <option value="yinian">一年</option>
-                        <option value="quanbu">全部</option>
-                    </select>
-                   <div id="lsjl">共收入：{{srsum}}共消费：{{zcsum}}</div> 
-                </div>
-                <canvas id="lineChartto" width="800" height="700"></canvas>
+            <div id="can">
+                <header>
+                    <div id="xsfw">
+                        <label id="lsjl" for="skill-level">范围：</label>
+                        <select id="skill-level" name="skill-level">
+                            <option value="yizhou">一周</option>
+                            <option value="yiyue">一月</option>
+                            <option value="yinian">一年</option>
+                            <option value="quanbu">全部</option>
+                        </select>
+                        <div id="lsjl">共收入：{{srsum}}共消费：{{zcsum}}</div>
+                    </div>
+                    <canvas id="lineChartto" width="800" height="700"></canvas>
 
-            </header>
+                </header>
+
+                <header>
+                    <canvas id="lineChart" width="800" height="700"></canvas>
+
+                </header>
+            </div>
 
 
         </div>
@@ -556,7 +569,7 @@
                 vueInstance = this;
                 await this.fetchData();
 
-               
+
                 //this.timesdy();
 
             },
@@ -707,6 +720,10 @@
                         return Number(item);
                     });
                     // console.log(result);
+                    const sr = Array.from(this.sr, item => item === undefined ? 0 : item);
+
+                    const results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
+
                     //计算收入合计
                     const sum = this.sr.reduce((total, current) => {
                         // 将非数字值转为0
@@ -745,7 +762,7 @@
                                 },
                                 {
                                     label: '每日收入',
-                                    data: this.sr, // 收入数据，假设有 this.sr 数组
+                                    data: sr, // 收入数据，假设有 this.sr 数组
 
                                     backgroundColor: 'rgba(255, 51, 153, 0.8)',
                                     borderColor: 'rgb(255, 51, 153)',
@@ -772,6 +789,40 @@
                             }
                         }
                     });
+                    // 如果你想要水平柱状图（横向）
+                    myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: this.sj,
+                            datasets: [
+                                {
+                                    label: '每日消费',
+                                    data: results,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.8)', // 青色系
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1,
+                                }
+                            ]
+                        },
+                        options: {
+                            indexAxis: 'y', // 设置为 'y' 就是水平柱状图
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                    }
+                                }
+                            }
+                        }
+                    });
+
 
                 },
                 SJ() {

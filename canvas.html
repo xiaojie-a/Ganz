@@ -487,20 +487,20 @@
 
 
             </div>
-
+            <div id="xsfw">
+                <label id="lsjl" for="skill-level">范围：</label>
+                <select id="skill-level" name="skill-level">
+                    <option value="yizhou">一周</option>
+                    <option value="yiyue">一月</option>
+                    <option value="yinian">一年</option>
+                    <option value="quanbu">全部</option>
+                </select>
+                <div id="lsjl">共收入：{{srsum}}共消费：{{zcsum}}</div>
+            </div>
 
             <div id="can">
                 <header>
-                    <div id="xsfw">
-                        <label id="lsjl" for="skill-level">范围：</label>
-                        <select id="skill-level" name="skill-level">
-                            <option value="yizhou">一周</option>
-                            <option value="yiyue">一月</option>
-                            <option value="yinian">一年</option>
-                            <option value="quanbu">全部</option>
-                        </select>
-                        <div id="lsjl">共收入：{{srsum}}共消费：{{zcsum}}</div>
-                    </div>
+                   
                     <canvas id="lineChartto"></canvas>
 
                 </header>

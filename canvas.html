@@ -691,7 +691,7 @@
                     this.sj = []
                     this.je = []
                     this.sr = []
-                    let results ;
+                    let results;
                     //对日期进行重新排序（倒序）
                     this.itemsz.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
                     //console.log(this.itemsz);
@@ -729,10 +729,17 @@
                     });
                     // console.log(result);
                     const sr = Array.from(this.sr, item => item === undefined ? 0 : item);
-                   
-                     //防止漏算
+
+                    //防止漏算
+                    if (sr.length != this.times) {
+                        let a = this.times - sr.length
+                        console.log(a);
+                        // for(a;a=0;a--){
+
+                        // }
+                    }
                     if (sr.length > result.length) {
-                        console.log('>');
+                       
                         results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
                     } else {
                         console.log('<');

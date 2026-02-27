@@ -732,8 +732,10 @@
                     console.log(sr);
                      //防止漏算
                     if (sr.length > result.length) {
+                        console.log('>');
                         const results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
                     } else {
+                        console.log('<');
                         const results = result.map((value, index) => parseFloat((sr[index] - value)).toFixed(2));
                     }
 

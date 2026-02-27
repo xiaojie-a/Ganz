@@ -733,12 +733,12 @@
                     if (sr.length != this.times) {
                         let a = this.times - sr.length
                         console.log(a);
-                        for(a;a=0;a--){
+                        for (a; a != 0; a--) {
                             sr.push(0);
                         }
                     }
                     if (sr.length > result.length) {
-                       
+
                         results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
                     } else {
                         console.log('<');

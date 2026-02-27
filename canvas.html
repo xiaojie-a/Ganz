@@ -314,12 +314,12 @@
             margin-left: 15px;
         }
 
-          /* 布局样式保持不变 */
-          #can {
+        /* 布局样式保持不变 */
+        #can {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            
+
         }
 
         #can>header {
@@ -499,7 +499,7 @@
             </div>
             <div id="can">
                 <header style="width: 100%; height: 300px;">
-                   
+
                     <canvas id="lineChartto"></canvas>
 
                 </header>
@@ -728,8 +728,15 @@
                     });
                     // console.log(result);
                     const sr = Array.from(this.sr, item => item === undefined ? 0 : item);
+                    console.log(result);
+                    console.log(sr);
+                    console.log(results);
+                    if (sr.length > result.length) {
+                        const results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
+                    } else {
+                        const results = result.map((value, index) => parseFloat((sr[index] - value)).toFixed(2));
+                    }
 
-                    const results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
 
                     //计算收入合计
                     const sum = this.sr.reduce((total, current) => {
@@ -756,7 +763,7 @@
                     const data = this.itemsz
                     const ctx = document.getElementById('lineChart');
                     const ctxto = document.getElementById('lineChartto');
-                  
+
                     // 如果你想要水平柱状图（横向）
                     myChartto = new Chart(ctxto, {
                         type: 'bar',
@@ -835,9 +842,7 @@
                         }
                     });
 
-console.log(result);
-console.log(sr);
-console.log(results);
+
 
                 },
                 SJ() {

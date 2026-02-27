@@ -691,6 +691,7 @@
                     this.sj = []
                     this.je = []
                     this.sr = []
+                    let results ;
                     //对日期进行重新排序（倒序）
                     this.itemsz.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
                     //console.log(this.itemsz);
@@ -728,10 +729,8 @@
                     });
                     // console.log(result);
                     const sr = Array.from(this.sr, item => item === undefined ? 0 : item);
-                    console.log(result);
-                    console.log(sr);
+                   
                      //防止漏算
-                     let results ;
                     if (sr.length > result.length) {
                         console.log('>');
                         results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
@@ -739,7 +738,9 @@
                         console.log('<');
                         results = result.map((value, index) => parseFloat((sr[index] - value)).toFixed(2));
                     }
-
+                    console.log(result);
+                    console.log(sr);
+                    console.log(results);
 
                     //计算收入合计
                     const sum = this.sr.reduce((total, current) => {

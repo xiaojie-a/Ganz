@@ -730,7 +730,7 @@
                     const sr = Array.from(this.sr, item => item === undefined ? 0 : item);
                     console.log(result);
                     console.log(sr);
-                    console.log(results);
+                     //防止漏算
                     if (sr.length > result.length) {
                         const results = sr.map((value, index) => parseFloat((value - result[index])).toFixed(2));
                     } else {

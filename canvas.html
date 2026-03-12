@@ -704,7 +704,7 @@
 
                     for (let a = 0; a < this.times; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {
-                            if (this.rsrs[a].substring(0, 10) === this.rsrs[b].created_at.substring(0, 10)) {
+                            if (this.rsrs[a].created_at.substring(0, 10) === this.rsrs[b].created_at.substring(0, 10)) {
                                 if (this.rsrs[b].historical.substring(0, 2) == "收入") {
                                     this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
                                 }

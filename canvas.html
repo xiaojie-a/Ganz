@@ -729,8 +729,7 @@
                         this.sj[a] = sorted[a];
                     }
                     //对金额进行分变量提取
-                    for (let a = 1; a <= this.times; a++) {
-                        let b = 1;
+                    for (let a = 1,b = 1; a <= this.times; a++) {
                         console.log(this.itemsz[this.itemsz.length - b].created_at.substring(5, 10));
                         console.log(this.sj[a - 1]);
                         if (this.itemsz[this.itemsz.length - b].created_at.substring(5, 10) != this.sj[a - 1]) {

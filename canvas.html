@@ -703,8 +703,8 @@
                     }
                     //对时间和金额进行分变量提取
                     for (let a = 1; a <= this.times; a++) {
-                        zcsj = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
-                        srsj = this.rsrs[this.rsrs.length - a].created_at.substring(5, 10);
+                        zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
+                        srsj[a - 1] = this.rsrs[this.rsrs.length - a].created_at.substring(5, 10);
                         this.sj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }

@@ -709,12 +709,11 @@
                     }
                     const merged = [...new Set([...sjs])];
 
-                    //对时间和金额进行分变量提取
+                    //对时间进行分变量提取
                     for (let a = 1; a <= this.times; a++) {
                         zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
                         srsj[a - 1] = merged[merged.length - a]
 
-                        this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
                     const mergeds = [...new Set([...zcsj, ...srsj])];
                     const sorted = mergeds.sort((a, b) => {
@@ -726,10 +725,17 @@
                         }
                         return dayB - dayA; // 同月按天倒序
                     });
-                    for(let a = 0; a<7; a++){
+                    for (let a = 0; a < 7; a++) {
                         this.sj[a] = sorted[a];
                     }
-                    
+                    //对金额进行分变量提取
+                    for (let a = 1; a <= this.times; a++) {
+                        if (this.itemsz[this.itemsz.length - a].created_at.substring(5, 10) != this.sj[a - 1]) {
+                            this.je[a - 1] = 0;
+                        } else {
+                            this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
+                        }
+                    }
 
                     for (let a = 0; a < this.sj.length; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {

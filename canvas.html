@@ -703,7 +703,7 @@
                         this.times = this.itemsz.length;
                     }
 
-                    for(let a = 0;a<this.rsrs.length;a++){
+                    for (let a = 0; a < this.rsrs.length; a++) {
                         sjs[a] = this.rsrs[a].created_at.substring(5, 10);
 
                     }
@@ -713,10 +713,20 @@
                     for (let a = 1; a <= this.times; a++) {
                         zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
                         srsj[a - 1] = merged[merged.length - a]
-                        
+
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
                     const mergeds = [...new Set([...zcsj, ...srsj])];
+                    const sorted = mergeds.sort((a, b) => {
+                        const [monthA, dayA] = a.split('/').map(Number);
+                        const [monthB, dayB] = b.split('/').map(Number);
+
+                        if (monthA !== monthB) {
+                            return monthB - monthA; // 月份倒序
+                        }
+                        return dayB - dayA; // 同月按天倒序
+                    });
+
 
                     for (let a = 0; a < this.sj.length; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {
@@ -734,7 +744,7 @@
                     console.log(srsj);
                     console.log(this.itemsz);
                     console.log(this.rsrs);
-                    console.log(mergeds);
+                    console.log(sorted);
                     //console.log(this.je);
                     //将je中的所有数字都转换为数字类型
                     const result = this.je.map(item => {

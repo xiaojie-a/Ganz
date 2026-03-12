@@ -691,6 +691,8 @@
                     this.sj = []
                     this.je = []
                     this.sr = []
+                    let srsj = []
+                    let zcsj = []
                     let results;
                     //对日期进行重新排序（倒序）
                     this.itemsz.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
@@ -701,6 +703,8 @@
                     }
                     //对时间和金额进行分变量提取
                     for (let a = 1; a <= this.times; a++) {
+                        zcsj = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
+                        srsj = this.rsrs[this.rsrs.length - a].created_at.substring(5, 10);
                         this.sj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
@@ -716,6 +720,8 @@
 
                     }
                     //console.log(this.sr);
+                    console.log(zcsj);
+                    console.log(srsj);
                     console.log(this.itemsz);
                     console.log(this.rsrs);
                      console.log(this.sj);

@@ -702,31 +702,6 @@
                         this.times = this.itemsz.length;
                     }
 
-                    // for (let a = 0; a < this.times; a++) {
-                    //     for (let b = 0; b < this.rsrs.length; b++) {
-                    //         if (this.rsrs[a].created_at.substring(0, 10) === this.rsrs[b].created_at.substring(0, 10)) {
-                    //             if (this.rsrs[b].historical.substring(0, 2) == "收入") {
-                    //                 this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
-                    //             }
-                    //         }
-                    //     }
-
-
-                    // }
-
-                    // 确保 times 不超过数组长度
-                    const maxIndex = Math.min(this.times, this.rsrs.length);
-
-                    for (let a = 0; a < maxIndex; a++) {
-                        for (let b = 0; b < this.rsrs.length; b++) {
-                            if (this.rsrs[a].created_at.substring(0, 10) === this.rsrs[b].created_at.substring(0, 10)) {
-                                if (this.rsrs[b].historical.substring(0, 2) == "收入") {
-                                    const amount = Number(this.rsrs[b].historical.substring(2, 10));
-                                    this.sr[a] = (this.sr[a] || 0) + amount;
-                                }
-                            }
-                        }
-                    }
                     //对时间和金额进行分变量提取
                     for (let a = 1; a <= this.times; a++) {
                         zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
@@ -735,17 +710,17 @@
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
 
-                    // for (let a = 0; a < this.sj.length; a++) {
-                    //     for (let b = 0; b < this.rsrs.length; b++) {
-                    //         if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
-                    //             if (this.rsrs[b].historical.substring(0, 2) == "收入") {
-                    //                 this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
-                    //             }
-                    //         }
-                    //     }
+                    for (let a = 0; a < this.sj.length; a++) {
+                        for (let b = 0; b < this.rsrs.length; b++) {
+                            if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
+                                if (this.rsrs[b].historical.substring(0, 2) == "收入") {
+                                    this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
+                                }
+                            }
+                        }
 
 
-                    // }
+                    }
                     console.log(this.sr);
                     console.log(zcsj);
                     console.log(srsj);

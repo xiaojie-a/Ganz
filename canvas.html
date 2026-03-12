@@ -706,11 +706,11 @@
                     }
                     for (let a = 0; a < this.sj.length; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {
-                            if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
+                            //if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
                                 if (this.rsrs[b].historical.substring(0, 2) == "收入") {
                                     this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
                                 }
-                            }
+                            //}
                         }
 
 

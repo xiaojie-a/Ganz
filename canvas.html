@@ -716,7 +716,7 @@
                         
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
-                    this.sj = [...new Set([...zcsj, ...srsj])];
+                    const mergeds = [...new Set([...zcsj, ...srsj])];
 
                     for (let a = 0; a < this.sj.length; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {
@@ -734,7 +734,7 @@
                     console.log(srsj);
                     console.log(this.itemsz);
                     console.log(this.rsrs);
-                    console.log(this.sj);
+                    console.log(mergeds);
                     //console.log(this.je);
                     //将je中的所有数字都转换为数字类型
                     const result = this.je.map(item => {

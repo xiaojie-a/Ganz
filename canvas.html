@@ -713,9 +713,10 @@
                     for (let a = 1; a <= this.times; a++) {
                         zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
                         srsj[a - 1] = merged[merged.length - a]
-                        this.sj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
+                        
                         this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
                     }
+                    this.sj = [...new Set([...zcsj, ...srsj])];
 
                     for (let a = 0; a < this.sj.length; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {

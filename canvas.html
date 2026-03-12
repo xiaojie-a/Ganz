@@ -704,7 +704,7 @@
                     }
 
                     for(let a = 0;a<this.rsrs.length;a++){
-                        sjs[a] = this.rsrs.created_at.substring(5, 10);
+                        sjs[a] = this.rsrs[a].created_at.substring(5, 10);
 
                     }
                     const merged = [...new Set([...this.sjs])];

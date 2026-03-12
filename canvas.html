@@ -701,16 +701,10 @@
                     if (this.itemsz.length < this.times) {
                         this.times = this.itemsz.length;
                     }
-                    //对时间和金额进行分变量提取
-                    for (let a = 1; a <= this.times; a++) {
-                        zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
-                        srsj[a - 1] = this.rsrs[this.rsrs.length - a].created_at.substring(5, 10);
-                        this.sj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
-                        this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
-                    }
-                    for (let a = 0; a < this.sj.length; a++) {
+
+                    for (let a = 0; a < this.times; a++) {
                         for (let b = 0; b < this.rsrs.length; b++) {
-                            if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
+                            if (this.rsrs[a].substring(0, 10) === this.rsrs[b].created_at.substring(0, 10)) {
                                 if (this.rsrs[b].historical.substring(0, 2) == "收入") {
                                     this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
                                 }
@@ -719,7 +713,26 @@
 
 
                     }
-                    //console.log(this.sr);
+                    //对时间和金额进行分变量提取
+                    for (let a = 1; a <= this.times; a++) {
+                        zcsj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
+                        srsj[a - 1] = this.rsrs[this.rsrs.length - a].created_at.substring(5, 10);
+                        this.sj[a - 1] = this.itemsz[this.itemsz.length - a].created_at.substring(5, 10);
+                        this.je[a - 1] = this.itemsz[this.itemsz.length - a].historical;
+                    }
+                    
+                    // for (let a = 0; a < this.sj.length; a++) {
+                    //     for (let b = 0; b < this.rsrs.length; b++) {
+                    //         if (this.sj[a] === this.rsrs[b].created_at.substring(5, 10)) {
+                    //             if (this.rsrs[b].historical.substring(0, 2) == "收入") {
+                    //                 this.sr[a] = (Number(this.sr[a]) || 0) + Number(this.rsrs[b].historical.substring(2, 10));
+                    //             }
+                    //         }
+                    //     }
+
+
+                    // }
+                    console.log(this.sr);
                     console.log(zcsj);
                     console.log(srsj);
                     console.log(this.itemsz);

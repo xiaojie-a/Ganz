@@ -564,6 +564,8 @@
                     modalTitle: '还款详情',
                     sry: 0.00,
                     rsr: '0.00',
+                    rsrss:0.00,
+                    rxf:'0.00',
                     l: '借款',
                     r: '还款',
                     times: 7,
@@ -805,6 +807,14 @@
                         return total + (Number(current) || 0);
                     }, 0);
                     this.zcsum = Number(sums.toFixed(2));
+
+                    const today = new Date();
+                    const dateString = String(today.getMonth() + 1).padStart(2, '0') + '/' +
+                        String(today.getDate()).padStart(2, '0');
+                    if (dateString === this.sj[this.sj.length-1]) {
+                       this.rxf = result[result.length-1]
+                    }
+
                     //console.log(sum); // 529.2
                     // this.sj.reverse();
                     //this.je.reverse();
@@ -1148,6 +1158,7 @@
                         }
                         if (this.rsr === 0) {
                             this.rsr = '请自律';
+                            this.rsrss = 0;
                         }
 
                         // 处理支付宝数据
@@ -1197,11 +1208,10 @@
                         console.log(zfz);
 
                         axios.post('api/broadcast', {
+                            username: '目前总负债：' + zfz + '元剩余存款：' + this.sry + '元,今日目前共收入' + this.rsrss + '元今日目前共消费'+this.rxf+'元。看到这些信息请对我说一句话，可以是嘲讽，可以是鼓励，也可以是打击。',
                             amount: zfz,
                             sry: this.sry
-
-                        }
-                        )
+                        })
 
                     } catch (error) {
                         console.error('数据加载失败:', error);

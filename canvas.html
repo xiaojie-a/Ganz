@@ -522,6 +522,11 @@
                 console.log(data.hitokoto);
                 document.getElementById("opText").innerHTML = data.hitokoto;
             })
+            let eventSource = new EventSource('/events');
+            eventSource.onmessage = (e) => {
+                const datas = JSON.parse(e.data).tas;
+                document.getElementById("opText").innerHTML = datas[datas.length-1].username;
+            }
         // 获取DOM元素
         const overlay = document.getElementById('overlay');
         overlay.classList.add('active');

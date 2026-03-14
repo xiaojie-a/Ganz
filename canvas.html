@@ -522,7 +522,7 @@
                 console.log(data.hitokoto);
                 document.getElementById("opText").innerHTML = data.hitokoto;
             })
-            let eventSource = new EventSource('api/events');
+            let eventSource = new EventSource('/api/events');
             eventSource.onmessage = (e) => {
                 const datas = JSON.parse(e.data).tas;
                 document.getElementById("opText").innerHTML = datas[datas.length-1].username;

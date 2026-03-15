@@ -1163,12 +1163,12 @@
                             if (dateString === this.srys[a].created_at?.substring(0, 10)) {
                                 if (this.srys[a].historical.substring(0, 2) == '收入') {
                                     this.rsr = (parseFloat(this.rsr) + parseFloat(this.srys[a].historical.match(/\d+\.\d+|\d+/g))).toFixed(2);
+                                    this.rsrss = this.rsr;
                                 }
                             }
                         }
                         if (this.rsr === 0) {
                             this.rsr = '请自律';
-                            this.rsrss = 0;
                         }
 
                         // 处理支付宝数据

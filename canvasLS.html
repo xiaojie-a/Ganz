@@ -179,7 +179,8 @@
         /* ============================================================
                    添加板块按钮
                    ============================================================ */
-        .add-platform-btn {
+        .add-platform-btn,
+        .add-platform  {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -197,17 +198,20 @@
             margin-bottom: 24px;
         }
 
-        .add-platform-btn:hover {
+        .add-platform-btn:hover,
+        .add-platform:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 10px 32px rgba(124, 77, 255, 0.40);
             background: #6D3FE0;
         }
 
-        .add-platform-btn:active {
+        .add-platform-btn:active,
+        .add-platform:active {
             transform: scale(0.96);
         }
 
-        .add-platform-btn::before {
+        .add-platform-btn::before ,
+        .add-platform::before {
             content: "＋";
             font-size: 1.3rem;
             font-weight: 300;
@@ -922,6 +926,12 @@
             }
 
             .add-platform-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
+             .add-platform {
                 justify-content: center;
                 padding: 14px 20px;
                 font-size: 0.95rem;
@@ -1056,7 +1066,7 @@
         </span>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
-        <button class="add-platform-btn" @click="manualSync" 
+        <button class="add-platform" @click="manualSync" 
                 style="background:#6f42c1;padding:6px 18px;font-size:0.8rem;margin:0;" 
                 :disabled="isSyncing">
             ☁️ {{ isSyncing ? '同步中...' : '同步' }}

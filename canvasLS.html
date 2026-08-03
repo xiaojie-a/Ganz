@@ -1178,18 +1178,18 @@
     JavaScript – 逻辑代码完全保持不变
     ============================================================ -->
     <script>
-        // 在你的网页加载完成后，通知 Cordova 隐藏启动页
-        document.addEventListener('deviceready', function () {
-            // 等所有资源加载完成后再隐藏
-            window.addEventListener('load', function () {
-                // 延迟 500ms 让页面完全渲染
-                setTimeout(function () {
-                    if (navigator.splashscreen) {
-                        navigator.splashscreen.hide();
-                    }
-                }, 500);
-            });
-        });
+        // // 在你的网页加载完成后，通知 Cordova 隐藏启动页
+        // document.addEventListener('deviceready', function () {
+        //     // 等所有资源加载完成后再隐藏
+        //     window.addEventListener('load', function () {
+        //         // 延迟 500ms 让页面完全渲染
+        //         setTimeout(function () {
+        //             if (navigator.splashscreen) {
+        //                 navigator.splashscreen.hide();
+        //             }
+        //         }, 500);
+        //     });
+        // });
         // document.addEventListener('deviceready', function () {
 
         //     StatusBar.backgroundColorByHexString('#00000000');

@@ -180,7 +180,7 @@
                    添加板块按钮
                    ============================================================ */
         .add-platform-btn,
-        .add-platform  {
+        .add-platform {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -210,7 +210,7 @@
             transform: scale(0.96);
         }
 
-        .add-platform-btn::before ,
+        .add-platform-btn::before,
         .add-platform::before {
             content: "＋";
             font-size: 1.3rem;
@@ -931,7 +931,8 @@
                 padding: 14px 20px;
                 font-size: 0.95rem;
             }
-             .add-platform {
+
+            .add-platform {
                 justify-content: center;
                 padding: 14px 20px;
                 font-size: 0.95rem;
@@ -1056,24 +1057,23 @@
         <div id="container" class="container">
 
             <!-- 顶部总览 -->
-           <!-- 在 footer 中添加同步状态 -->
-<footer id="myFooter">
-    <div class="love-counter">
-        总负债 ¥ {{ totalDebt }} &nbsp;·&nbsp; 总剩余 ¥ {{ totalRemain }}
-        <span class="sync-status" :class="syncStatus" 
-              style="font-size:0.7rem;padding:4px 12px;border-radius:20px;background:rgba(0,0,0,0.05);">
-            {{ syncStatusText }}
-        </span>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;">
-        <button class="add-platform" @click="manualSync" 
-                style="background:#6f42c1;padding:6px 18px;font-size:0.8rem;margin:0;" 
-                :disabled="isSyncing">
-            ☁️ {{ isSyncing ? '同步中...' : '同步' }}
-        </button>
-        <p id="opText" style="margin:0;">今天你吃了么</p>
-    </div>
-</footer>
+            <!-- 在 footer 中添加同步状态 -->
+            <footer id="myFooter">
+                <div class="love-counter">
+                    总负债 ¥ {{ totalDebt }} &nbsp;·&nbsp; 总剩余 ¥ {{ totalRemain }}
+                    <span class="sync-status" :class="syncStatus"
+                        style="font-size:0.7rem;padding:4px 12px;border-radius:20px;background:rgba(0,0,0,0.05);">
+                        {{ syncStatusText }}
+                    </span>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button class="add-platform" @click="manualSync"
+                        style="background:#6f42c1;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isSyncing">
+                        ☁️ {{ isSyncing ? '同步中...' : '同步' }}
+                    </button>
+                    <p id="opText" style="margin:0;">今天你吃了么</p>
+                </div>
+            </footer>
             <div class="content">
                 <!-- 添加板块按钮 -->
                 <button class="add-platform-btn" @click="showAddPlatformModal">添加板块</button>
@@ -1178,16 +1178,29 @@
     JavaScript – 逻辑代码完全保持不变
     ============================================================ -->
     <script>
+        // 在你的网页加载完成后，通知 Cordova 隐藏启动页
         document.addEventListener('deviceready', function () {
-            StatusBar.backgroundColorByHexString('#00000000');
-            const isDarkMode = window.matchMedia &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (isDarkMode) {
-                StatusBar.styleLightContent();
-            } else {
-                StatusBar.styleDefault();
-            }
-        }, false);
+            // 等所有资源加载完成后再隐藏
+            window.addEventListener('load', function () {
+                // 延迟 500ms 让页面完全渲染
+                setTimeout(function () {
+                    if (navigator.splashscreen) {
+                        navigator.splashscreen.hide();
+                    }
+                }, 500);
+            });
+        });
+        // document.addEventListener('deviceready', function () {
+
+        //     StatusBar.backgroundColorByHexString('#00000000');
+        //     const isDarkMode = window.matchMedia &&
+        //         window.matchMedia('(prefers-color-scheme: dark)').matches;
+        //     if (isDarkMode) {
+        //         StatusBar.styleLightContent();
+        //     } else {
+        //         StatusBar.styleDefault();
+        //     }
+        // }, false);
 
         // ===== 工具函数 =====
         function nowISO() { return new Date().toISOString(); }
@@ -1344,7 +1357,7 @@
                             this.syncStatus = 'online';
                             this.syncStatusText = '✅ 已同步';
                             this.loadAllData();
-                           // alert('✅ 同步成功！');
+                            // alert('✅ 同步成功！');
                         } else {
                             this.syncStatus = 'offline';
                             this.syncStatusText = '⚠️ 同步失败';

@@ -564,8 +564,8 @@
                     modalTitle: '还款详情',
                     sry: 0.00,
                     rsr: '0.00',
-                    rsrss:0.00,
-                    rxf:'0.00',
+                    rsrss: 0.00,
+                    rxf: '0.00',
                     l: '借款',
                     r: '还款',
                     times: 7,
@@ -731,7 +731,7 @@
                         this.sj[a] = sorted[a];
                     }
                     //对金额进行分变量提取
-                    for (let a = 1,b = 1; a <= this.times; a++) {
+                    for (let a = 1, b = 1; a <= this.times; a++) {
                         console.log(this.itemsz[this.itemsz.length - b].created_at.substring(5, 10));
                         console.log(this.sj[a - 1]);
                         if (this.itemsz[this.itemsz.length - b].created_at.substring(5, 10) != this.sj[a - 1]) {
@@ -812,17 +812,17 @@
                     const dateString = String(today.getMonth() + 1).padStart(2, '0') + '/' +
                         String(today.getDate()).padStart(2, '0');
                     if (dateString == this.sj[0]) {
-                       this.rxf = result[0]
+                        this.rxf = result[0]
                     }
 
                     zfz = parseFloat((parseFloat(this.amount || 0) + parseFloat(this.amountmt || 0) + parseFloat(this.amountwx ||
-                            0) + 3000).toFixed(2));
-                        console.log(zfz);
+                        0) + 3000).toFixed(2));
+                    console.log(zfz);
 
-                        axios.post('api/broadcast', {
-                            amount: zfz,
-                            sry: this.sry
-                        })
+                    axios.post('api/broadcast', {
+                        amount: zfz,
+                        sry: this.sry
+                    })
 
                     //console.log(sum); // 529.2
                     // this.sj.reverse();
@@ -1212,7 +1212,7 @@
                             console.log('所有数据加载完成（最新数据）');
                         }
 
-                       
+
 
                     } catch (error) {
                         console.error('数据加载失败:', error);

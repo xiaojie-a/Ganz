@@ -1,14 +1,49 @@
-// sync-gitee.js - Gitee 同步核心模块
+// sync-gitee.js - Gitee 同步核心模块（修复中文乱码）
 
 const GITEE_CONFIG = {
-    // 替换为你的信息
-    owner: 'jikezhan',      // 例如: 'zhangsan'
-    repo: 'finance-data',          // 仓库名
-    path: 'data.json',             // 文件路径
-    token: '4cd1726b6a4f5bac7025c2a6a625ba90'     // 例如: 'abc123...'
+    owner: 'jikezhan',
+    repo: 'finance-data',
+    path: 'data.json',
+    token: '4cd1726b6a4f5bac7025c2a6a625ba90'
 };
 
 const API_BASE = 'https://gitee.com/api/v5';
+
+// ============================================================
+// Base64 编码（支持中文，Cordova/浏览器通用）
+// ============================================================
+function utf8ToBase64(str) {
+    // 使用 TextEncoder 将字符串转为 UTF-8 字节数组
+    const encoder = new TextEncoder();
+    const bytes = encoder.encode(str);
+    
+    // 将字节数组转为二进制字符串
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    
+    // 转为 Base64
+    return btoa(binary);
+}
+
+// ============================================================
+// Base64 解码（支持中文，Cordova/浏览器通用）
+// ============================================================
+function base64ToUtf8(base64) {
+    // 先解码 Base64 为二进制字符串
+    const binary = atob(base64);
+    
+    // 将二进制字符串转为 Uint8Array
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    
+    // 使用 TextDecoder 解码为 UTF-8 字符串
+    const decoder = new TextDecoder('utf-8');
+    return decoder.decode(bytes);
+}
 
 // ============================================================
 // 1. 获取文件的 SHA
@@ -64,8 +99,9 @@ async function pullFromGitee() {
         }
         
         const data = await response.json();
-        // Gitee 返回的内容是 Base64 编码
-        const content = atob(data.content);
+        
+        // ✅ 使用支持中文的解码
+        const content = base64ToUtf8(data.content);
         const jsonData = JSON.parse(content);
         
         console.log('📥 从 Gitee 拉取数据成功');
@@ -82,8 +118,9 @@ async function pullFromGitee() {
 async function pushToGitee(data) {
     const sha = await getFileSHA();
     
-    // 将数据转为 Base64
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    // ✅ 使用支持中文的编码
+    const jsonStr = JSON.stringify(data, null, 2);
+    const content = utf8ToBase64(jsonStr);
     
     const url = `${API_BASE}/repos/${GITEE_CONFIG.owner}/${GITEE_CONFIG.repo}/contents/${GITEE_CONFIG.path}`;
     
@@ -242,7 +279,7 @@ async function syncWithGitee() {
 }
 
 // ============================================================
-// 8. 仅拉取（不合并上传）
+// 8. 仅拉取
 // ============================================================
 async function pullOnly() {
     const remoteData = await pullFromGitee();
@@ -255,7 +292,7 @@ async function pullOnly() {
 }
 
 // ============================================================
-// 9. 仅上传（不拉取）
+// 9. 仅上传
 // ============================================================
 async function pushOnly() {
     const localData = gatherLocalData();
@@ -264,7 +301,7 @@ async function pushOnly() {
 }
 
 // ============================================================
-// 导出（支持浏览器和 Cordova）
+// 导出
 // ============================================================
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -277,7 +314,6 @@ if (typeof module !== 'undefined' && module.exports) {
         GITEE_CONFIG
     };
 } else {
-    // 浏览器环境
     window.syncWithGitee = syncWithGitee;
     window.pullOnly = pullOnly;
     window.pushOnly = pushOnly;

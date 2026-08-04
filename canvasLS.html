@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 引入依赖库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js">
     </script>
+    <!-- 同步模块（需存在 sync-gitee.js） -->
     <script src="sync-gitee.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
@@ -17,8 +19,8 @@
 
     <style>
         /* ============================================================
-                   2026 · Material You 风格重置 & 全局
-                   ============================================================ */
+           全局样式（Material You 风格）
+           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -79,9 +81,7 @@
             transition: filter 0.3s;
         }
 
-        /* ============================================================
-                   顶部总览卡片
-                   ============================================================ */
+        /* 顶部总览卡片（粘性） */
         #myFooter {
             position: sticky;
             top: 0;
@@ -116,11 +116,7 @@
             flex-wrap: wrap;
             gap: 12px 28px;
         }
-
-        .love-counter br {
-            display: none;
-        }
-
+        .love-counter br { display: none; }
         .love-counter::before {
             content: "💰";
             margin-right: 4px;
@@ -155,9 +151,7 @@
             }
         }
 
-        /* ============================================================
-                   按钮
-                   ============================================================ */
+        /* 按钮 */
         .add-platform-btn,
         .add-platform {
             display: inline-flex;
@@ -176,19 +170,16 @@
             letter-spacing: 0.3px;
             margin-bottom: 24px;
         }
-
         .add-platform-btn:hover,
         .add-platform:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 10px 32px rgba(124, 77, 255, 0.40);
             background: #6D3FE0;
         }
-
         .add-platform-btn:active,
         .add-platform:active {
             transform: scale(0.96);
         }
-
         .add-platform-btn::before,
         .add-platform::before {
             content: "＋";
@@ -197,9 +188,7 @@
             line-height: 1;
         }
 
-        /* ============================================================
-                   板块网格
-                   ============================================================ */
+        /* 板块网格 */
         .sections-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -207,9 +196,7 @@
             margin-bottom: 32px;
         }
 
-        /* ============================================================
-                   板块卡片
-                   ============================================================ */
+        /* 板块卡片 */
         .section {
             background: var(--md-surface);
             backdrop-filter: blur(20px) saturate(1.3);
@@ -227,7 +214,6 @@
             height: auto !important;
             flex-basis: auto !important;
         }
-
         .section:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 56px rgba(90, 60, 160, 0.14);
@@ -245,7 +231,6 @@
             gap: 8px;
             letter-spacing: -0.2px;
         }
-
         .section h2::before {
             content: "📋";
             font-size: 1.1rem;
@@ -269,7 +254,6 @@
             justify-content: center;
             line-height: 1;
         }
-
         .section .delete-btn:hover {
             color: #E53935;
             background: rgba(229, 57, 53, 0.08);
@@ -292,12 +276,10 @@
             border: 1px solid rgba(124, 77, 255, 0.06);
             flex: 1;
         }
-
         #ann:hover {
             background: linear-gradient(135deg, rgba(124, 77, 255, 0.14), rgba(68, 138, 255, 0.10));
             transform: scale(1.01);
         }
-
         #ann h2 {
             border: none !important;
             padding: 0 !important;
@@ -308,17 +290,14 @@
             float: none !important;
             flex-shrink: 0;
         }
-
         #ann h2::before {
             content: none !important;
         }
-
         #ann>div {
             padding: 0 !important;
             margin-left: auto;
             flex-shrink: 0;
         }
-
         #ann>div img {
             width: 44px !important;
             height: 44px !important;
@@ -337,7 +316,6 @@
             margin-top: 4px;
             padding-right: 4px;
         }
-
         #lsjl {
             padding: 4px 6px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
@@ -348,23 +326,18 @@
             gap: 8px;
             word-break: break-word;
         }
-
         #lsjl:last-child {
             border-bottom: none;
         }
-
         #lsjl[style*="color:red"] {
             color: var(--md-primary) !important;
             font-weight: 500;
         }
-
         .section:first-child h2::before {
             content: "📥";
         }
 
-        /* ============================================================
-                   图表区域
-                   ============================================================ */
+        /* 图表控制栏 */
         #xsfw {
             display: flex;
             flex-wrap: wrap;
@@ -379,7 +352,6 @@
             box-shadow: var(--md-shadow);
             border: 1px solid rgba(255, 255, 255, 0.50);
         }
-
         #xsfw #lsjl {
             border: none !important;
             padding: 0 !important;
@@ -389,13 +361,11 @@
             gap: 6px;
             align-items: center;
         }
-
         #xsfw #lsjl:not(:last-child)::after {
             content: "·";
             color: rgba(26, 26, 46, 0.20);
             margin: 0 4px;
         }
-
         #xsfw select {
             padding: 6px 18px 6px 14px;
             border-radius: 40px;
@@ -409,12 +379,10 @@
             cursor: pointer;
             transition: var(--md-transition);
         }
-
         #xsfw select:hover {
             border-color: var(--md-primary-light);
             background: rgba(255, 255, 255, 0.80);
         }
-
         #xsfw select:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.12);
@@ -426,7 +394,6 @@
             gap: 22px;
             margin-bottom: 20px;
         }
-
         #can>header {
             background: var(--md-surface);
             backdrop-filter: blur(16px) saturate(1.3);
@@ -440,12 +407,10 @@
             height: 260px !important;
             transition: var(--md-transition);
         }
-
         #can>header:hover {
             transform: translateY(-2px);
             box-shadow: 0 14px 48px rgba(90, 60, 160, 0.10);
         }
-
         #can>header canvas {
             width: 100% !important;
             height: 100% !important;
@@ -473,9 +438,7 @@
             }
         }
 
-        /* ============================================================
-                   模态框
-                   ============================================================ */
+        /* 模态框 */
         .modal-content {
             border: none !important;
             border-radius: var(--md-radius) !important;
@@ -485,19 +448,16 @@
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
             overflow: hidden;
         }
-
         .modal-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 18px 24px 12px !important;
             background: transparent !important;
         }
-
         .modal-header .modal-title {
             font-weight: 700;
             font-size: 1.25rem;
             color: #1A1A2E;
         }
-
         .modal-header .btn-danger {
             background: transparent !important;
             border: none !important;
@@ -506,12 +466,10 @@
             padding: 0 8px;
             transition: var(--md-transition);
         }
-
         .modal-header .btn-danger:hover {
             color: #E53935 !important;
             transform: rotate(90deg);
         }
-
         .modal-body {
             padding: 16px 24px 28px !important;
             position: relative;
@@ -529,7 +487,6 @@
             z-index: 1 !important;
             margin-bottom: 18px;
         }
-
         #gd {
             width: 50% !important;
             height: 100% !important;
@@ -538,7 +495,6 @@
             transition: margin-left 0.4s cubic-bezier(0.2, 0, 0, 1);
             box-shadow: 0 4px 12px rgba(124, 77, 255, 0.25);
         }
-
         #L,
         #R {
             position: absolute !important;
@@ -557,13 +513,8 @@
             letter-spacing: 0.3px;
             background: transparent !important;
         }
-
-        #L {
-            left: 0 !important;
-        }
-        #R {
-            right: 0 !important;
-        }
+        #L { left: 0 !important; }
+        #R { right: 0 !important; }
 
         .search-input {
             width: 100%;
@@ -579,13 +530,11 @@
             margin-bottom: 16px;
             color: #1A1A2E;
         }
-
         .search-input:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.10);
             background: rgba(255, 255, 255, 0.90);
         }
-
         .search-input::placeholder {
             color: rgba(26, 26, 46, 0.30);
         }
@@ -597,7 +546,6 @@
             max-width: 100% !important;
             margin: 0 !important;
         }
-
         .display {
             background: rgba(255, 255, 255, 0.70);
             backdrop-filter: blur(8px);
@@ -608,14 +556,12 @@
             min-height: 60px;
             border: 1px solid rgba(0, 0, 0, 0.04);
         }
-
         .input-value {
             font-size: 2.2rem;
             font-weight: 700;
             color: #1A1A2E;
             letter-spacing: 0.5px;
         }
-
         .placeholders {
             font-size: 0.75rem;
             color: rgba(26, 26, 46, 0.25);
@@ -626,7 +572,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
-
         .key {
             padding: 16px 0;
             border: none;
@@ -641,18 +586,15 @@
             color: #1A1A2E;
             user-select: none;
         }
-
         .key:active {
             transform: scale(0.92);
         }
-
         .key.number {
             background: rgba(255, 255, 255, 0.60);
         }
         .key.number:hover {
             background: rgba(255, 255, 255, 0.90);
         }
-
         .key.operation {
             background: rgba(124, 77, 255, 0.08);
             color: var(--md-primary);
@@ -660,7 +602,6 @@
         .key.operation:hover {
             background: rgba(124, 77, 255, 0.14);
         }
-
         .key.backspace {
             background: rgba(229, 57, 53, 0.06);
             color: #E53935;
@@ -668,7 +609,6 @@
         .key.backspace:hover {
             background: rgba(229, 57, 53, 0.12);
         }
-
         .key.confirm {
             background: linear-gradient(135deg, var(--md-primary), var(--md-secondary));
             color: #fff;
@@ -676,30 +616,22 @@
             font-weight: 700;
             box-shadow: 0 4px 16px rgba(124, 77, 255, 0.25);
         }
-
         .key.confirm:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(124, 77, 255, 0.32);
         }
-
         .key.zero {
             grid-column: span 2;
         }
-
         .instructions {
             font-size: 0.7rem;
             color: rgba(26, 26, 46, 0.25);
             text-align: center;
             margin-top: 10px;
         }
+        #nr { display: none; }
 
-        #nr {
-            display: none;
-        }
-
-        /* ============================================================
-                   覆盖层
-                   ============================================================ */
+        /* 加载覆盖层 */
         .overlay {
             position: fixed;
             top: 0;
@@ -717,12 +649,10 @@
             visibility: hidden;
             transition: all 0.5s ease;
         }
-
         .overlay.active {
             opacity: 1;
             visibility: visible;
         }
-
         .overlay-content {
             background: var(--md-surface);
             backdrop-filter: blur(32px) saturate(1.4);
@@ -738,27 +668,22 @@
             transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1), opacity 0.5s ease;
             opacity: 0;
         }
-
         .overlay.active .overlay-content {
             transform: translateY(0) scale(1);
             opacity: 1;
         }
-
         .overlay-content h3 {
             color: var(--md-primary-dark);
             font-weight: 700;
             font-size: 1.3rem;
             margin-bottom: 8px;
         }
-
         .overlay-content p {
             color: rgba(26, 26, 46, 0.50);
             font-size: 0.95rem;
         }
 
-        /* ============================================================
-                   添加板块模态框
-                   ============================================================ */
+        /* 添加板块模态框 */
         #addPlatformModal .modal-content {
             background: rgba(255, 255, 255, 0.92) !important;
             backdrop-filter: blur(32px) saturate(1.4);
@@ -766,27 +691,22 @@
             border-radius: var(--md-radius) !important;
             border: none !important;
         }
-
         #addPlatformModal .modal-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 18px 24px 12px !important;
         }
-
         #addPlatformModal .modal-header .modal-title {
             font-weight: 700;
             color: #1A1A2E;
         }
-
         #addPlatformModal .modal-body {
             padding: 16px 24px 20px !important;
         }
-
         #addPlatformModal .form-label {
             font-weight: 600;
             font-size: 0.9rem;
             color: rgba(26, 26, 46, 0.70);
         }
-
         #addPlatformModal .form-select,
         #addPlatformModal .form-control {
             border-radius: var(--md-radius-xs);
@@ -797,13 +717,11 @@
             backdrop-filter: blur(8px);
             transition: var(--md-transition);
         }
-
         #addPlatformModal .form-select:focus,
         #addPlatformModal .form-control:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.10);
         }
-
         #addPlatformModal .btn-primary {
             background: var(--md-primary);
             border: none;
@@ -812,13 +730,11 @@
             font-weight: 600;
             transition: var(--md-transition);
         }
-
         #addPlatformModal .btn-primary:hover {
             background: #6D3FE0;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(124, 77, 255, 0.30);
         }
-
         #addPlatformModal .btn-secondary {
             border-radius: 60px;
             padding: 10px 28px;
@@ -827,102 +743,42 @@
             color: rgba(26, 26, 46, 0.60);
             transition: var(--md-transition);
         }
-
         #addPlatformModal .btn-secondary:hover {
             background: rgba(0, 0, 0, 0.04);
         }
-
         #addPlatformModal .modal-footer {
             border-top: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 12px 24px 20px !important;
         }
 
-        /* ============================================================
-                   响应式
-                   ============================================================ */
+        /* 响应式 */
         @media (max-width: 640px) {
-            .content {
-                padding: 12px 10px 20px;
-            }
-            .sections-container {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .section {
-                min-height: 240px;
-                padding: 16px;
-            }
-            .modal-body {
-                padding: 12px 16px 20px !important;
-            }
-            .keyboard {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 6px;
-            }
-            .key {
-                padding: 14px 0;
-                font-size: 1rem;
-            }
-            .input-value {
-                font-size: 1.8rem;
-            }
-            #containers {
-                padding: 12px !important;
-            }
-            #ann h2 {
-                font-size: 1.2rem !important;
-            }
-            #ann>div img {
-                width: 36px !important;
-                height: 36px !important;
-            }
-            .add-platform-btn {
-                width: 100%;
-                justify-content: center;
-                padding: 14px 20px;
-                font-size: 0.95rem;
-            }
-            .add-platform {
-                justify-content: center;
-                padding: 14px 20px;
-                font-size: 0.95rem;
-            }
+            .content { padding: 12px 10px 20px; }
+            .sections-container { grid-template-columns: 1fr; gap: 16px; }
+            .section { min-height: 240px; padding: 16px; }
+            .modal-body { padding: 12px 16px 20px !important; }
+            .keyboard { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .key { padding: 14px 0; font-size: 1rem; }
+            .input-value { font-size: 1.8rem; }
+            #containers { padding: 12px !important; }
+            #ann h2 { font-size: 1.2rem !important; }
+            #ann>div img { width: 36px !important; height: 36px !important; }
+            .add-platform-btn { width: 100%; justify-content: center; padding: 14px 20px; font-size: 0.95rem; }
+            .add-platform { justify-content: center; padding: 14px 20px; font-size: 0.95rem; }
         }
-
         @media (max-width: 400px) {
-            .love-counter {
-                font-size: 0.9rem;
-                flex-direction: column;
-                gap: 4px;
-            }
-            #myFooter {
-                padding: 16px;
-            }
-            #opText {
-                font-size: 0.75rem;
-                padding: 4px 12px;
-            }
-            .key {
-                padding: 12px 0;
-                font-size: 0.9rem;
-            }
-            .key.confirm {
-                font-size: 0.9rem;
-            }
+            .love-counter { font-size: 0.9rem; flex-direction: column; gap: 4px; }
+            #myFooter { padding: 16px; }
+            #opText { font-size: 0.75rem; padding: 4px 12px; }
+            .key { padding: 12px 0; font-size: 0.9rem; }
+            .key.confirm { font-size: 0.9rem; }
         }
 
-        .section[style*="position:relative"] {
-            position: relative !important;
-        }
-        #ann[style*="float:left"] {
-            float: none !important;
-        }
-        #ls[style*="float:right"] {
-            float: none !important;
-        }
-        #ann h2[style*="float:left"] {
-            float: none !important;
-        }
+        /* 兼容旧样式 */
+        .section[style*="position:relative"] { position: relative !important; }
+        #ann[style*="float:left"] { float: none !important; }
+        #ls[style*="float:right"] { float: none !important; }
+        #ann h2[style*="float:left"] { float: none !important; }
 
         canvas {
             max-width: 100%;
@@ -933,7 +789,7 @@
 
 <body>
 
-    <!-- 加载覆盖层 -->
+    <!-- ===== 加载覆盖层 ===== -->
     <div class="overlay active" id="overlay">
         <div class="overlay-content">
             <h3>📦 正在加载本地数据…</h3>
@@ -941,10 +797,10 @@
         </div>
     </div>
 
-    <!-- Vue 根实例 -->
+    <!-- ===== Vue 根实例 ===== -->
     <div id="app">
 
-        <!-- 录入模态框 -->
+        <!-- ===== 录入模态框 ===== -->
         <div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -953,15 +809,15 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-
+                        <!-- 切换条 -->
                         <div id="dhl">
                             <div id="L" @click="SJ()">{{ l }}</div>
                             <div id="R" @click="DN()">{{ r }}</div>
                             <div id="gd"></div>
                         </div>
-
+                        <!-- 备注输入 -->
                         <input id="input" type="text" class="search-input" placeholder="请输入备注（如：购物、餐饮）">
-
+                        <!-- 数字键盘 -->
                         <div id="containers">
                             <div class="display">
                                 <div class="input-value" id="displayAmount">0.00</div>
@@ -983,7 +839,6 @@
                                 <button class="key confirm" id="keyConfirm">确认</button>
                             </div>
                         </div>
-
                         <div class="instructions">点击数字或使用键盘输入</div>
                         <div id="nr"></div>
                     </div>
@@ -991,9 +846,10 @@
             </div>
         </div>
 
-        <!-- 主容器 -->
+        <!-- ===== 主容器 ===== -->
         <div id="container" class="container">
 
+            <!-- 顶部总览 -->
             <footer id="myFooter">
                 <div class="love-counter">
                     总负债 ¥ {{ totalDebt }} &nbsp;·&nbsp; 总剩余 ¥ {{ totalRemain }}
@@ -1012,8 +868,10 @@
             </footer>
 
             <div class="content">
+                <!-- 添加板块按钮 -->
                 <button class="add-platform-btn" @click="showAddPlatformModal">添加板块</button>
 
+                <!-- 板块卡片网格 -->
                 <div class="sections-container">
 
                     <!-- 今日入账（固定） -->
@@ -1076,7 +934,7 @@
         </div>
     </div>
 
-    <!-- 添加板块模态框 -->
+    <!-- ===== 添加板块模态框 ===== -->
     <div class="modal fade" id="addPlatformModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1110,12 +968,17 @@
     </div>
 
     <!-- ============================================================
-    JavaScript
+    JavaScript – 主要逻辑（修复时区问题，全量注释）
     ============================================================ -->
     <script>
-        // ===== 工具函数 =====
+        // ============================================================
+        // 工具函数
+        // ============================================================
+
+        // 获取当前 UTC ISO 字符串（存储时统一用 UTC）
         function nowISO() { return new Date().toISOString(); }
 
+        /** 格式化时间为本地显示：YYYY/MM/DD HH:mm:ss */
         function formatTime(iso) {
             if (!iso) return '';
             const d = new Date(iso);
@@ -1124,58 +987,41 @@
                 ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
         }
 
+        /** 生成唯一 ID */
         function genId() { return Date.now() + '_' + Math.random().toString(36).slice(2, 6); }
 
+        /** 从字符串（如 "借款 123.45 备注"）中提取金额数字 */
         function extractNum(str) {
             if (!str) return 0;
             const m = str.match(/\d+\.\d+|\d+/);
             return m ? parseFloat(m[0]) : 0;
         }
 
-        // ===== 改进的日期提取函数：始终返回 YYYY-MM-DD =====
-        function getDateStr(createdAt) {
+        /** ★★★ 核心修复：将任意时间（UTC 字符串或 Date）转换为本地日期字符串 YYYY-MM-DD
+         *  之前直接截取 UTC 日期导致跨时区偏移，现在统一使用本地日期
+         */
+        function getLocalDateStr(createdAt) {
             if (!createdAt) return '';
-            var dateStr = '';
             try {
-                if (typeof createdAt === 'string') {
-                    // 处理 ISO: 2026-08-04T12:34:56.789Z
-                    if (createdAt.includes('T')) {
-                        dateStr = createdAt.split('T')[0];
-                    }
-                    // 处理 斜杠 + 空格: 2026/08/04 12:34:56
-                    else if (createdAt.includes(' ')) {
-                        dateStr = createdAt.split(' ')[0];
-                    }
-                    // 处理纯日期
-                    else {
-                        dateStr = createdAt;
-                    }
-                    // 统一将 / 替换为 -
-                    dateStr = dateStr.replace(/\//g, '-');
-                    // 截取前 10 位
-                    if (dateStr.length >= 10) {
-                        dateStr = dateStr.substring(0, 10);
-                    }
-                    // 验证是否为有效日期
-                    var d = new Date(dateStr);
-                    if (!isNaN(d.getTime())) {
-                        var pad = function(n) { return String(n).padStart(2, '0'); };
-                        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-                    }
-                }
-                // 尝试作为 Date 对象
-                var d2 = new Date(createdAt);
-                if (!isNaN(d2.getTime())) {
-                    var pad2 = function(n) { return String(n).padStart(2, '0'); };
-                    return d2.getFullYear() + '-' + pad2(d2.getMonth() + 1) + '-' + pad2(d2.getDate());
-                }
-            } catch (_) { /* ignore */ }
-            return '';
+                const d = new Date(createdAt);
+                if (isNaN(d.getTime())) return '';
+                const pad = n => String(n).padStart(2, '0');
+                return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+            } catch (_) { return ''; }
         }
 
-        // ===== localStorage 辅助 =====
-        var STORE_KEY_PREFIX = 'platform_';
+        /** 获取当前本地日期的字符串 YYYY-MM-DD */
+        function getTodayLocalStr() {
+            const d = new Date();
+            const pad = n => String(n).padStart(2, '0');
+            return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+        }
 
+        // ============================================================
+        // localStorage 存储辅助（数据持久化）
+        // ============================================================
+
+        var STORE_KEY_PREFIX = 'platform_';
         function getPlatformDataKey(platformId) { return STORE_KEY_PREFIX + platformId + '_data'; }
 
         function loadPlatformData(platformId) {
@@ -1184,38 +1030,37 @@
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
-
         function savePlatformData(platformId, data) {
             localStorage.setItem(getPlatformDataKey(platformId), JSON.stringify(data));
         }
 
         var PLATFORMS_LIST_KEY = 'platforms_list';
-
         function loadPlatformsList() {
             try {
                 var raw = localStorage.getItem(PLATFORMS_LIST_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
-
         function savePlatformsList(list) {
             localStorage.setItem(PLATFORMS_LIST_KEY, JSON.stringify(list));
         }
 
         var SRYS_KEY = 'srys_data';
-
         function loadSrys() {
             try {
                 var raw = localStorage.getItem(SRYS_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
-
         function saveSrys(data) {
             localStorage.setItem(SRYS_KEY, JSON.stringify(data));
         }
 
-        // ===== Vue 实例 =====
+
+        // ============================================================
+        // Vue 实例
+        // ============================================================
+
         var vueInstance = null;
         var myChart = null,
             myChartto = null;
@@ -1226,34 +1071,39 @@
             el: '#app',
             data: function() {
                 return {
-                    srys: [],
-                    rsr: '0.00',
-                    platforms: [],
-                    sj: [],
-                    je: [],
-                    sr: [],
-                    srsum: 0,
-                    zcsum: 0,
-                    totalRemain: 0,
-                    totalDebt: 0,
+                    srys: [], // 今日入账记录（含历史）
+                    rsr: '0.00', // 今日入账总额（仅当天）
+                    platforms: [], // 动态板块列表
+                    sj: [], // 图表 X 轴标签（日期）
+                    je: [], // 消费金额数组
+                    sr: [], // 收入金额数组
+                    srsum: 0, // 图表统计总收入
+                    zcsum: 0, // 图表统计总消费
+                    totalRemain: 0, // 总剩余（入账-提现）
+                    totalDebt: 0, // 总负债（各板块欠款总和）
                     modalTitle: '录入',
                     l: '借款',
                     r: '还款',
-                    times: 30,
+                    times: 30, // 图表时间范围（天数）
                     syncStatus: 'offline',
                     syncStatusText: '⚪ 未同步',
                     isSyncing: false,
                 }
             },
+
+            // ----- 生命周期：创建时加载数据并初始化 -----
             async created() {
-                await this.autoSync();
+                await this.autoSync(); // 尝试同步
                 vueInstance = this;
-                this.loadAllData();
+                this.loadAllData(); // 加载本地数据
+
+                // 隐藏加载覆盖层
                 setTimeout(function() {
                     document.getElementById('overlay').classList.remove('active');
                     document.body.style.overflow = '';
                 }, 300);
 
+                // 监听图表时间范围选择器
                 var sel = document.getElementById('skill-level');
                 if (sel) {
                     sel.addEventListener('change', function() {
@@ -1266,16 +1116,22 @@
                     });
                 }
 
-                this.fetchHitokoto();
+                this.fetchHitokoto(); // 获取一言
                 this.$nextTick(function() { this.mrzc(); }.bind(this));
                 this.bindAddPlatformEvents();
             },
+
             mounted: function() {
                 this.bindKeyboardOnce();
                 this.bindConfirmButton();
             },
+
+            // ============================================================
+            // 方法
+            // ============================================================
             methods: {
-                // ----- 同步 -----
+
+                // ----- 同步相关（调用外部 sync-gitee.js） -----
                 async autoSync() {
                     try {
                         this.syncStatus = 'syncing';
@@ -1318,17 +1174,19 @@
                     this.isSyncing = false;
                 },
 
-                // ----- 数据加载 -----
+                // ----- 加载并刷新所有数据 -----
                 loadAllData: function() {
+                    // 加载今日入账记录
                     var srys = loadSrys();
                     this.srys = srys.map(function(item) {
                         return {
                             ...item,
-                            created_at: formatTime(item.created_at),
+                            created_at: formatTime(item.created_at), // 显示本地时间
                             historical: item.historical
                         };
                     });
 
+                    // 加载动态板块
                     var platformsList = loadPlatformsList();
                     this.platforms = platformsList.map(function(p) {
                         var items = loadPlatformData(p.id);
@@ -1346,18 +1204,27 @@
                         };
                     });
 
+                    // 计算总剩余（入账 - 提现）
                     this.calcTotalRemain();
-                    var today = new Date().toISOString().slice(0, 10);
+
+                    // ★★★ 修复：计算今日入账总额，使用本地日期比较 ★★★
+                    var todayStr = getTodayLocalStr();
                     var ti = 0;
                     for (var i = 0; i < srys.length; i++) {
                         var item = srys[i];
-                        if (item.created_at && item.created_at.startsWith(today)) {
+                        // 使用 getLocalDateStr 提取本地日期
+                        var itemDate = getLocalDateStr(item.created_at);
+                        if (itemDate === todayStr) {
                             var num = extractNum(item.historical);
                             if (item.historical && item.historical.startsWith('入账')) ti += num;
                         }
                     }
                     this.rsr = ti > 0 ? ti.toFixed(2) : '请自律';
+
+                    // 计算总负债
                     this.calcTotalDebt();
+
+                    // 刷新图表
                     this.mrzc();
                 },
 
@@ -1434,7 +1301,7 @@
                     this.loadAllData();
                 },
 
-                // ----- 保存板块数据 -----
+                // ----- 保存板块记录 -----
                 savePlatformRecord: function(platformId, record) {
                     var items = loadPlatformData(platformId);
                     items.push(record);
@@ -1442,7 +1309,7 @@
                     this.loadAllData();
                 },
 
-                // ----- 今日入账保存 -----
+                // ----- 保存今日入账记录 -----
                 saveSrysRecord: function(record) {
                     var items = loadSrys();
                     items.push(record);
@@ -1450,7 +1317,7 @@
                     this.loadAllData();
                 },
 
-                // ----- 模态框交互 -----
+                // ----- 模态框显示与切换 -----
                 showModal: function(platformId) {
                     currentPlatformId = platformId;
                     if (platformId === 'sry') {
@@ -1465,6 +1332,7 @@
                     }
                     currentType = (this.l === '借款' || this.l === '提现') ? this.l : this.r;
 
+                    // 重置切换条及输入
                     document.getElementById('gd').style.marginLeft = '0%';
                     document.getElementById('L').style.color = '#FFFF';
                     document.getElementById('R').style.color = '#000000';
@@ -1500,6 +1368,7 @@
                     document.getElementById('R').style.color = '#FFFF';
                 },
 
+                // ----- 确认录入 -----
                 bindConfirmButton: function() {
                     var btn = document.getElementById('keyConfirm');
                     if (!btn) return;
@@ -1529,9 +1398,10 @@
 
                     var typeLabel = currentType || '借款';
                     var historical = typeLabel + ' ' + amountVal.toFixed(2) + ' ' + note;
+                    // 存储时使用 UTC 时间（ISO 字符串）
                     var newItem = {
                         id: genId(),
-                        created_at: new Date().toISOString(),
+                        created_at: nowISO(), // UTC 时间
                         historical: historical,
                         amount: amountVal
                     };
@@ -1539,10 +1409,11 @@
                     if (platformId === 'sry') {
                         this.saveSrysRecord(newItem);
                     } else {
+                        // 还款时同时记录一笔提现（从总余额扣除）
                         if (typeLabel === '还款') {
                             var withdrawItem = {
                                 id: genId(),
-                                created_at: new Date().toISOString(),
+                                created_at: nowISO(),
                                 historical: '提现 ' + amountVal.toFixed(2) + ' 还款-' + this.getPlatformName(
                                     platformId),
                                 amount: amountVal
@@ -1561,7 +1432,7 @@
                     alert('✅ 已保存：' + historical);
                 },
 
-                // ----- 虚拟键盘 -----
+                // ----- 虚拟键盘绑定 -----
                 bindKeyboardOnce: function() {
                     var container = document.getElementById('containers');
                     if (!container) return;
@@ -1593,6 +1464,7 @@
                     };
                     container.addEventListener('click', this._containerClickHandler);
 
+                    // 物理键盘支持
                     if (this._keyboardHandler) document.removeEventListener('keydown', this._keyboardHandler);
                     this._keyboardHandler = function(e) {
                         if (!document.getElementById('myModal').classList.contains('show')) return;
@@ -1632,57 +1504,43 @@
                 },
 
                 // ============================================================
-                // ★★★ 核心修复：mrzc() 图表数据生成 ★★★
-                // 修复：当某天只有收入（入账）没有消费时，收入能正确显示在图表中
+                // ★★★ 核心图表数据生成 mrzc() ★★★
+                // 修复：使用 getLocalDateStr 保证日期按本地时区分组
                 // ============================================================
                 mrzc: function() {
                     var self = this;
 
-                    // 1. 从原始数据中提取记录
+                    // 1. 收集所有原始记录（提现、入账、借款）
                     var records = [];
                     var srysRaw = loadSrys();
 
-                    // 处理今日入账数据（提现 / 入账）
                     for (var i = 0; i < srysRaw.length; i++) {
                         var item = srysRaw[i];
-                        var dateKey = getDateStr(item.created_at);
+                        var dateKey = getLocalDateStr(item.created_at); // ★ 使用本地日期
                         if (!dateKey) continue;
                         if (item.historical && item.historical.startsWith('提现')) {
-                            records.push({
-                                date: dateKey,
-                                amount: extractNum(item.historical),
-                                type: 'withdraw'
-                            });
+                            records.push({ date: dateKey, amount: extractNum(item.historical), type: 'withdraw' });
                         }
                         if (item.historical && item.historical.startsWith('入账')) {
-                            records.push({
-                                date: dateKey,
-                                amount: extractNum(item.historical),
-                                type: 'income'
-                            });
+                            records.push({ date: dateKey, amount: extractNum(item.historical), type: 'income' });
                         }
                     }
 
-                    // 处理平台数据（借款）
                     var platformsList = loadPlatformsList();
                     for (var j = 0; j < platformsList.length; j++) {
                         var p = platformsList[j];
                         var items = loadPlatformData(p.id);
                         for (var k = 0; k < items.length; k++) {
                             var it = items[k];
-                            var dateKey2 = getDateStr(it.created_at);
+                            var dateKey2 = getLocalDateStr(it.created_at); // ★ 使用本地日期
                             if (!dateKey2) continue;
                             if (it.historical && it.historical.startsWith('借款')) {
-                                records.push({
-                                    date: dateKey2,
-                                    amount: extractNum(it.historical),
-                                    type: 'borrow'
-                                });
+                                records.push({ date: dateKey2, amount: extractNum(it.historical), type: 'borrow' });
                             }
                         }
                     }
 
-                    // 2. 按日期分组
+                    // 2. 按日期聚合
                     var dateMap = new Map();
                     for (var m = 0; m < records.length; m++) {
                         var rec = records[m];
@@ -1696,7 +1554,7 @@
                         else if (rec.type === 'withdraw') dayData.withdraw += rec.amount;
                     }
 
-                    // 3. 获取所有日期并排序
+                    // 3. 日期排序
                     var sortedDates = Array.from(dateMap.keys()).sort(function(a, b) {
                         return new Date(a) - new Date(b);
                     });
@@ -1716,9 +1574,8 @@
                         var date = selected[n];
                         var data = dateMap.get(date);
                         if (!data) continue;
-                        // 消费 = 借款 + 超出借款的提现（简化逻辑：提现全部视为消费）
+                        // 消费 = 借款 + 提现（提现视为消费）
                         var totalSpend = data.borrow + data.withdraw;
-                        // 格式化日期显示：MM/DD
                         var parts = date.split('-');
                         var displayDate = parts.length === 3 ? parts[1] + '/' + parts[2] : date.substring(5);
 
@@ -1747,6 +1604,7 @@
                     this.renderCharts(this.sj, this.je, this.sr, netData);
                 },
 
+                // ----- 使用 Chart.js 绘制两个图表 -----
                 renderCharts: function(labels, spendData, incomeData, netData) {
                     var ctx = document.getElementById('lineChart');
                     var ctxto = document.getElementById('lineChartto');
@@ -1760,7 +1618,7 @@
                     var incomeNum = incomeData.map(function(v) { return parseFloat(v) || 0; });
                     var netNum = netData.map(function(v) { return parseFloat(v) || 0; });
 
-                    // 如果数据为空，显示占位提示
+                    // 无数据时显示占位
                     if (labels.length === 0) {
                         labels = ['暂无数据'];
                         spendNum = [0];
@@ -1768,6 +1626,7 @@
                         netNum = [0];
                     }
 
+                    // 图表1：每日消费与收入
                     myChartto = new Chart(ctxto, {
                         type: 'bar',
                         data: {
@@ -1804,6 +1663,7 @@
                         }
                     });
 
+                    // 图表2：每日净收入
                     myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -1838,10 +1698,12 @@
                     });
                 },
 
+                // 时间范围变化时刷新图表
                 timesdy: function() {
                     this.mrzc();
                 },
 
+                // 获取一言（每日一句）
                 fetchHitokoto: function() {
                     fetch('https://v1.hitokoto.cn/?max_length=10')
                         .then(function(res) { return res.json(); })
@@ -1856,7 +1718,7 @@
             }
         });
 
-        console.log('📦 动态板块 · Material You 风格已启动 (图表修复版)');
+        console.log('📦 动态板块 · Material You 风格已启动 (时区修复版)');
     </script>
 
 </body>

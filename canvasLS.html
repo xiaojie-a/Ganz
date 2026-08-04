@@ -180,7 +180,6 @@
         }
         .add-platform-btn::before,
         .add-platform::before {
-            content: "＋";
             font-size: 1.3rem;
             font-weight: 300;
             line-height: 1;
@@ -888,12 +887,12 @@
                     <!-- ★ 修改：同步按钮改为“拉取合并”（仅拉取，不上传） -->
                     <button class="add-platform" @click="manualPull"
                         style="background:#0d6efd;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isPulling">
-                        📥 {{ '拉取中...' : '拉取合并' }}
+                        📥 {{ isPulling ? '拉取中...' : '拉取合并' }}
                     </button>
                     <!-- 覆盖云端按钮（强制推送本地数据） -->
                     <button class="add-platform" @click="forcePush"
                         style="background:#d63384;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isPushing">
-                        🔥 {{ '覆盖中...' : '覆盖云端' }}
+                        🔥 {{ isPushing ? '覆盖中...' : '覆盖云端' }}
                     </button>
                     <p id="opText" style="margin:0;">今天你吃了么</p>
                 </div>
@@ -1200,7 +1199,7 @@
                     this.isPulling = true;
                     try {
                         await this.pullAndMerge();
-                        alert('✅ 已从云端拉取并合并到本地（未上传）');
+                       // alert('✅ 已从云端拉取并合并到本地（未上传）');
                     } catch (e) {
                         alert('❌ 拉取失败: ' + e.message);
                     }

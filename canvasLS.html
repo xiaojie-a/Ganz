@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- 引入依赖库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js">
     </script>
-    <!-- 同步模块（需存在 sync-gitee.js） -->
     <script src="sync-gitee.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
@@ -81,7 +79,7 @@
             transition: filter 0.3s;
         }
 
-        /* 顶部总览卡片（粘性） */
+        /* 顶部总览卡片 */
         #myFooter {
             position: sticky;
             top: 0;
@@ -306,6 +304,7 @@
             opacity: 0.6;
         }
 
+        /* ===== 历史记录列表（重构为单行+删除按钮） ===== */
         #ls {
             float: none !important;
             width: 100% !important;
@@ -316,25 +315,53 @@
             margin-top: 4px;
             padding-right: 4px;
         }
-        #lsjl {
+
+        /* 每条记录的行容器 */
+        .record-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             padding: 4px 6px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             font-size: 0.75rem;
             color: rgba(26, 26, 46, 0.70);
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
             word-break: break-word;
         }
-        #lsjl:last-child {
+        .record-item:last-child {
             border-bottom: none;
         }
-        #lsjl[style*="color:red"] {
-            color: var(--md-primary) !important;
-            font-weight: 500;
+
+        .record-time {
+            flex-shrink: 0;
+            font-weight: 400;
+            color: rgba(26, 26, 46, 0.50);
+            font-size: 0.7rem;
+            min-width: 70px;
         }
-        .section:first-child h2::before {
-            content: "📥";
+        .record-historical {
+            flex: 1;
+            font-weight: 500;
+            color: var(--md-primary);
+        }
+        .record-delete {
+            flex-shrink: 0;
+            background: transparent;
+            border: none;
+            color: rgba(26, 26, 46, 0.20);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0 4px;
+            transition: var(--md-transition);
+            line-height: 1;
+        }
+        .record-delete:hover {
+            color: #E53935;
+            transform: scale(1.2);
+        }
+
+        /* 兼容旧样式（避免冲突） */
+        #lsjl {
+            display: none;
         }
 
         /* 图表控制栏 */
@@ -789,18 +816,18 @@
 
 <body>
 
-    <!-- ===== 加载覆盖层 ===== -->
+    <!-- 加载覆盖层 -->
     <div class="overlay active" id="overlay">
         <div class="overlay-content">
-            <h3>📦 正在加载本地数据…</h3>
-            <p style="color:#666;">数据完全存储在浏览器中，无需网络</p>
+            <h3>📦 正在拉取云端数据…</h3>
+            <p style="color:#666;">数据拉取失败则调用本地数据</p>
         </div>
     </div>
 
-    <!-- ===== Vue 根实例 ===== -->
+    <!-- Vue 根实例 -->
     <div id="app">
 
-        <!-- ===== 录入模态框 ===== -->
+        <!-- 录入模态框（不变） -->
         <div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -809,15 +836,12 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <!-- 切换条 -->
                         <div id="dhl">
                             <div id="L" @click="SJ()">{{ l }}</div>
                             <div id="R" @click="DN()">{{ r }}</div>
                             <div id="gd"></div>
                         </div>
-                        <!-- 备注输入 -->
                         <input id="input" type="text" class="search-input" placeholder="请输入备注（如：购物、餐饮）">
-                        <!-- 数字键盘 -->
                         <div id="containers">
                             <div class="display">
                                 <div class="input-value" id="displayAmount">0.00</div>
@@ -846,10 +870,12 @@
             </div>
         </div>
 
-        <!-- ===== 主容器 ===== -->
+        <!-- 主容器 -->
         <div id="container" class="container">
 
-            <!-- 顶部总览 -->
+            <!-- ============================================================
+            顶部栏：修改了同步按钮的行为，并保留覆盖按钮
+            ============================================================ -->
             <footer id="myFooter">
                 <div class="love-counter">
                     总负债 ¥ {{ totalDebt }} &nbsp;·&nbsp; 总剩余 ¥ {{ totalRemain }}
@@ -858,23 +884,27 @@
                         {{ syncStatusText }}
                     </span>
                 </div>
-                <div style="display:flex;gap:8px;align-items:center;">
-                    <button class="add-platform" @click="manualSync"
-                        style="background:#6f42c1;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isSyncing">
-                        ☁️ {{ isSyncing ? '同步中...' : '同步' }}
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <!-- ★ 修改：同步按钮改为“拉取合并”（仅拉取，不上传） -->
+                    <button class="add-platform" @click="manualPull"
+                        style="background:#0d6efd;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isPulling">
+                        📥 {{ '拉取中...' : '拉取合并' }}
+                    </button>
+                    <!-- 覆盖云端按钮（强制推送本地数据） -->
+                    <button class="add-platform" @click="forcePush"
+                        style="background:#d63384;padding:6px 18px;font-size:0.8rem;margin:0;" :disabled="isPushing">
+                        🔥 {{ '覆盖中...' : '覆盖云端' }}
                     </button>
                     <p id="opText" style="margin:0;">今天你吃了么</p>
                 </div>
             </footer>
 
             <div class="content">
-                <!-- 添加板块按钮 -->
                 <button class="add-platform-btn" @click="showAddPlatformModal">添加板块</button>
 
-                <!-- 板块卡片网格 -->
+                <!-- 板块网格（不变） -->
                 <div class="sections-container">
-
-                    <!-- 今日入账（固定） -->
+                    <!-- 今日入账 -->
                     <section class="section" style="position:relative;">
                         <h2>今日入账</h2>
                         <div id="ann" @click="showModal('sry')">
@@ -885,10 +915,11 @@
                             </div>
                         </div>
                         <div id="ls">
-                            <template v-for="(item, index) in srys.slice().reverse()">
-                                <div id="lsjl">{{ item.created_at }}</div>
-                                <div id="lsjl" style="color:red;">{{ item.historical }}</div>
-                            </template>
+                            <div v-for="item in srys.slice().reverse()" :key="item.id" class="record-item">
+                                <span class="record-time">{{ item.created_at }}</span>
+                                <span class="record-historical" style="color:red;">{{ item.historical }}</span>
+                                <button class="record-delete" @click="deleteSrysRecord(item.id)" title="删除此记录">✕</button>
+                            </div>
                         </div>
                     </section>
 
@@ -904,15 +935,16 @@
                             </div>
                         </div>
                         <div id="ls">
-                            <template v-for="(item, index) in p.items.slice().reverse()">
-                                <div id="lsjl">{{ item.created_at }}</div>
-                                <div id="lsjl" style="color:red;">{{ item.historical }}</div>
-                            </template>
+                            <div v-for="item in p.items.slice().reverse()" :key="item.id" class="record-item">
+                                <span class="record-time">{{ item.created_at }}</span>
+                                <span class="record-historical" style="color:red;">{{ item.historical }}</span>
+                                <button class="record-delete" @click="deletePlatformRecord(p.id, item.id)" title="删除此记录">✕</button>
+                            </div>
                         </div>
                     </section>
                 </div>
 
-                <!-- 图表控制栏 -->
+                <!-- 图表控制栏（不变） -->
                 <div id="xsfw">
                     <label id="lsjl" for="skill-level">📊 范围：</label>
                     <select id="skill-level" name="skill-level">
@@ -934,7 +966,7 @@
         </div>
     </div>
 
-    <!-- ===== 添加板块模态框 ===== -->
+    <!-- 添加板块模态框（不变） -->
     <div class="modal fade" id="addPlatformModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -968,17 +1000,14 @@
     </div>
 
     <!-- ============================================================
-    JavaScript – 主要逻辑（修复时区问题，全量注释）
+    JavaScript – 主要逻辑（修改同步为仅拉取合并）
     ============================================================ -->
     <script>
         // ============================================================
-        // 工具函数
+        // 工具函数（不变）
         // ============================================================
-
-        // 获取当前 UTC ISO 字符串（存储时统一用 UTC）
         function nowISO() { return new Date().toISOString(); }
 
-        /** 格式化时间为本地显示：YYYY/MM/DD HH:mm:ss */
         function formatTime(iso) {
             if (!iso) return '';
             const d = new Date(iso);
@@ -987,19 +1016,14 @@
                 ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
         }
 
-        /** 生成唯一 ID */
         function genId() { return Date.now() + '_' + Math.random().toString(36).slice(2, 6); }
 
-        /** 从字符串（如 "借款 123.45 备注"）中提取金额数字 */
         function extractNum(str) {
             if (!str) return 0;
             const m = str.match(/\d+\.\d+|\d+/);
             return m ? parseFloat(m[0]) : 0;
         }
 
-        /** ★★★ 核心修复：将任意时间（UTC 字符串或 Date）转换为本地日期字符串 YYYY-MM-DD
-         *  之前直接截取 UTC 日期导致跨时区偏移，现在统一使用本地日期
-         */
         function getLocalDateStr(createdAt) {
             if (!createdAt) return '';
             try {
@@ -1010,7 +1034,6 @@
             } catch (_) { return ''; }
         }
 
-        /** 获取当前本地日期的字符串 YYYY-MM-DD */
         function getTodayLocalStr() {
             const d = new Date();
             const pad = n => String(n).padStart(2, '0');
@@ -1018,10 +1041,10 @@
         }
 
         // ============================================================
-        // localStorage 存储辅助（数据持久化）
+        // localStorage 辅助（不变）
         // ============================================================
-
         var STORE_KEY_PREFIX = 'platform_';
+
         function getPlatformDataKey(platformId) { return STORE_KEY_PREFIX + platformId + '_data'; }
 
         function loadPlatformData(platformId) {
@@ -1030,37 +1053,41 @@
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
+
         function savePlatformData(platformId, data) {
             localStorage.setItem(getPlatformDataKey(platformId), JSON.stringify(data));
         }
 
         var PLATFORMS_LIST_KEY = 'platforms_list';
+
         function loadPlatformsList() {
             try {
                 var raw = localStorage.getItem(PLATFORMS_LIST_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
+
         function savePlatformsList(list) {
             localStorage.setItem(PLATFORMS_LIST_KEY, JSON.stringify(list));
         }
 
         var SRYS_KEY = 'srys_data';
+
         function loadSrys() {
             try {
                 var raw = localStorage.getItem(SRYS_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
+
         function saveSrys(data) {
             localStorage.setItem(SRYS_KEY, JSON.stringify(data));
         }
 
 
         // ============================================================
-        // Vue 实例
+        // Vue 实例（修改同步逻辑）
         // ============================================================
-
         var vueInstance = null;
         var myChart = null,
             myChartto = null;
@@ -1071,39 +1098,38 @@
             el: '#app',
             data: function() {
                 return {
-                    srys: [], // 今日入账记录（含历史）
-                    rsr: '0.00', // 今日入账总额（仅当天）
-                    platforms: [], // 动态板块列表
-                    sj: [], // 图表 X 轴标签（日期）
-                    je: [], // 消费金额数组
-                    sr: [], // 收入金额数组
-                    srsum: 0, // 图表统计总收入
-                    zcsum: 0, // 图表统计总消费
-                    totalRemain: 0, // 总剩余（入账-提现）
-                    totalDebt: 0, // 总负债（各板块欠款总和）
+                    srys: [],
+                    rsr: '0.00',
+                    platforms: [],
+                    sj: [],
+                    je: [],
+                    sr: [],
+                    srsum: 0,
+                    zcsum: 0,
+                    totalRemain: 0,
+                    totalDebt: 0,
                     modalTitle: '录入',
                     l: '借款',
                     r: '还款',
-                    times: 30, // 图表时间范围（天数）
+                    times: 30,
                     syncStatus: 'offline',
                     syncStatusText: '⚪ 未同步',
-                    isSyncing: false,
+                    isPulling: false, // 拉取状态
+                    isPushing: false, // 覆盖状态
                 }
             },
 
-            // ----- 生命周期：创建时加载数据并初始化 -----
             async created() {
-                await this.autoSync(); // 尝试同步
+                // 启动时执行拉取合并（只拉取不上传）
+                await this.pullAndMerge();
                 vueInstance = this;
-                this.loadAllData(); // 加载本地数据
+                this.loadAllData();
 
-                // 隐藏加载覆盖层
                 setTimeout(function() {
                     document.getElementById('overlay').classList.remove('active');
                     document.body.style.overflow = '';
                 }, 300);
 
-                // 监听图表时间范围选择器
                 var sel = document.getElementById('skill-level');
                 if (sel) {
                     sel.addEventListener('change', function() {
@@ -1116,7 +1142,7 @@
                     });
                 }
 
-                this.fetchHitokoto(); // 获取一言
+                this.fetchHitokoto();
                 this.$nextTick(function() { this.mrzc(); }.bind(this));
                 this.bindAddPlatformEvents();
             },
@@ -1126,67 +1152,102 @@
                 this.bindConfirmButton();
             },
 
-            // ============================================================
-            // 方法
-            // ============================================================
             methods: {
 
-                // ----- 同步相关（调用外部 sync-gitee.js） -----
-                async autoSync() {
+                // ============================================================
+                // ★ 核心修改：拉取云端数据并合并到本地（不上传）
+                // ============================================================
+                async pullAndMerge() {
                     try {
                         this.syncStatus = 'syncing';
-                        this.syncStatusText = '🔄 同步中...';
-                        var result = await syncWithGitee();
-                        if (result.success) {
-                            this.syncStatus = 'online';
-                            this.syncStatusText = '✅ 已同步';
-                            this.loadAllData();
-                        } else {
+                        this.syncStatusText = '📥 拉取中...';
+
+                        // 1. 从 Gitee 拉取远程数据
+                        const remoteData = await window.pullFromGitee();
+                        if (!remoteData) {
                             this.syncStatus = 'offline';
-                            this.syncStatusText = '⚠️ 同步失败';
+                            this.syncStatusText = '⚠️ 无远程数据';
+                            return;
                         }
+
+                        // 2. 收集本地数据
+                        const localData = window.gatherLocalData();
+
+                        // 3. 合并（远程优先，但保留本地新增）
+                        const merged = window.mergeData(localData, remoteData);
+
+                        // 4. 写回本地
+                        window.writeToLocal(merged);
+
+                        // 5. 刷新界面
+                        this.loadAllData();
+
+                        this.syncStatus = 'online';
+                        this.syncStatusText = '✅ 已拉取合并';
+                        console.log('✅ 拉取合并完成');
                     } catch (e) {
-                        console.error('自动同步失败:', e);
+                        console.error('拉取合并失败:', e);
                         this.syncStatus = 'offline';
-                        this.syncStatusText = '⚠️ 同步失败';
+                        this.syncStatusText = '⚠️ 拉取失败';
                     }
                 },
 
-                async manualSync() {
-                    if (this.isSyncing) return;
-                    this.isSyncing = true;
-                    this.syncStatusText = '🔄 同步中...';
+                // ============================================================
+                // 手动拉取按钮（只拉取不上传）
+                // ============================================================
+                async manualPull() {
+                    if (this.isPulling) return;
+                    this.isPulling = true;
                     try {
-                        var result = await syncWithGitee();
-                        if (result.success) {
+                        await this.pullAndMerge();
+                        alert('✅ 已从云端拉取并合并到本地（未上传）');
+                    } catch (e) {
+                        alert('❌ 拉取失败: ' + e.message);
+                    }
+                    this.isPulling = false;
+                },
+
+                // ============================================================
+                // 强制覆盖云端（仅上传，不拉取）
+                // ============================================================
+                async forcePush() {
+                    if (!confirm('⚠️ 确定要将本地数据强制覆盖云端吗？\n此操作不会拉取远程数据，所有云端数据将被本地数据替换！')) {
+                        return;
+                    }
+                    if (this.isPushing) return;
+                    this.isPushing = true;
+                    this.syncStatusText = '🔥 覆盖中...';
+                    try {
+                        const success = await window.pushOnly();
+                        if (success) {
                             this.syncStatus = 'online';
-                            this.syncStatusText = '✅ 已同步';
-                            this.loadAllData();
+                            this.syncStatusText = '✅ 已覆盖云端';
+                            alert('✅ 本地数据已成功覆盖到 Gitee 云端！');
                         } else {
                             this.syncStatus = 'offline';
-                            this.syncStatusText = '⚠️ 同步失败';
-                            alert('❌ 同步失败，请检查网络和配置');
+                            this.syncStatusText = '⚠️ 覆盖失败';
+                            alert('❌ 覆盖云端失败，请检查网络和配置');
                         }
                     } catch (e) {
-                        console.error('同步失败:', e);
-                        alert('❌ 同步失败: ' + e.message);
+                        console.error('覆盖失败:', e);
+                        this.syncStatus = 'offline';
+                        this.syncStatusText = '⚠️ 覆盖失败';
+                        alert('❌ 覆盖失败: ' + e.message);
                     }
-                    this.isSyncing = false;
+                    this.isPushing = false;
                 },
 
-                // ----- 加载并刷新所有数据 -----
+                // ----- 其余方法（不变） -----
                 loadAllData: function() {
-                    // 加载今日入账记录
                     var srys = loadSrys();
                     this.srys = srys.map(function(item) {
                         return {
                             ...item,
-                            created_at: formatTime(item.created_at), // 显示本地时间
+                            created_at: formatTime(item.created_at),
                             historical: item.historical
                         };
                     });
 
-                    // 加载动态板块
                     var platformsList = loadPlatformsList();
                     this.platforms = platformsList.map(function(p) {
                         var items = loadPlatformData(p.id);
@@ -1204,15 +1265,12 @@
                         };
                     });
 
-                    // 计算总剩余（入账 - 提现）
                     this.calcTotalRemain();
 
-                    // ★★★ 修复：计算今日入账总额，使用本地日期比较 ★★★
                     var todayStr = getTodayLocalStr();
                     var ti = 0;
                     for (var i = 0; i < srys.length; i++) {
                         var item = srys[i];
-                        // 使用 getLocalDateStr 提取本地日期
                         var itemDate = getLocalDateStr(item.created_at);
                         if (itemDate === todayStr) {
                             var num = extractNum(item.historical);
@@ -1221,10 +1279,7 @@
                     }
                     this.rsr = ti > 0 ? ti.toFixed(2) : '请自律';
 
-                    // 计算总负债
                     this.calcTotalDebt();
-
-                    // 刷新图表
                     this.mrzc();
                 },
 
@@ -1250,7 +1305,6 @@
                     this.totalDebt = parseFloat(debt.toFixed(2));
                 },
 
-                // ----- 添加板块 -----
                 showAddPlatformModal: function() {
                     var modal = new bootstrap.Modal(document.getElementById('addPlatformModal'));
                     modal.show();
@@ -1291,7 +1345,6 @@
                     });
                 },
 
-                // ----- 删除板块 -----
                 deletePlatform: function(platformId) {
                     if (!confirm('确定要删除该板块及其所有数据吗？')) return;
                     var list = loadPlatformsList();
@@ -1301,7 +1354,6 @@
                     this.loadAllData();
                 },
 
-                // ----- 保存板块记录 -----
                 savePlatformRecord: function(platformId, record) {
                     var items = loadPlatformData(platformId);
                     items.push(record);
@@ -1309,7 +1361,6 @@
                     this.loadAllData();
                 },
 
-                // ----- 保存今日入账记录 -----
                 saveSrysRecord: function(record) {
                     var items = loadSrys();
                     items.push(record);
@@ -1317,7 +1368,22 @@
                     this.loadAllData();
                 },
 
-                // ----- 模态框显示与切换 -----
+                deleteSrysRecord: function(recordId) {
+                    if (!confirm('确定要删除这条记录吗？')) return;
+                    var items = loadSrys();
+                    var newItems = items.filter(function(item) { return item.id !== recordId; });
+                    saveSrys(newItems);
+                    this.loadAllData();
+                },
+
+                deletePlatformRecord: function(platformId, recordId) {
+                    if (!confirm('确定要删除这条记录吗？')) return;
+                    var items = loadPlatformData(platformId);
+                    var newItems = items.filter(function(item) { return item.id !== recordId; });
+                    savePlatformData(platformId, newItems);
+                    this.loadAllData();
+                },
+
                 showModal: function(platformId) {
                     currentPlatformId = platformId;
                     if (platformId === 'sry') {
@@ -1332,7 +1398,6 @@
                     }
                     currentType = (this.l === '借款' || this.l === '提现') ? this.l : this.r;
 
-                    // 重置切换条及输入
                     document.getElementById('gd').style.marginLeft = '0%';
                     document.getElementById('L').style.color = '#FFFF';
                     document.getElementById('R').style.color = '#000000';
@@ -1368,7 +1433,6 @@
                     document.getElementById('R').style.color = '#FFFF';
                 },
 
-                // ----- 确认录入 -----
                 bindConfirmButton: function() {
                     var btn = document.getElementById('keyConfirm');
                     if (!btn) return;
@@ -1398,10 +1462,9 @@
 
                     var typeLabel = currentType || '借款';
                     var historical = typeLabel + ' ' + amountVal.toFixed(2) + ' ' + note;
-                    // 存储时使用 UTC 时间（ISO 字符串）
                     var newItem = {
                         id: genId(),
-                        created_at: nowISO(), // UTC 时间
+                        created_at: nowISO(),
                         historical: historical,
                         amount: amountVal
                     };
@@ -1409,7 +1472,6 @@
                     if (platformId === 'sry') {
                         this.saveSrysRecord(newItem);
                     } else {
-                        // 还款时同时记录一笔提现（从总余额扣除）
                         if (typeLabel === '还款') {
                             var withdrawItem = {
                                 id: genId(),
@@ -1432,7 +1494,6 @@
                     alert('✅ 已保存：' + historical);
                 },
 
-                // ----- 虚拟键盘绑定 -----
                 bindKeyboardOnce: function() {
                     var container = document.getElementById('containers');
                     if (!container) return;
@@ -1464,7 +1525,6 @@
                     };
                     container.addEventListener('click', this._containerClickHandler);
 
-                    // 物理键盘支持
                     if (this._keyboardHandler) document.removeEventListener('keydown', this._keyboardHandler);
                     this._keyboardHandler = function(e) {
                         if (!document.getElementById('myModal').classList.contains('show')) return;
@@ -1503,20 +1563,16 @@
                     document.addEventListener('keydown', this._keyboardHandler);
                 },
 
-                // ============================================================
-                // ★★★ 核心图表数据生成 mrzc() ★★★
-                // 修复：使用 getLocalDateStr 保证日期按本地时区分组
-                // ============================================================
+                // 图表方法（不变）
                 mrzc: function() {
                     var self = this;
 
-                    // 1. 收集所有原始记录（提现、入账、借款）
                     var records = [];
                     var srysRaw = loadSrys();
 
                     for (var i = 0; i < srysRaw.length; i++) {
                         var item = srysRaw[i];
-                        var dateKey = getLocalDateStr(item.created_at); // ★ 使用本地日期
+                        var dateKey = getLocalDateStr(item.created_at);
                         if (!dateKey) continue;
                         if (item.historical && item.historical.startsWith('提现')) {
                             records.push({ date: dateKey, amount: extractNum(item.historical), type: 'withdraw' });
@@ -1532,7 +1588,7 @@
                         var items = loadPlatformData(p.id);
                         for (var k = 0; k < items.length; k++) {
                             var it = items[k];
-                            var dateKey2 = getLocalDateStr(it.created_at); // ★ 使用本地日期
+                            var dateKey2 = getLocalDateStr(it.created_at);
                             if (!dateKey2) continue;
                             if (it.historical && it.historical.startsWith('借款')) {
                                 records.push({ date: dateKey2, amount: extractNum(it.historical), type: 'borrow' });
@@ -1540,7 +1596,6 @@
                         }
                     }
 
-                    // 2. 按日期聚合
                     var dateMap = new Map();
                     for (var m = 0; m < records.length; m++) {
                         var rec = records[m];
@@ -1554,18 +1609,15 @@
                         else if (rec.type === 'withdraw') dayData.withdraw += rec.amount;
                     }
 
-                    // 3. 日期排序
                     var sortedDates = Array.from(dateMap.keys()).sort(function(a, b) {
                         return new Date(a) - new Date(b);
                     });
 
-                    // 4. 根据 times 截取最近 N 天
                     var limit = this.times || 30;
                     if (limit === 9999 || limit >= sortedDates.length) limit = sortedDates.length;
                     if (limit < 1) limit = 1;
                     var selected = sortedDates.slice(-limit);
 
-                    // 5. 填充图表数据
                     this.sj = [];
                     this.je = [];
                     this.sr = [];
@@ -1574,7 +1626,6 @@
                         var date = selected[n];
                         var data = dateMap.get(date);
                         if (!data) continue;
-                        // 消费 = 借款 + 提现（提现视为消费）
                         var totalSpend = data.borrow + data.withdraw;
                         var parts = date.split('-');
                         var displayDate = parts.length === 3 ? parts[1] + '/' + parts[2] : date.substring(5);
@@ -1584,7 +1635,6 @@
                         this.sr.push(data.income.toFixed(2));
                     }
 
-                    // 6. 计算汇总
                     var srSum = 0,
                         zcSum = 0;
                     for (var p2 = 0; p2 < this.sr.length; p2++) {
@@ -1594,17 +1644,14 @@
                     this.srsum = parseFloat(srSum.toFixed(2));
                     this.zcsum = parseFloat(zcSum.toFixed(2));
 
-                    // 7. 计算净收入
                     var netData = [];
                     for (var q = 0; q < this.sr.length; q++) {
                         netData.push((parseFloat(this.sr[q]) || 0) - (parseFloat(this.je[q]) || 0));
                     }
 
-                    // 8. 渲染图表
                     this.renderCharts(this.sj, this.je, this.sr, netData);
                 },
 
-                // ----- 使用 Chart.js 绘制两个图表 -----
                 renderCharts: function(labels, spendData, incomeData, netData) {
                     var ctx = document.getElementById('lineChart');
                     var ctxto = document.getElementById('lineChartto');
@@ -1618,7 +1665,6 @@
                     var incomeNum = incomeData.map(function(v) { return parseFloat(v) || 0; });
                     var netNum = netData.map(function(v) { return parseFloat(v) || 0; });
 
-                    // 无数据时显示占位
                     if (labels.length === 0) {
                         labels = ['暂无数据'];
                         spendNum = [0];
@@ -1626,7 +1672,6 @@
                         netNum = [0];
                     }
 
-                    // 图表1：每日消费与收入
                     myChartto = new Chart(ctxto, {
                         type: 'bar',
                         data: {
@@ -1663,7 +1708,6 @@
                         }
                     });
 
-                    // 图表2：每日净收入
                     myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -1698,12 +1742,10 @@
                     });
                 },
 
-                // 时间范围变化时刷新图表
                 timesdy: function() {
                     this.mrzc();
                 },
 
-                // 获取一言（每日一句）
                 fetchHitokoto: function() {
                     fetch('https://v1.hitokoto.cn/?max_length=10')
                         .then(function(res) { return res.json(); })
@@ -1718,7 +1760,7 @@
             }
         });
 
-        console.log('📦 动态板块 · Material You 风格已启动 (时区修复版)');
+        console.log('📦 动态板块 · 同步按钮已改为只拉取合并，覆盖按钮用于强制推送');
     </script>
 
 </body>

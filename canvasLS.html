@@ -56,24 +56,18 @@
             padding: 18px 16px 30px;
         }
 
-        /* 滚动条 – 清爽 */
         ::-webkit-scrollbar {
             width: 4px;
             height: 4px;
         }
-
         ::-webkit-scrollbar-track {
             background: transparent;
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--md-primary-light);
             border-radius: 20px;
         }
 
-        /* ============================================================
-                   容器
-                   ============================================================ */
         .container {
             max-width: 1200px !important;
             margin: 0 auto;
@@ -86,40 +80,27 @@
         }
 
         /* ============================================================
-                   顶部总览卡片 (原 footer)
+                   顶部总览卡片
                    ============================================================ */
         #myFooter {
-            /* 固定定位 – 脱离文档流，无视父容器内边距 */
-
             position: sticky;
             top: 0;
             left: 0;
             right: 0;
             width: 100%;
             z-index: 1000;
-            /* 置于顶层 */
-
-            /* 背景与毛玻璃效果 */
             background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(24px) saturate(1.4);
             -webkit-backdrop-filter: blur(24px) saturate(1.4);
-
-            /* 去掉圆角，贴合屏幕边缘（如果喜欢可保留 0 或 8px 的小圆角） */
             border-radius: 0 0 30px 30px;
-            /* 可适当调整 */
-
-            /* 内边距与布局 */
             padding: 18px 28px;
-            /* 可适当调整 */
             box-shadow: 0 4px 30px rgba(90, 60, 160, 0.12);
             border-bottom: 1px solid rgba(255, 255, 255, 0.50);
-
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             transition: var(--md-transition);
-
         }
 
         #myFooter:hover {
@@ -164,12 +145,10 @@
                 gap: 12px;
                 padding: 20px;
             }
-
             .love-counter {
                 font-size: 1rem;
                 gap: 8px 20px;
             }
-
             #opText {
                 font-size: 0.85rem;
                 padding: 4px 14px;
@@ -177,7 +156,7 @@
         }
 
         /* ============================================================
-                   添加板块按钮
+                   按钮
                    ============================================================ */
         .add-platform-btn,
         .add-platform {
@@ -229,7 +208,7 @@
         }
 
         /* ============================================================
-                   板块卡片 .section
+                   板块卡片
                    ============================================================ */
         .section {
             background: var(--md-surface);
@@ -272,7 +251,6 @@
             font-size: 1.1rem;
         }
 
-        /* 删除按钮 */
         .section .delete-btn {
             position: absolute;
             top: 12px;
@@ -298,7 +276,6 @@
             transform: scale(1.1);
         }
 
-        /* 左侧圆形金额区 #ann */
         #ann {
             background: linear-gradient(135deg, rgba(124, 77, 255, 0.08), rgba(68, 138, 255, 0.06));
             border-radius: var(--md-radius-sm);
@@ -350,7 +327,6 @@
             opacity: 0.6;
         }
 
-        /* 右侧记录列表 #ls */
         #ls {
             float: none !important;
             width: 100% !important;
@@ -382,7 +358,6 @@
             font-weight: 500;
         }
 
-        /* 今日入账特殊样式 – 使用 .section 内的 #ann + #ls 已覆盖 */
         .section:first-child h2::before {
             content: "📥";
         }
@@ -481,29 +456,25 @@
                 grid-template-columns: 1fr;
                 gap: 18px;
             }
-
             #can>header {
                 height: 220px !important;
             }
-
             #xsfw {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 10px;
                 padding: 16px 18px;
             }
-
             #xsfw #lsjl {
                 justify-content: center;
             }
-
             #xsfw select {
                 width: 100%;
             }
         }
 
         /* ============================================================
-                   模态框 – Material You 风格
+                   模态框
                    ============================================================ */
         .modal-content {
             border: none !important;
@@ -546,7 +517,6 @@
             position: relative;
         }
 
-        /* 借款/还款 切换条 */
         #dhl {
             width: 100% !important;
             height: 44px !important;
@@ -590,16 +560,11 @@
 
         #L {
             left: 0 !important;
-
         }
-
         #R {
             right: 0 !important;
-
         }
 
-
-        /* 输入框 */
         .search-input {
             width: 100%;
             padding: 14px 20px;
@@ -625,7 +590,6 @@
             color: rgba(26, 26, 46, 0.30);
         }
 
-        /* 键盘容器 */
         #containers {
             background: rgba(0, 0, 0, 0.02) !important;
             border-radius: var(--md-radius-sm) !important;
@@ -685,7 +649,6 @@
         .key.number {
             background: rgba(255, 255, 255, 0.60);
         }
-
         .key.number:hover {
             background: rgba(255, 255, 255, 0.90);
         }
@@ -694,7 +657,6 @@
             background: rgba(124, 77, 255, 0.08);
             color: var(--md-primary);
         }
-
         .key.operation:hover {
             background: rgba(124, 77, 255, 0.14);
         }
@@ -703,7 +665,6 @@
             background: rgba(229, 57, 53, 0.06);
             color: #E53935;
         }
-
         .key.backspace:hover {
             background: rgba(229, 57, 53, 0.12);
         }
@@ -737,7 +698,7 @@
         }
 
         /* ============================================================
-                   覆盖层 (Loading)
+                   覆盖层
                    ============================================================ */
         .overlay {
             position: fixed;
@@ -796,7 +757,7 @@
         }
 
         /* ============================================================
-                   添加板块模态框 (独立)
+                   添加板块模态框
                    ============================================================ */
         #addPlatformModal .modal-content {
             background: rgba(255, 255, 255, 0.92) !important;
@@ -877,61 +838,50 @@
         }
 
         /* ============================================================
-                   响应式微调
+                   响应式
                    ============================================================ */
         @media (max-width: 640px) {
             .content {
                 padding: 12px 10px 20px;
             }
-
             .sections-container {
                 grid-template-columns: 1fr;
                 gap: 16px;
             }
-
             .section {
                 min-height: 240px;
                 padding: 16px;
             }
-
             .modal-body {
                 padding: 12px 16px 20px !important;
             }
-
             .keyboard {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 6px;
             }
-
             .key {
                 padding: 14px 0;
                 font-size: 1rem;
             }
-
             .input-value {
                 font-size: 1.8rem;
             }
-
             #containers {
                 padding: 12px !important;
             }
-
             #ann h2 {
                 font-size: 1.2rem !important;
             }
-
             #ann>div img {
                 width: 36px !important;
                 height: 36px !important;
             }
-
             .add-platform-btn {
                 width: 100%;
                 justify-content: center;
                 padding: 14px 20px;
                 font-size: 0.95rem;
             }
-
             .add-platform {
                 justify-content: center;
                 padding: 14px 20px;
@@ -945,44 +895,35 @@
                 flex-direction: column;
                 gap: 4px;
             }
-
             #myFooter {
                 padding: 16px;
             }
-
             #opText {
                 font-size: 0.75rem;
                 padding: 4px 12px;
             }
-
             .key {
                 padding: 12px 0;
                 font-size: 0.9rem;
             }
-
             .key.confirm {
                 font-size: 0.9rem;
             }
         }
 
-        /* 辅助 – 让老样式不干扰 */
         .section[style*="position:relative"] {
             position: relative !important;
         }
-
         #ann[style*="float:left"] {
             float: none !important;
         }
-
         #ls[style*="float:right"] {
             float: none !important;
         }
-
         #ann h2[style*="float:left"] {
             float: none !important;
         }
 
-        /* Chart.js 自适应 */
         canvas {
             max-width: 100%;
             max-height: 100%;
@@ -992,7 +933,7 @@
 
 <body>
 
-    <!-- ===== 加载覆盖层 ===== -->
+    <!-- 加载覆盖层 -->
     <div class="overlay active" id="overlay">
         <div class="overlay-content">
             <h3>📦 正在加载本地数据…</h3>
@@ -1000,10 +941,10 @@
         </div>
     </div>
 
-    <!-- ===== Vue 根实例 ===== -->
+    <!-- Vue 根实例 -->
     <div id="app">
 
-        <!-- ===== 录入模态框 (Bootstrap) ===== -->
+        <!-- 录入模态框 -->
         <div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -1013,17 +954,14 @@
                     </div>
                     <div class="modal-body">
 
-                        <!-- 切换条 -->
                         <div id="dhl">
                             <div id="L" @click="SJ()">{{ l }}</div>
                             <div id="R" @click="DN()">{{ r }}</div>
                             <div id="gd"></div>
                         </div>
 
-                        <!-- 备注输入 -->
                         <input id="input" type="text" class="search-input" placeholder="请输入备注（如：购物、餐饮）">
 
-                        <!-- 数字键盘 -->
                         <div id="containers">
                             <div class="display">
                                 <div class="input-value" id="displayAmount">0.00</div>
@@ -1053,11 +991,9 @@
             </div>
         </div>
 
-        <!-- ===== 主容器 ===== -->
+        <!-- 主容器 -->
         <div id="container" class="container">
 
-            <!-- 顶部总览 -->
-            <!-- 在 footer 中添加同步状态 -->
             <footer id="myFooter">
                 <div class="love-counter">
                     总负债 ¥ {{ totalDebt }} &nbsp;·&nbsp; 总剩余 ¥ {{ totalRemain }}
@@ -1074,11 +1010,10 @@
                     <p id="opText" style="margin:0;">今天你吃了么</p>
                 </div>
             </footer>
+
             <div class="content">
-                <!-- 添加板块按钮 -->
                 <button class="add-platform-btn" @click="showAddPlatformModal">添加板块</button>
 
-                <!-- 板块卡片网格 -->
                 <div class="sections-container">
 
                     <!-- 今日入账（固定） -->
@@ -1141,7 +1076,7 @@
         </div>
     </div>
 
-    <!-- ===== 添加板块模态框 (独立) ===== -->
+    <!-- 添加板块模态框 -->
     <div class="modal fade" id="addPlatformModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1175,33 +1110,9 @@
     </div>
 
     <!-- ============================================================
-    JavaScript – 逻辑代码完全保持不变
+    JavaScript
     ============================================================ -->
     <script>
-        // // 在你的网页加载完成后，通知 Cordova 隐藏启动页
-        // document.addEventListener('deviceready', function () {
-        //     // 等所有资源加载完成后再隐藏
-        //     window.addEventListener('load', function () {
-        //         // 延迟 500ms 让页面完全渲染
-        //         setTimeout(function () {
-        //             if (navigator.splashscreen) {
-        //                 navigator.splashscreen.hide();
-        //             }
-        //         }, 500);
-        //     });
-        // });
-        // document.addEventListener('deviceready', function () {
-
-        //     StatusBar.backgroundColorByHexString('#00000000');
-        //     const isDarkMode = window.matchMedia &&
-        //         window.matchMedia('(prefers-color-scheme: dark)').matches;
-        //     if (isDarkMode) {
-        //         StatusBar.styleLightContent();
-        //     } else {
-        //         StatusBar.styleDefault();
-        //     }
-        // }, false);
-
         // ===== 工具函数 =====
         function nowISO() { return new Date().toISOString(); }
 
@@ -1221,14 +1132,55 @@
             return m ? parseFloat(m[0]) : 0;
         }
 
+        // ===== 改进的日期提取函数：始终返回 YYYY-MM-DD =====
+        function getDateStr(createdAt) {
+            if (!createdAt) return '';
+            var dateStr = '';
+            try {
+                if (typeof createdAt === 'string') {
+                    // 处理 ISO: 2026-08-04T12:34:56.789Z
+                    if (createdAt.includes('T')) {
+                        dateStr = createdAt.split('T')[0];
+                    }
+                    // 处理 斜杠 + 空格: 2026/08/04 12:34:56
+                    else if (createdAt.includes(' ')) {
+                        dateStr = createdAt.split(' ')[0];
+                    }
+                    // 处理纯日期
+                    else {
+                        dateStr = createdAt;
+                    }
+                    // 统一将 / 替换为 -
+                    dateStr = dateStr.replace(/\//g, '-');
+                    // 截取前 10 位
+                    if (dateStr.length >= 10) {
+                        dateStr = dateStr.substring(0, 10);
+                    }
+                    // 验证是否为有效日期
+                    var d = new Date(dateStr);
+                    if (!isNaN(d.getTime())) {
+                        var pad = function(n) { return String(n).padStart(2, '0'); };
+                        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+                    }
+                }
+                // 尝试作为 Date 对象
+                var d2 = new Date(createdAt);
+                if (!isNaN(d2.getTime())) {
+                    var pad2 = function(n) { return String(n).padStart(2, '0'); };
+                    return d2.getFullYear() + '-' + pad2(d2.getMonth() + 1) + '-' + pad2(d2.getDate());
+                }
+            } catch (_) { /* ignore */ }
+            return '';
+        }
+
         // ===== localStorage 辅助 =====
-        const STORE_KEY_PREFIX = 'platform_';
+        var STORE_KEY_PREFIX = 'platform_';
 
         function getPlatformDataKey(platformId) { return STORE_KEY_PREFIX + platformId + '_data'; }
 
         function loadPlatformData(platformId) {
             try {
-                const raw = localStorage.getItem(getPlatformDataKey(platformId));
+                var raw = localStorage.getItem(getPlatformDataKey(platformId));
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
@@ -1237,11 +1189,11 @@
             localStorage.setItem(getPlatformDataKey(platformId), JSON.stringify(data));
         }
 
-        const PLATFORMS_LIST_KEY = 'platforms_list';
+        var PLATFORMS_LIST_KEY = 'platforms_list';
 
         function loadPlatformsList() {
             try {
-                const raw = localStorage.getItem(PLATFORMS_LIST_KEY);
+                var raw = localStorage.getItem(PLATFORMS_LIST_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
@@ -1250,11 +1202,11 @@
             localStorage.setItem(PLATFORMS_LIST_KEY, JSON.stringify(list));
         }
 
-        const SRYS_KEY = 'srys_data';
+        var SRYS_KEY = 'srys_data';
 
         function loadSrys() {
             try {
-                const raw = localStorage.getItem(SRYS_KEY);
+                var raw = localStorage.getItem(SRYS_KEY);
                 return raw ? JSON.parse(raw) : [];
             } catch (_) { return []; }
         }
@@ -1264,15 +1216,15 @@
         }
 
         // ===== Vue 实例 =====
-        let vueInstance = null;
-        let myChart = null,
+        var vueInstance = null;
+        var myChart = null,
             myChartto = null;
-        let currentPlatformId = '';
-        let currentType = '借款';
+        var currentPlatformId = '';
+        var currentType = '借款';
 
         new Vue({
             el: '#app',
-            data: function () {
+            data: function() {
                 return {
                     srys: [],
                     rsr: '0.00',
@@ -1294,43 +1246,41 @@
                 }
             },
             async created() {
-                // 自动同步
                 await this.autoSync();
                 vueInstance = this;
                 this.loadAllData();
-                setTimeout(() => {
+                setTimeout(function() {
                     document.getElementById('overlay').classList.remove('active');
                     document.body.style.overflow = '';
                 }, 300);
 
-                const sel = document.getElementById('skill-level');
+                var sel = document.getElementById('skill-level');
                 if (sel) {
-                    sel.addEventListener('change', () => {
-                        const val = sel.value;
-                        if (val === 'yizhou') this.times = 7;
-                        else if (val === 'yiyue') this.times = 30;
-                        else if (val === 'yinian') this.times = 365;
-                        else if (val === 'quanbu') this.times = 9999;
-                        this.timesdy();
+                    sel.addEventListener('change', function() {
+                        var val = sel.value;
+                        if (val === 'yizhou') vueInstance.times = 7;
+                        else if (val === 'yiyue') vueInstance.times = 30;
+                        else if (val === 'yinian') vueInstance.times = 365;
+                        else if (val === 'quanbu') vueInstance.times = 9999;
+                        vueInstance.timesdy();
                     });
                 }
 
                 this.fetchHitokoto();
-                this.$nextTick(() => { this.mrzc(); });
+                this.$nextTick(function() { this.mrzc(); }.bind(this));
                 this.bindAddPlatformEvents();
             },
-            mounted() {
+            mounted: function() {
                 this.bindKeyboardOnce();
                 this.bindConfirmButton();
             },
             methods: {
+                // ----- 同步 -----
                 async autoSync() {
                     try {
                         this.syncStatus = 'syncing';
                         this.syncStatusText = '🔄 同步中...';
-
-                        const result = await syncWithGitee();
-
+                        var result = await syncWithGitee();
                         if (result.success) {
                             this.syncStatus = 'online';
                             this.syncStatusText = '✅ 已同步';
@@ -1350,14 +1300,12 @@
                     if (this.isSyncing) return;
                     this.isSyncing = true;
                     this.syncStatusText = '🔄 同步中...';
-
                     try {
-                        const result = await syncWithGitee();
+                        var result = await syncWithGitee();
                         if (result.success) {
                             this.syncStatus = 'online';
                             this.syncStatusText = '✅ 已同步';
                             this.loadAllData();
-                            // alert('✅ 同步成功！');
                         } else {
                             this.syncStatus = 'offline';
                             this.syncStatusText = '⚠️ 同步失败';
@@ -1371,36 +1319,41 @@
                 },
 
                 // ----- 数据加载 -----
-                loadAllData() {
-                    const srys = loadSrys();
-                    this.srys = srys.map(item => ({
-                        ...item,
-                        created_at: formatTime(item.created_at),
-                        historical: item.historical
-                    }));
+                loadAllData: function() {
+                    var srys = loadSrys();
+                    this.srys = srys.map(function(item) {
+                        return {
+                            ...item,
+                            created_at: formatTime(item.created_at),
+                            historical: item.historical
+                        };
+                    });
 
-                    const platformsList = loadPlatformsList();
-                    this.platforms = platformsList.map(p => {
-                        const items = loadPlatformData(p.id);
-                        const amount = items.reduce((s, i) => s + (i.amount || 0), 0);
+                    var platformsList = loadPlatformsList();
+                    this.platforms = platformsList.map(function(p) {
+                        var items = loadPlatformData(p.id);
+                        var amount = items.reduce(function(s, i) { return s + (i.amount || 0); }, 0);
                         return {
                             ...p,
-                            items: items.map(item => ({
-                                ...item,
-                                created_at: formatTime(item.created_at),
-                                historical: item.historical
-                            })),
+                            items: items.map(function(item) {
+                                return {
+                                    ...item,
+                                    created_at: formatTime(item.created_at),
+                                    historical: item.historical
+                                };
+                            }),
                             amount: amount
                         };
                     });
 
                     this.calcTotalRemain();
-                    const today = new Date().toISOString().slice(0, 10);
-                    let ti = 0;
-                    for (const item of srys) {
+                    var today = new Date().toISOString().slice(0, 10);
+                    var ti = 0;
+                    for (var i = 0; i < srys.length; i++) {
+                        var item = srys[i];
                         if (item.created_at && item.created_at.startsWith(today)) {
-                            const num = extractNum(item.historical);
-                            if (item.historical && item.historical.startsWith('收入')) ti += num;
+                            var num = extractNum(item.historical);
+                            if (item.historical && item.historical.startsWith('入账')) ti += num;
                         }
                     }
                     this.rsr = ti > 0 ? ti.toFixed(2) : '请自律';
@@ -1408,10 +1361,11 @@
                     this.mrzc();
                 },
 
-                calcTotalRemain() {
-                    const srys = loadSrys();
-                    let total = 0;
-                    for (const item of srys) {
+                calcTotalRemain: function() {
+                    var srys = loadSrys();
+                    var total = 0;
+                    for (var i = 0; i < srys.length; i++) {
+                        var item = srys[i];
                         if (item.historical && item.historical.startsWith('入账')) {
                             total += extractNum(item.historical);
                         } else if (item.historical && item.historical.startsWith('提现')) {
@@ -1421,26 +1375,26 @@
                     this.totalRemain = parseFloat(total.toFixed(2));
                 },
 
-                calcTotalDebt() {
-                    let debt = 0;
-                    for (const p of this.platforms) {
-                        debt += parseFloat(p.amount || 0);
+                calcTotalDebt: function() {
+                    var debt = 0;
+                    for (var i = 0; i < this.platforms.length; i++) {
+                        debt += parseFloat(this.platforms[i].amount || 0);
                     }
                     this.totalDebt = parseFloat(debt.toFixed(2));
                 },
 
                 // ----- 添加板块 -----
-                showAddPlatformModal() {
-                    const modal = new bootstrap.Modal(document.getElementById('addPlatformModal'));
+                showAddPlatformModal: function() {
+                    var modal = new bootstrap.Modal(document.getElementById('addPlatformModal'));
                     modal.show();
                     document.getElementById('presetSelect').value = 'custom';
                     document.getElementById('platformNameInput').value = '';
                 },
 
-                bindAddPlatformEvents() {
-                    const presetSelect = document.getElementById('presetSelect');
-                    const nameInput = document.getElementById('platformNameInput');
-                    presetSelect.addEventListener('change', function () {
+                bindAddPlatformEvents: function() {
+                    var presetSelect = document.getElementById('presetSelect');
+                    var nameInput = document.getElementById('platformNameInput');
+                    presetSelect.addEventListener('change', function() {
                         if (this.value !== 'custom') {
                             nameInput.value = this.value;
                         } else {
@@ -1448,63 +1402,63 @@
                         }
                     });
 
-                    document.getElementById('confirmAddPlatform').addEventListener('click', () => {
-                        let name = nameInput.value.trim();
+                    document.getElementById('confirmAddPlatform').addEventListener('click', function() {
+                        var name = nameInput.value.trim();
                         if (!name) {
                             alert('请输入板块名称');
                             return;
                         }
-                        const exists = this.platforms.some(p => p.name === name);
+                        var exists = vueInstance.platforms.some(function(p) { return p.name === name; });
                         if (exists) {
                             alert('已存在同名板块，请换一个名称');
                             return;
                         }
-                        const id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5);
-                        const newPlatform = { id, name };
-                        const list = loadPlatformsList();
+                        var id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5);
+                        var newPlatform = { id: id, name: name };
+                        var list = loadPlatformsList();
                         list.push(newPlatform);
                         savePlatformsList(list);
                         savePlatformData(id, []);
-                        this.loadAllData();
+                        vueInstance.loadAllData();
                         bootstrap.Modal.getInstance(document.getElementById('addPlatformModal')).hide();
                     });
                 },
 
                 // ----- 删除板块 -----
-                deletePlatform(platformId) {
+                deletePlatform: function(platformId) {
                     if (!confirm('确定要删除该板块及其所有数据吗？')) return;
-                    let list = loadPlatformsList();
-                    list = list.filter(p => p.id !== platformId);
+                    var list = loadPlatformsList();
+                    list = list.filter(function(p) { return p.id !== platformId; });
                     savePlatformsList(list);
                     localStorage.removeItem(getPlatformDataKey(platformId));
                     this.loadAllData();
                 },
 
                 // ----- 保存板块数据 -----
-                savePlatformRecord(platformId, record) {
-                    const items = loadPlatformData(platformId);
+                savePlatformRecord: function(platformId, record) {
+                    var items = loadPlatformData(platformId);
                     items.push(record);
                     savePlatformData(platformId, items);
                     this.loadAllData();
                 },
 
                 // ----- 今日入账保存 -----
-                saveSrysRecord(record) {
-                    const items = loadSrys();
+                saveSrysRecord: function(record) {
+                    var items = loadSrys();
                     items.push(record);
                     saveSrys(items);
                     this.loadAllData();
                 },
 
                 // ----- 模态框交互 -----
-                showModal(platformId) {
+                showModal: function(platformId) {
                     currentPlatformId = platformId;
                     if (platformId === 'sry') {
                         this.modalTitle = '今日入账';
                         this.l = '提现';
                         this.r = '入账';
                     } else {
-                        const p = this.platforms.find(p => p.id === platformId);
+                        var p = this.platforms.find(function(p) { return p.id === platformId; });
                         this.modalTitle = p ? p.name : '未知板块';
                         this.l = '借款';
                         this.r = '还款';
@@ -1517,18 +1471,18 @@
                     document.getElementById('displayAmount').textContent = '0.00';
                     document.getElementById('input').value = '';
 
-                    const modal = new bootstrap.Modal(document.getElementById('myModal'));
+                    var modal = new bootstrap.Modal(document.getElementById('myModal'));
                     modal.show();
                     this.bindConfirmButton();
                 },
 
-                getPlatformName(platformId) {
+                getPlatformName: function(platformId) {
                     if (platformId === 'sry') return '今日入账';
-                    const p = this.platforms.find(p => p.id === platformId);
+                    var p = this.platforms.find(function(p) { return p.id === platformId; });
                     return p ? p.name : '未知';
                 },
 
-                SJ() {
+                SJ: function() {
                     if (currentPlatformId === 'sry') currentType = '提现';
                     else currentType = '借款';
                     document.getElementById('input').placeholder = '请输入备注（如：购物、餐饮）';
@@ -1537,7 +1491,7 @@
                     document.getElementById('R').style.color = '#000000';
                 },
 
-                DN() {
+                DN: function() {
                     if (currentPlatformId === 'sry') currentType = '入账';
                     else currentType = '还款';
                     document.getElementById('input').placeholder = '输入收入来源';
@@ -1546,36 +1500,36 @@
                     document.getElementById('R').style.color = '#FFFF';
                 },
 
-                bindConfirmButton() {
-                    const btn = document.getElementById('keyConfirm');
+                bindConfirmButton: function() {
+                    var btn = document.getElementById('keyConfirm');
                     if (!btn) return;
-                    const newBtn = btn.cloneNode(true);
+                    var newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', () => { this.handleConfirm(); });
+                    newBtn.addEventListener('click', function() { vueInstance.handleConfirm(); });
                 },
 
-                handleConfirm() {
-                    const platformId = currentPlatformId;
+                handleConfirm: function() {
+                    var platformId = currentPlatformId;
                     if (!platformId) return;
 
-                    const amountStr = document.getElementById('displayAmount').textContent || '0.00';
-                    const amountVal = parseFloat(amountStr) || 0;
+                    var amountStr = document.getElementById('displayAmount').textContent || '0.00';
+                    var amountVal = parseFloat(amountStr) || 0;
                     if (amountVal <= 0) {
                         alert('请输入有效的金额（大于0）');
                         return;
                     }
 
-                    let note = '';
-                    const inputEl = document.getElementById('input');
+                    var note = '';
+                    var inputEl = document.getElementById('input');
                     if (inputEl && inputEl.style.display !== 'none') {
                         note = inputEl.value.trim() || '无备注';
                     } else {
                         note = '无备注';
                     }
 
-                    const typeLabel = currentType || '借款';
-                    const historical = typeLabel + ' ' + amountVal.toFixed(2) + ' ' + note;
-                    const newItem = {
+                    var typeLabel = currentType || '借款';
+                    var historical = typeLabel + ' ' + amountVal.toFixed(2) + ' ' + note;
+                    var newItem = {
                         id: genId(),
                         created_at: new Date().toISOString(),
                         historical: historical,
@@ -1586,43 +1540,43 @@
                         this.saveSrysRecord(newItem);
                     } else {
                         if (typeLabel === '还款') {
-                            const withdrawItem = {
+                            var withdrawItem = {
                                 id: genId(),
                                 created_at: new Date().toISOString(),
                                 historical: '提现 ' + amountVal.toFixed(2) + ' 还款-' + this.getPlatformName(
                                     platformId),
                                 amount: amountVal
                             };
-                            const srys = loadSrys();
+                            var srys = loadSrys();
                             srys.push(withdrawItem);
                             saveSrys(srys);
                         }
                         this.savePlatformRecord(platformId, newItem);
                     }
 
-                    const modalEl = document.getElementById('myModal');
-                    const modal = bootstrap.Modal.getInstance(modalEl);
+                    var modalEl = document.getElementById('myModal');
+                    var modal = bootstrap.Modal.getInstance(modalEl);
                     if (modal) modal.hide();
 
                     alert('✅ 已保存：' + historical);
                 },
 
                 // ----- 虚拟键盘 -----
-                bindKeyboardOnce() {
-                    const container = document.getElementById('containers');
+                bindKeyboardOnce: function() {
+                    var container = document.getElementById('containers');
                     if (!container) return;
 
                     container.removeEventListener('click', this._containerClickHandler);
-                    this._containerClickHandler = (e) => {
-                        const target = e.target.closest('.key');
+                    this._containerClickHandler = function(e) {
+                        var target = e.target.closest('.key');
                         if (!target) return;
-                        const display = document.getElementById('displayAmount');
+                        var display = document.getElementById('displayAmount');
                         if (!display) return;
 
                         if (target.classList.contains('number') || target.classList.contains('operation')) {
-                            const val = target.dataset.val || target.textContent;
+                            var val = target.dataset.val || target.textContent;
                             if (val === '.' && display.textContent.includes('.')) return;
-                            let cur = display.textContent || '0.00';
+                            var cur = display.textContent || '0.00';
                             if (cur === '0.00' && val !== '.') cur = '';
                             if (val === '.') {
                                 if (cur === '') cur = '0';
@@ -1631,7 +1585,7 @@
                             if (cur.includes('.') && cur.split('.')[1].length >= 2) return;
                             display.textContent = cur + val;
                         } else if (target.classList.contains('backspace')) {
-                            let cur = display.textContent || '0.00';
+                            var cur = display.textContent || '0.00';
                             if (cur.length <= 1) { display.textContent = '0.00'; return; }
                             display.textContent = cur.slice(0, -1);
                             if (display.textContent === '') display.textContent = '0.00';
@@ -1640,14 +1594,14 @@
                     container.addEventListener('click', this._containerClickHandler);
 
                     if (this._keyboardHandler) document.removeEventListener('keydown', this._keyboardHandler);
-                    this._keyboardHandler = (e) => {
+                    this._keyboardHandler = function(e) {
                         if (!document.getElementById('myModal').classList.contains('show')) return;
-                        const key = e.key;
-                        const display = document.getElementById('displayAmount');
+                        var key = e.key;
+                        var display = document.getElementById('displayAmount');
                         if (!display) return;
-                        const handleKey = (val) => {
+                        var handleKey = function(val) {
                             if (val === '.' && display.textContent.includes('.')) return;
-                            let cur = display.textContent || '0.00';
+                            var cur = display.textContent || '0.00';
                             if (cur === '0.00' && val !== '.') cur = '';
                             if (val === '.') {
                                 if (cur === '') cur = '0';
@@ -1664,120 +1618,155 @@
                             handleKey('.');
                         } else if (key === 'Backspace') {
                             e.preventDefault();
-                            let cur = display.textContent || '0.00';
+                            var cur = display.textContent || '0.00';
                             if (cur.length <= 1) { display.textContent = '0.00'; return; }
                             display.textContent = cur.slice(0, -1);
                             if (display.textContent === '') display.textContent = '0.00';
                         } else if (key === 'Enter') {
                             e.preventDefault();
-                            const confirmBtn = document.getElementById('keyConfirm');
+                            var confirmBtn = document.getElementById('keyConfirm');
                             if (confirmBtn) confirmBtn.click();
                         }
                     };
                     document.addEventListener('keydown', this._keyboardHandler);
                 },
 
-                // ----- 图表处理 -----
-                mrzc() {
-                    const getDateStr = (createdAt) => {
-                        if (!createdAt) return '';
-                        if (createdAt.includes('/')) return createdAt.substring(0, 10);
-                        if (createdAt.includes('-')) return createdAt.substring(0, 10);
-                        try {
-                            const d = new Date(createdAt);
-                            if (!isNaN(d.getTime())) {
-                                const pad = n => String(n).padStart(2, '0');
-                                return d.getFullYear() + '/' + pad(d.getMonth() + 1) + '/' + pad(d.getDate());
-                            }
-                        } catch (_) { }
-                        return '';
-                    };
+                // ============================================================
+                // ★★★ 核心修复：mrzc() 图表数据生成 ★★★
+                // 修复：当某天只有收入（入账）没有消费时，收入能正确显示在图表中
+                // ============================================================
+                mrzc: function() {
+                    var self = this;
 
-                    const records = [];
-                    const srys = loadSrys();
-                    for (const item of srys) {
+                    // 1. 从原始数据中提取记录
+                    var records = [];
+                    var srysRaw = loadSrys();
+
+                    // 处理今日入账数据（提现 / 入账）
+                    for (var i = 0; i < srysRaw.length; i++) {
+                        var item = srysRaw[i];
+                        var dateKey = getDateStr(item.created_at);
+                        if (!dateKey) continue;
                         if (item.historical && item.historical.startsWith('提现')) {
                             records.push({
-                                date: getDateStr(item.created_at), amount: extractNum(item.historical),
+                                date: dateKey,
+                                amount: extractNum(item.historical),
                                 type: 'withdraw'
                             });
                         }
                         if (item.historical && item.historical.startsWith('入账')) {
                             records.push({
-                                date: getDateStr(item.created_at), amount: extractNum(item.historical),
+                                date: dateKey,
+                                amount: extractNum(item.historical),
                                 type: 'income'
                             });
                         }
                     }
-                    for (const p of this.platforms) {
-                        const items = loadPlatformData(p.id);
-                        for (const item of items) {
-                            if (item.historical && item.historical.startsWith('借款')) {
+
+                    // 处理平台数据（借款）
+                    var platformsList = loadPlatformsList();
+                    for (var j = 0; j < platformsList.length; j++) {
+                        var p = platformsList[j];
+                        var items = loadPlatformData(p.id);
+                        for (var k = 0; k < items.length; k++) {
+                            var it = items[k];
+                            var dateKey2 = getDateStr(it.created_at);
+                            if (!dateKey2) continue;
+                            if (it.historical && it.historical.startsWith('借款')) {
                                 records.push({
-                                    date: getDateStr(item.created_at), amount: extractNum(item.historical),
+                                    date: dateKey2,
+                                    amount: extractNum(it.historical),
                                     type: 'borrow'
                                 });
                             }
                         }
                     }
 
-                    const dateMap = new Map();
-                    for (const record of records) {
-                        if (!record.date) continue;
-                        if (!dateMap.has(record.date)) dateMap.set(record.date, {
-                            borrow: 0, withdraw: 0,
-                            income: 0
-                        });
-                        const dayData = dateMap.get(record.date);
-                        if (record.type === 'income') dayData.income += record.amount;
-                        else if (record.type === 'borrow') dayData.borrow += record.amount;
-                        else if (record.type === 'withdraw') dayData.withdraw += record.amount;
+                    // 2. 按日期分组
+                    var dateMap = new Map();
+                    for (var m = 0; m < records.length; m++) {
+                        var rec = records[m];
+                        if (!rec.date) continue;
+                        if (!dateMap.has(rec.date)) {
+                            dateMap.set(rec.date, { borrow: 0, withdraw: 0, income: 0 });
+                        }
+                        var dayData = dateMap.get(rec.date);
+                        if (rec.type === 'income') dayData.income += rec.amount;
+                        else if (rec.type === 'borrow') dayData.borrow += rec.amount;
+                        else if (rec.type === 'withdraw') dayData.withdraw += rec.amount;
                     }
 
-                    const sortedDates = Array.from(dateMap.keys()).sort((a, b) => {
-                        return new Date(a.replace(/\//g, '-')) - new Date(b.replace(/\//g, '-'));
+                    // 3. 获取所有日期并排序
+                    var sortedDates = Array.from(dateMap.keys()).sort(function(a, b) {
+                        return new Date(a) - new Date(b);
                     });
 
-                    let limit = this.times || 7;
+                    // 4. 根据 times 截取最近 N 天
+                    var limit = this.times || 30;
                     if (limit === 9999 || limit >= sortedDates.length) limit = sortedDates.length;
                     if (limit < 1) limit = 1;
-                    const selected = sortedDates.slice(-limit);
+                    var selected = sortedDates.slice(-limit);
 
+                    // 5. 填充图表数据
                     this.sj = [];
                     this.je = [];
                     this.sr = [];
-                    for (const date of selected) {
-                        const data = dateMap.get(date);
-                        const totalSpend = data.borrow + Math.max(0, data.withdraw - data.borrow);
-                        const dateParts = date.split('/');
-                        const displayDate = dateParts.length === 3 ? dateParts[1] + '/' + dateParts[2] : date.substring(
-                            5);
+
+                    for (var n = 0; n < selected.length; n++) {
+                        var date = selected[n];
+                        var data = dateMap.get(date);
+                        if (!data) continue;
+                        // 消费 = 借款 + 超出借款的提现（简化逻辑：提现全部视为消费）
+                        var totalSpend = data.borrow + data.withdraw;
+                        // 格式化日期显示：MM/DD
+                        var parts = date.split('-');
+                        var displayDate = parts.length === 3 ? parts[1] + '/' + parts[2] : date.substring(5);
+
                         this.sj.push(displayDate);
                         this.je.push(totalSpend.toFixed(2));
                         this.sr.push(data.income.toFixed(2));
                     }
 
-                    this.srsum = this.sr.reduce((s, v) => s + (parseFloat(v) || 0), 0);
-                    this.zcsum = this.je.reduce((s, v) => s + (parseFloat(v) || 0), 0);
-                    const net = this.sr.map((v, i) => (parseFloat(v) || 0) - (parseFloat(this.je[i]) || 0));
-                    this.renderCharts(this.sj, this.je, this.sr, net);
+                    // 6. 计算汇总
+                    var srSum = 0,
+                        zcSum = 0;
+                    for (var p2 = 0; p2 < this.sr.length; p2++) {
+                        srSum += parseFloat(this.sr[p2]) || 0;
+                        zcSum += parseFloat(this.je[p2]) || 0;
+                    }
+                    this.srsum = parseFloat(srSum.toFixed(2));
+                    this.zcsum = parseFloat(zcSum.toFixed(2));
+
+                    // 7. 计算净收入
+                    var netData = [];
+                    for (var q = 0; q < this.sr.length; q++) {
+                        netData.push((parseFloat(this.sr[q]) || 0) - (parseFloat(this.je[q]) || 0));
+                    }
+
+                    // 8. 渲染图表
+                    this.renderCharts(this.sj, this.je, this.sr, netData);
                 },
 
-                renderCharts(labels, spendData, incomeData, netData) {
-                    const ctx = document.getElementById('lineChart');
-                    const ctxto = document.getElementById('lineChartto');
-                    if (myChart) {
-                        myChart.destroy();
-                        myChart = null;
-                    }
-                    if (myChartto) {
-                        myChartto.destroy();
-                        myChartto = null;
-                    }
+                renderCharts: function(labels, spendData, incomeData, netData) {
+                    var ctx = document.getElementById('lineChart');
+                    var ctxto = document.getElementById('lineChartto');
 
-                    const spendNum = spendData.map(v => parseFloat(v) || 0);
-                    const incomeNum = incomeData.map(v => parseFloat(v) || 0);
-                    const netNum = netData.map(v => parseFloat(v) || 0);
+                    if (myChart) { myChart.destroy();
+                        myChart = null; }
+                    if (myChartto) { myChartto.destroy();
+                        myChartto = null; }
+
+                    var spendNum = spendData.map(function(v) { return parseFloat(v) || 0; });
+                    var incomeNum = incomeData.map(function(v) { return parseFloat(v) || 0; });
+                    var netNum = netData.map(function(v) { return parseFloat(v) || 0; });
+
+                    // 如果数据为空，显示占位提示
+                    if (labels.length === 0) {
+                        labels = ['暂无数据'];
+                        spendNum = [0];
+                        incomeNum = [0];
+                        netNum = [0];
+                    }
 
                     myChartto = new Chart(ctxto, {
                         type: 'bar',
@@ -1822,10 +1811,12 @@
                             datasets: [{
                                 label: '每日净收入',
                                 data: netNum,
-                                backgroundColor: netNum.map(v => v >= 0 ? 'rgba(68,138,255,0.55)' :
-                                    'rgba(229,57,53,0.50)'),
-                                borderColor: netNum.map(v => v >= 0 ? 'rgba(68,138,255,0.90)' :
-                                    'rgba(229,57,53,0.85)'),
+                                backgroundColor: netNum.map(function(v) {
+                                    return v >= 0 ? 'rgba(68,138,255,0.55)' : 'rgba(229,57,53,0.50)';
+                                }),
+                                borderColor: netNum.map(function(v) {
+                                    return v >= 0 ? 'rgba(68,138,255,0.90)' : 'rgba(229,57,53,0.85)';
+                                }),
                                 borderWidth: 1.5,
                                 borderRadius: 4
                             }]
@@ -1847,23 +1838,25 @@
                     });
                 },
 
-                timesdy() {
+                timesdy: function() {
                     this.mrzc();
                 },
 
-                fetchHitokoto() {
+                fetchHitokoto: function() {
                     fetch('https://v1.hitokoto.cn/?max_length=10')
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(function(res) { return res.json(); })
+                        .then(function(data) {
                             if (data && data.hitokoto) document.getElementById('opText').textContent = data
                                 .hitokoto;
                         })
-                        .catch(() => document.getElementById('opText').textContent = '今天你吃了么');
+                        .catch(function() {
+                            document.getElementById('opText').textContent = '今天你吃了么';
+                        });
                 }
             }
         });
 
-        console.log('📦 动态板块 · Material You 风格已启动');
+        console.log('📦 动态板块 · Material You 风格已启动 (图表修复版)');
     </script>
 
 </body>

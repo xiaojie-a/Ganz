@@ -61,9 +61,11 @@
             width: 4px;
             height: 4px;
         }
+
         ::-webkit-scrollbar-track {
             background: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--md-primary-light);
             border-radius: 20px;
@@ -115,7 +117,11 @@
             flex-wrap: wrap;
             gap: 12px 28px;
         }
-        .love-counter br { display: none; }
+
+        .love-counter br {
+            display: none;
+        }
+
         .love-counter::before {
             content: "💰";
             margin-right: 4px;
@@ -140,10 +146,12 @@
                 gap: 12px;
                 padding: 20px;
             }
+
             .love-counter {
                 font-size: 1rem;
                 gap: 8px 20px;
             }
+
             #opText {
                 font-size: 0.85rem;
                 padding: 4px 14px;
@@ -169,16 +177,19 @@
             letter-spacing: 0.3px;
             margin-bottom: 24px;
         }
+
         .add-platform-btn:hover,
         .add-platform:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 10px 32px rgba(124, 77, 255, 0.40);
             background: #6D3FE0;
         }
+
         .add-platform-btn:active,
         .add-platform:active {
             transform: scale(0.96);
         }
+
         .add-platform-btn::before,
         .add-platform::before {
             font-size: 1.3rem;
@@ -212,6 +223,7 @@
             height: auto !important;
             flex-basis: auto !important;
         }
+
         .section:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 56px rgba(90, 60, 160, 0.14);
@@ -229,6 +241,7 @@
             gap: 8px;
             letter-spacing: -0.2px;
         }
+
         .section h2::before {
             content: "📋";
             font-size: 1.1rem;
@@ -252,6 +265,7 @@
             justify-content: center;
             line-height: 1;
         }
+
         .section .delete-btn:hover {
             color: #E53935;
             background: rgba(229, 57, 53, 0.08);
@@ -274,10 +288,12 @@
             border: 1px solid rgba(124, 77, 255, 0.06);
             flex: 1;
         }
+
         #ann:hover {
             background: linear-gradient(135deg, rgba(124, 77, 255, 0.14), rgba(68, 138, 255, 0.10));
             transform: scale(1.01);
         }
+
         #ann h2 {
             border: none !important;
             padding: 0 !important;
@@ -288,14 +304,17 @@
             float: none !important;
             flex-shrink: 0;
         }
+
         #ann h2::before {
             content: none !important;
         }
+
         #ann>div {
             padding: 0 !important;
             margin-left: auto;
             flex-shrink: 0;
         }
+
         #ann>div img {
             width: 44px !important;
             height: 44px !important;
@@ -327,6 +346,7 @@
             color: rgba(26, 26, 46, 0.70);
             word-break: break-word;
         }
+
         .record-item:last-child {
             border-bottom: none;
         }
@@ -338,11 +358,13 @@
             font-size: 0.7rem;
             min-width: 70px;
         }
+
         .record-historical {
             flex: 1;
             font-weight: 500;
             color: var(--md-primary);
         }
+
         .record-delete {
             flex-shrink: 0;
             background: transparent;
@@ -354,6 +376,7 @@
             transition: var(--md-transition);
             line-height: 1;
         }
+
         .record-delete:hover {
             color: #E53935;
             transform: scale(1.2);
@@ -379,6 +402,7 @@
             box-shadow: var(--md-shadow);
             border: 1px solid rgba(255, 255, 255, 0.50);
         }
+
         #xsfw #lsjl {
             border: none !important;
             padding: 0 !important;
@@ -388,11 +412,13 @@
             gap: 6px;
             align-items: center;
         }
+
         #xsfw #lsjl:not(:last-child)::after {
             content: "·";
             color: rgba(26, 26, 46, 0.20);
             margin: 0 4px;
         }
+
         #xsfw select {
             padding: 6px 18px 6px 14px;
             border-radius: 40px;
@@ -406,10 +432,12 @@
             cursor: pointer;
             transition: var(--md-transition);
         }
+
         #xsfw select:hover {
             border-color: var(--md-primary-light);
             background: rgba(255, 255, 255, 0.80);
         }
+
         #xsfw select:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.12);
@@ -421,6 +449,7 @@
             gap: 22px;
             margin-bottom: 20px;
         }
+
         #can>header {
             background: var(--md-surface);
             backdrop-filter: blur(16px) saturate(1.3);
@@ -434,10 +463,12 @@
             height: 260px !important;
             transition: var(--md-transition);
         }
+
         #can>header:hover {
             transform: translateY(-2px);
             box-shadow: 0 14px 48px rgba(90, 60, 160, 0.10);
         }
+
         #can>header canvas {
             width: 100% !important;
             height: 100% !important;
@@ -448,18 +479,22 @@
                 grid-template-columns: 1fr;
                 gap: 18px;
             }
+
             #can>header {
                 height: 220px !important;
             }
+
             #xsfw {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 10px;
                 padding: 16px 18px;
             }
+
             #xsfw #lsjl {
                 justify-content: center;
             }
+
             #xsfw select {
                 width: 100%;
             }
@@ -475,16 +510,19 @@
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
             overflow: hidden;
         }
+
         .modal-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 18px 24px 12px !important;
             background: transparent !important;
         }
+
         .modal-header .modal-title {
             font-weight: 700;
             font-size: 1.25rem;
             color: #1A1A2E;
         }
+
         .modal-header .btn-danger {
             background: transparent !important;
             border: none !important;
@@ -493,10 +531,12 @@
             padding: 0 8px;
             transition: var(--md-transition);
         }
+
         .modal-header .btn-danger:hover {
             color: #E53935 !important;
             transform: rotate(90deg);
         }
+
         .modal-body {
             padding: 16px 24px 28px !important;
             position: relative;
@@ -514,6 +554,7 @@
             z-index: 1 !important;
             margin-bottom: 18px;
         }
+
         #gd {
             width: 50% !important;
             height: 100% !important;
@@ -522,6 +563,7 @@
             transition: margin-left 0.4s cubic-bezier(0.2, 0, 0, 1);
             box-shadow: 0 4px 12px rgba(124, 77, 255, 0.25);
         }
+
         #L,
         #R {
             position: absolute !important;
@@ -540,8 +582,14 @@
             letter-spacing: 0.3px;
             background: transparent !important;
         }
-        #L { left: 0 !important; }
-        #R { right: 0 !important; }
+
+        #L {
+            left: 0 !important;
+        }
+
+        #R {
+            right: 0 !important;
+        }
 
         .search-input {
             width: 100%;
@@ -557,11 +605,13 @@
             margin-bottom: 16px;
             color: #1A1A2E;
         }
+
         .search-input:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.10);
             background: rgba(255, 255, 255, 0.90);
         }
+
         .search-input::placeholder {
             color: rgba(26, 26, 46, 0.30);
         }
@@ -573,6 +623,7 @@
             max-width: 100% !important;
             margin: 0 !important;
         }
+
         .display {
             background: rgba(255, 255, 255, 0.70);
             backdrop-filter: blur(8px);
@@ -583,12 +634,14 @@
             min-height: 60px;
             border: 1px solid rgba(0, 0, 0, 0.04);
         }
+
         .input-value {
             font-size: 2.2rem;
             font-weight: 700;
             color: #1A1A2E;
             letter-spacing: 0.5px;
         }
+
         .placeholders {
             font-size: 0.75rem;
             color: rgba(26, 26, 46, 0.25);
@@ -599,6 +652,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
+
         .key {
             padding: 16px 0;
             border: none;
@@ -613,29 +667,37 @@
             color: #1A1A2E;
             user-select: none;
         }
+
         .key:active {
             transform: scale(0.92);
         }
+
         .key.number {
             background: rgba(255, 255, 255, 0.60);
         }
+
         .key.number:hover {
             background: rgba(255, 255, 255, 0.90);
         }
+
         .key.operation {
             background: rgba(124, 77, 255, 0.08);
             color: var(--md-primary);
         }
+
         .key.operation:hover {
             background: rgba(124, 77, 255, 0.14);
         }
+
         .key.backspace {
             background: rgba(229, 57, 53, 0.06);
             color: #E53935;
         }
+
         .key.backspace:hover {
             background: rgba(229, 57, 53, 0.12);
         }
+
         .key.confirm {
             background: linear-gradient(135deg, var(--md-primary), var(--md-secondary));
             color: #fff;
@@ -643,20 +705,26 @@
             font-weight: 700;
             box-shadow: 0 4px 16px rgba(124, 77, 255, 0.25);
         }
+
         .key.confirm:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(124, 77, 255, 0.32);
         }
+
         .key.zero {
             grid-column: span 2;
         }
+
         .instructions {
             font-size: 0.7rem;
             color: rgba(26, 26, 46, 0.25);
             text-align: center;
             margin-top: 10px;
         }
-        #nr { display: none; }
+
+        #nr {
+            display: none;
+        }
 
         /* 加载覆盖层 */
         .overlay {
@@ -676,10 +744,12 @@
             visibility: hidden;
             transition: all 0.5s ease;
         }
+
         .overlay.active {
             opacity: 1;
             visibility: visible;
         }
+
         .overlay-content {
             background: var(--md-surface);
             backdrop-filter: blur(32px) saturate(1.4);
@@ -695,16 +765,19 @@
             transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1), opacity 0.5s ease;
             opacity: 0;
         }
+
         .overlay.active .overlay-content {
             transform: translateY(0) scale(1);
             opacity: 1;
         }
+
         .overlay-content h3 {
             color: var(--md-primary-dark);
             font-weight: 700;
             font-size: 1.3rem;
             margin-bottom: 8px;
         }
+
         .overlay-content p {
             color: rgba(26, 26, 46, 0.50);
             font-size: 0.95rem;
@@ -718,22 +791,27 @@
             border-radius: var(--md-radius) !important;
             border: none !important;
         }
+
         #addPlatformModal .modal-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 18px 24px 12px !important;
         }
+
         #addPlatformModal .modal-header .modal-title {
             font-weight: 700;
             color: #1A1A2E;
         }
+
         #addPlatformModal .modal-body {
             padding: 16px 24px 20px !important;
         }
+
         #addPlatformModal .form-label {
             font-weight: 600;
             font-size: 0.9rem;
             color: rgba(26, 26, 46, 0.70);
         }
+
         #addPlatformModal .form-select,
         #addPlatformModal .form-control {
             border-radius: var(--md-radius-xs);
@@ -744,11 +822,13 @@
             backdrop-filter: blur(8px);
             transition: var(--md-transition);
         }
+
         #addPlatformModal .form-select:focus,
         #addPlatformModal .form-control:focus {
             border-color: var(--md-primary);
             box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.10);
         }
+
         #addPlatformModal .btn-primary {
             background: var(--md-primary);
             border: none;
@@ -757,11 +837,13 @@
             font-weight: 600;
             transition: var(--md-transition);
         }
+
         #addPlatformModal .btn-primary:hover {
             background: #6D3FE0;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(124, 77, 255, 0.30);
         }
+
         #addPlatformModal .btn-secondary {
             border-radius: 60px;
             padding: 10px 28px;
@@ -770,9 +852,11 @@
             color: rgba(26, 26, 46, 0.60);
             transition: var(--md-transition);
         }
+
         #addPlatformModal .btn-secondary:hover {
             background: rgba(0, 0, 0, 0.04);
         }
+
         #addPlatformModal .modal-footer {
             border-top: 1px solid rgba(0, 0, 0, 0.04) !important;
             padding: 12px 24px 20px !important;
@@ -780,32 +864,107 @@
 
         /* 响应式 */
         @media (max-width: 640px) {
-            .content { padding: 12px 10px 20px; }
-            .sections-container { grid-template-columns: 1fr; gap: 16px; }
-            .section { min-height: 240px; padding: 16px; }
-            .modal-body { padding: 12px 16px 20px !important; }
-            .keyboard { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .key { padding: 14px 0; font-size: 1rem; }
-            .input-value { font-size: 1.8rem; }
-            #containers { padding: 12px !important; }
-            #ann h2 { font-size: 1.2rem !important; }
-            #ann>div img { width: 36px !important; height: 36px !important; }
-            .add-platform-btn { width: 100%; justify-content: center; padding: 14px 20px; font-size: 0.95rem; }
-            .add-platform { justify-content: center; padding: 14px 20px; font-size: 0.95rem; }
+            .content {
+                padding: 12px 10px 20px;
+            }
+
+            .sections-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .section {
+                min-height: 240px;
+                padding: 16px;
+            }
+
+            .modal-body {
+                padding: 12px 16px 20px !important;
+            }
+
+            .keyboard {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .key {
+                padding: 14px 0;
+                font-size: 1rem;
+            }
+
+            .input-value {
+                font-size: 1.8rem;
+            }
+
+            #containers {
+                padding: 12px !important;
+            }
+
+            #ann h2 {
+                font-size: 1.2rem !important;
+            }
+
+            #ann>div img {
+                width: 36px !important;
+                height: 36px !important;
+            }
+
+            .add-platform-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
+
+            .add-platform {
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 0.95rem;
+            }
         }
+
         @media (max-width: 400px) {
-            .love-counter { font-size: 0.9rem; flex-direction: column; gap: 4px; }
-            #myFooter { padding: 16px; }
-            #opText { font-size: 0.75rem; padding: 4px 12px; }
-            .key { padding: 12px 0; font-size: 0.9rem; }
-            .key.confirm { font-size: 0.9rem; }
+            .love-counter {
+                font-size: 0.9rem;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            #myFooter {
+                padding: 16px;
+            }
+
+            #opText {
+                font-size: 0.75rem;
+                padding: 4px 12px;
+            }
+
+            .key {
+                padding: 12px 0;
+                font-size: 0.9rem;
+            }
+
+            .key.confirm {
+                font-size: 0.9rem;
+            }
         }
 
         /* 兼容旧样式 */
-        .section[style*="position:relative"] { position: relative !important; }
-        #ann[style*="float:left"] { float: none !important; }
-        #ls[style*="float:right"] { float: none !important; }
-        #ann h2[style*="float:left"] { float: none !important; }
+        .section[style*="position:relative"] {
+            position: relative !important;
+        }
+
+        #ann[style*="float:left"] {
+            float: none !important;
+        }
+
+        #ls[style*="float:right"] {
+            float: none !important;
+        }
+
+        #ann h2[style*="float:left"] {
+            float: none !important;
+        }
 
         canvas {
             max-width: 100%;
@@ -918,7 +1077,8 @@
                             <div v-for="item in srys.slice().reverse()" :key="item.id" class="record-item">
                                 <span class="record-time">{{ item.created_at }}</span>
                                 <span class="record-historical" style="color:red;">{{ item.historical }}</span>
-                                <button class="record-delete" @click="deleteSrysRecord(item.id)" title="删除此记录">✕</button>
+                                <button class="record-delete" @click="deleteSrysRecord(item.id)"
+                                    title="删除此记录">✕</button>
                             </div>
                         </div>
                     </section>
@@ -938,7 +1098,8 @@
                             <div v-for="item in p.items.slice().reverse()" :key="item.id" class="record-item">
                                 <span class="record-time">{{ item.created_at }}</span>
                                 <span class="record-historical" style="color:red;">{{ item.historical }}</span>
-                                <button class="record-delete" @click="deletePlatformRecord(p.id, item.id)" title="删除此记录">✕</button>
+                                <button class="record-delete" @click="deletePlatformRecord(p.id, item.id)"
+                                    title="删除此记录">✕</button>
                             </div>
                         </div>
                     </section>
@@ -948,8 +1109,8 @@
                 <div id="xsfw">
                     <label id="lsjl" for="skill-level">📊 范围：</label>
                     <select id="skill-level" name="skill-level">
-                        <option value="yizhou">一周</option>
-                        <option value="yiyue" selected>一月</option>
+                        <option value="yizhou" selected>一周</option>
+                        <option value="yiyue">一月</option>
                         <option value="yinian">一年</option>
                         <option value="quanbu">全部</option>
                     </select>
@@ -1006,7 +1167,7 @@
         // ============================================================
         // 工具函数（不变）
         // ============================================================
-        function nowISO() { return new Date().toISOString(); }
+        function nowISO() {return new Date().toISOString();}
 
         function formatTime(iso) {
             if (!iso) return '';
@@ -1016,7 +1177,7 @@
                 ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
         }
 
-        function genId() { return Date.now() + '_' + Math.random().toString(36).slice(2, 6); }
+        function genId() {return Date.now() + '_' + Math.random().toString(36).slice(2, 6);}
 
         function extractNum(str) {
             if (!str) return 0;
@@ -1031,7 +1192,7 @@
                 if (isNaN(d.getTime())) return '';
                 const pad = n => String(n).padStart(2, '0');
                 return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-            } catch (_) { return ''; }
+            } catch (_) {return '';}
         }
 
         function getTodayLocalStr() {
@@ -1045,13 +1206,13 @@
         // ============================================================
         var STORE_KEY_PREFIX = 'platform_';
 
-        function getPlatformDataKey(platformId) { return STORE_KEY_PREFIX + platformId + '_data'; }
+        function getPlatformDataKey(platformId) {return STORE_KEY_PREFIX + platformId + '_data';}
 
         function loadPlatformData(platformId) {
             try {
                 var raw = localStorage.getItem(getPlatformDataKey(platformId));
                 return raw ? JSON.parse(raw) : [];
-            } catch (_) { return []; }
+            } catch (_) {return [];}
         }
 
         function savePlatformData(platformId, data) {
@@ -1064,7 +1225,7 @@
             try {
                 var raw = localStorage.getItem(PLATFORMS_LIST_KEY);
                 return raw ? JSON.parse(raw) : [];
-            } catch (_) { return []; }
+            } catch (_) {return [];}
         }
 
         function savePlatformsList(list) {
@@ -1077,7 +1238,7 @@
             try {
                 var raw = localStorage.getItem(SRYS_KEY);
                 return raw ? JSON.parse(raw) : [];
-            } catch (_) { return []; }
+            } catch (_) {return [];}
         }
 
         function saveSrys(data) {
@@ -1096,7 +1257,7 @@
 
         new Vue({
             el: '#app',
-            data: function() {
+            data: function () {
                 return {
                     srys: [],
                     rsr: '0.00',
@@ -1125,14 +1286,19 @@
                 vueInstance = this;
                 this.loadAllData();
 
-                setTimeout(function() {
+                setTimeout(function () {
                     document.getElementById('overlay').classList.remove('active');
                     document.body.style.overflow = '';
                 }, 300);
 
                 var sel = document.getElementById('skill-level');
                 if (sel) {
-                    sel.addEventListener('change', function() {
+                    var initVal = sel.value;
+                    if (initVal === 'yizhou') this.times = 7;
+                    else if (initVal === 'yiyue') this.times = 30;
+                    else if (initVal === 'yinian') this.times = 365;
+                    else if (initVal === 'quanbu') this.times = 9999;
+                    sel.addEventListener('change', function () {
                         var val = sel.value;
                         if (val === 'yizhou') vueInstance.times = 7;
                         else if (val === 'yiyue') vueInstance.times = 30;
@@ -1143,11 +1309,11 @@
                 }
 
                 this.fetchHitokoto();
-                this.$nextTick(function() { this.mrzc(); }.bind(this));
+                this.$nextTick(function () {this.mrzc();}.bind(this));
                 this.bindAddPlatformEvents();
             },
 
-            mounted: function() {
+            mounted: function () {
                 this.bindKeyboardOnce();
                 this.bindConfirmButton();
             },
@@ -1200,7 +1366,7 @@
                     this.isPulling = true;
                     try {
                         await this.pullAndMerge();
-                       // alert('✅ 已从云端拉取并合并到本地（未上传）');
+                        // alert('✅ 已从云端拉取并合并到本地（未上传）');
                     } catch (e) {
                         alert('❌ 拉取失败: ' + e.message);
                     }
@@ -1238,9 +1404,9 @@
                 },
 
                 // ----- 其余方法（不变） -----
-                loadAllData: function() {
+                loadAllData: function () {
                     var srys = loadSrys();
-                    this.srys = srys.map(function(item) {
+                    this.srys = srys.map(function (item) {
                         return {
                             ...item,
                             created_at: formatTime(item.created_at),
@@ -1249,12 +1415,12 @@
                     });
 
                     var platformsList = loadPlatformsList();
-                    this.platforms = platformsList.map(function(p) {
+                    this.platforms = platformsList.map(function (p) {
                         var items = loadPlatformData(p.id);
-                        var amount = items.reduce(function(s, i) { return s + (i.amount || 0); }, 0);
+                        var amount = items.reduce(function (s, i) {return s + (i.amount || 0);}, 0);
                         return {
                             ...p,
-                            items: items.map(function(item) {
+                            items: items.map(function (item) {
                                 return {
                                     ...item,
                                     created_at: formatTime(item.created_at),
@@ -1283,7 +1449,7 @@
                     this.mrzc();
                 },
 
-                calcTotalRemain: function() {
+                calcTotalRemain: function () {
                     var srys = loadSrys();
                     var total = 0;
                     for (var i = 0; i < srys.length; i++) {
@@ -1297,7 +1463,7 @@
                     this.totalRemain = parseFloat(total.toFixed(2));
                 },
 
-                calcTotalDebt: function() {
+                calcTotalDebt: function () {
                     var debt = 0;
                     for (var i = 0; i < this.platforms.length; i++) {
                         debt += parseFloat(this.platforms[i].amount || 0);
@@ -1305,17 +1471,17 @@
                     this.totalDebt = parseFloat(debt.toFixed(2));
                 },
 
-                showAddPlatformModal: function() {
+                showAddPlatformModal: function () {
                     var modal = new bootstrap.Modal(document.getElementById('addPlatformModal'));
                     modal.show();
                     document.getElementById('presetSelect').value = 'custom';
                     document.getElementById('platformNameInput').value = '';
                 },
 
-                bindAddPlatformEvents: function() {
+                bindAddPlatformEvents: function () {
                     var presetSelect = document.getElementById('presetSelect');
                     var nameInput = document.getElementById('platformNameInput');
-                    presetSelect.addEventListener('change', function() {
+                    presetSelect.addEventListener('change', function () {
                         if (this.value !== 'custom') {
                             nameInput.value = this.value;
                         } else {
@@ -1323,19 +1489,19 @@
                         }
                     });
 
-                    document.getElementById('confirmAddPlatform').addEventListener('click', function() {
+                    document.getElementById('confirmAddPlatform').addEventListener('click', function () {
                         var name = nameInput.value.trim();
                         if (!name) {
                             alert('请输入板块名称');
                             return;
                         }
-                        var exists = vueInstance.platforms.some(function(p) { return p.name === name; });
+                        var exists = vueInstance.platforms.some(function (p) {return p.name === name;});
                         if (exists) {
                             alert('已存在同名板块，请换一个名称');
                             return;
                         }
                         var id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5);
-                        var newPlatform = { id: id, name: name };
+                        var newPlatform = {id: id, name: name};
                         var list = loadPlatformsList();
                         list.push(newPlatform);
                         savePlatformsList(list);
@@ -1345,53 +1511,53 @@
                     });
                 },
 
-                deletePlatform: function(platformId) {
+                deletePlatform: function (platformId) {
                     if (!confirm('确定要删除该板块及其所有数据吗？')) return;
                     var list = loadPlatformsList();
-                    list = list.filter(function(p) { return p.id !== platformId; });
+                    list = list.filter(function (p) {return p.id !== platformId;});
                     savePlatformsList(list);
                     localStorage.removeItem(getPlatformDataKey(platformId));
                     this.loadAllData();
                 },
 
-                savePlatformRecord: function(platformId, record) {
+                savePlatformRecord: function (platformId, record) {
                     var items = loadPlatformData(platformId);
                     items.push(record);
                     savePlatformData(platformId, items);
                     this.loadAllData();
                 },
 
-                saveSrysRecord: function(record) {
+                saveSrysRecord: function (record) {
                     var items = loadSrys();
                     items.push(record);
                     saveSrys(items);
                     this.loadAllData();
                 },
 
-                deleteSrysRecord: function(recordId) {
+                deleteSrysRecord: function (recordId) {
                     if (!confirm('确定要删除这条记录吗？')) return;
                     var items = loadSrys();
-                    var newItems = items.filter(function(item) { return item.id !== recordId; });
+                    var newItems = items.filter(function (item) {return item.id !== recordId;});
                     saveSrys(newItems);
                     this.loadAllData();
                 },
 
-                deletePlatformRecord: function(platformId, recordId) {
+                deletePlatformRecord: function (platformId, recordId) {
                     if (!confirm('确定要删除这条记录吗？')) return;
                     var items = loadPlatformData(platformId);
-                    var newItems = items.filter(function(item) { return item.id !== recordId; });
+                    var newItems = items.filter(function (item) {return item.id !== recordId;});
                     savePlatformData(platformId, newItems);
                     this.loadAllData();
                 },
 
-                showModal: function(platformId) {
+                showModal: function (platformId) {
                     currentPlatformId = platformId;
                     if (platformId === 'sry') {
                         this.modalTitle = '今日入账';
                         this.l = '提现';
                         this.r = '入账';
                     } else {
-                        var p = this.platforms.find(function(p) { return p.id === platformId; });
+                        var p = this.platforms.find(function (p) {return p.id === platformId;});
                         this.modalTitle = p ? p.name : '未知板块';
                         this.l = '借款';
                         this.r = '还款';
@@ -1409,13 +1575,13 @@
                     this.bindConfirmButton();
                 },
 
-                getPlatformName: function(platformId) {
+                getPlatformName: function (platformId) {
                     if (platformId === 'sry') return '今日入账';
-                    var p = this.platforms.find(function(p) { return p.id === platformId; });
+                    var p = this.platforms.find(function (p) {return p.id === platformId;});
                     return p ? p.name : '未知';
                 },
 
-                SJ: function() {
+                SJ: function () {
                     if (currentPlatformId === 'sry') currentType = '提现';
                     else currentType = '借款';
                     document.getElementById('input').placeholder = '请输入备注（如：购物、餐饮）';
@@ -1424,7 +1590,7 @@
                     document.getElementById('R').style.color = '#000000';
                 },
 
-                DN: function() {
+                DN: function () {
                     if (currentPlatformId === 'sry') currentType = '入账';
                     else currentType = '还款';
                     document.getElementById('input').placeholder = '输入收入来源';
@@ -1433,15 +1599,15 @@
                     document.getElementById('R').style.color = '#FFFF';
                 },
 
-                bindConfirmButton: function() {
+                bindConfirmButton: function () {
                     var btn = document.getElementById('keyConfirm');
                     if (!btn) return;
                     var newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', function() { vueInstance.handleConfirm(); });
+                    newBtn.addEventListener('click', function () {vueInstance.handleConfirm();});
                 },
 
-                handleConfirm: function() {
+                handleConfirm: function () {
                     var platformId = currentPlatformId;
                     if (!platformId) return;
 
@@ -1494,12 +1660,12 @@
                     alert('✅ 已保存：' + historical);
                 },
 
-                bindKeyboardOnce: function() {
+                bindKeyboardOnce: function () {
                     var container = document.getElementById('containers');
                     if (!container) return;
 
                     container.removeEventListener('click', this._containerClickHandler);
-                    this._containerClickHandler = function(e) {
+                    this._containerClickHandler = function (e) {
                         var target = e.target.closest('.key');
                         if (!target) return;
                         var display = document.getElementById('displayAmount');
@@ -1518,7 +1684,7 @@
                             display.textContent = cur + val;
                         } else if (target.classList.contains('backspace')) {
                             var cur = display.textContent || '0.00';
-                            if (cur.length <= 1) { display.textContent = '0.00'; return; }
+                            if (cur.length <= 1) {display.textContent = '0.00'; return;}
                             display.textContent = cur.slice(0, -1);
                             if (display.textContent === '') display.textContent = '0.00';
                         }
@@ -1526,12 +1692,12 @@
                     container.addEventListener('click', this._containerClickHandler);
 
                     if (this._keyboardHandler) document.removeEventListener('keydown', this._keyboardHandler);
-                    this._keyboardHandler = function(e) {
+                    this._keyboardHandler = function (e) {
                         if (!document.getElementById('myModal').classList.contains('show')) return;
                         var key = e.key;
                         var display = document.getElementById('displayAmount');
                         if (!display) return;
-                        var handleKey = function(val) {
+                        var handleKey = function (val) {
                             if (val === '.' && display.textContent.includes('.')) return;
                             var cur = display.textContent || '0.00';
                             if (cur === '0.00' && val !== '.') cur = '';
@@ -1551,7 +1717,7 @@
                         } else if (key === 'Backspace') {
                             e.preventDefault();
                             var cur = display.textContent || '0.00';
-                            if (cur.length <= 1) { display.textContent = '0.00'; return; }
+                            if (cur.length <= 1) {display.textContent = '0.00'; return;}
                             display.textContent = cur.slice(0, -1);
                             if (display.textContent === '') display.textContent = '0.00';
                         } else if (key === 'Enter') {
@@ -1564,7 +1730,7 @@
                 },
 
                 // 图表方法（不变）
-                mrzc: function() {
+                mrzc: function () {
                     var self = this;
 
                     var records = [];
@@ -1575,10 +1741,10 @@
                         var dateKey = getLocalDateStr(item.created_at);
                         if (!dateKey) continue;
                         if (item.historical && item.historical.startsWith('提现')) {
-                            records.push({ date: dateKey, amount: extractNum(item.historical), type: 'withdraw' });
+                            records.push({date: dateKey, amount: extractNum(item.historical), type: 'withdraw'});
                         }
                         if (item.historical && item.historical.startsWith('入账')) {
-                            records.push({ date: dateKey, amount: extractNum(item.historical), type: 'income' });
+                            records.push({date: dateKey, amount: extractNum(item.historical), type: 'income'});
                         }
                     }
 
@@ -1591,7 +1757,7 @@
                             var dateKey2 = getLocalDateStr(it.created_at);
                             if (!dateKey2) continue;
                             if (it.historical && it.historical.startsWith('借款')) {
-                                records.push({ date: dateKey2, amount: extractNum(it.historical), type: 'borrow' });
+                                records.push({date: dateKey2, amount: extractNum(it.historical), type: 'borrow'});
                             }
                         }
                     }
@@ -1601,7 +1767,7 @@
                         var rec = records[m];
                         if (!rec.date) continue;
                         if (!dateMap.has(rec.date)) {
-                            dateMap.set(rec.date, { borrow: 0, withdraw: 0, income: 0 });
+                            dateMap.set(rec.date, {borrow: 0, withdraw: 0, income: 0});
                         }
                         var dayData = dateMap.get(rec.date);
                         if (rec.type === 'income') dayData.income += rec.amount;
@@ -1609,7 +1775,7 @@
                         else if (rec.type === 'withdraw') dayData.withdraw += rec.amount;
                     }
 
-                    var sortedDates = Array.from(dateMap.keys()).sort(function(a, b) {
+                    var sortedDates = Array.from(dateMap.keys()).sort(function (a, b) {
                         return new Date(a) - new Date(b);
                     });
 
@@ -1652,18 +1818,22 @@
                     this.renderCharts(this.sj, this.je, this.sr, netData);
                 },
 
-                renderCharts: function(labels, spendData, incomeData, netData) {
+                renderCharts: function (labels, spendData, incomeData, netData) {
                     var ctx = document.getElementById('lineChart');
                     var ctxto = document.getElementById('lineChartto');
 
-                    if (myChart) { myChart.destroy();
-                        myChart = null; }
-                    if (myChartto) { myChartto.destroy();
-                        myChartto = null; }
+                    if (myChart) {
+                        myChart.destroy();
+                        myChart = null;
+                    }
+                    if (myChartto) {
+                        myChartto.destroy();
+                        myChartto = null;
+                    }
 
-                    var spendNum = spendData.map(function(v) { return parseFloat(v) || 0; });
-                    var incomeNum = incomeData.map(function(v) { return parseFloat(v) || 0; });
-                    var netNum = netData.map(function(v) { return parseFloat(v) || 0; });
+                    var spendNum = spendData.map(function (v) {return parseFloat(v) || 0;});
+                    var incomeNum = incomeData.map(function (v) {return parseFloat(v) || 0;});
+                    var netNum = netData.map(function (v) {return parseFloat(v) || 0;});
 
                     if (labels.length === 0) {
                         labels = ['暂无数据'];
@@ -1698,12 +1868,12 @@
                             maintainAspectRatio: false,
                             plugins: {
                                 legend: {
-                                    labels: { boxWidth: 12, padding: 12, font: { size: 11 } }
+                                    labels: {boxWidth: 12, padding: 12, font: {size: 11}}
                                 }
                             },
                             scales: {
-                                x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
-                                y: { grid: { color: 'rgba(0,0,0,0.04)' } }
+                                x: {type: 'logarithmic', beginAtZero: false, grid: {color: 'rgba(0,0,0,0.04)'}},
+                                y: {grid: {color: 'rgba(0,0,0,0.04)'}}
                             }
                         }
                     });
@@ -1715,10 +1885,10 @@
                             datasets: [{
                                 label: '每日净收入',
                                 data: netNum,
-                                backgroundColor: netNum.map(function(v) {
+                                backgroundColor: netNum.map(function (v) {
                                     return v >= 0 ? 'rgba(68,138,255,0.55)' : 'rgba(229,57,53,0.50)';
                                 }),
-                                borderColor: netNum.map(function(v) {
+                                borderColor: netNum.map(function (v) {
                                     return v >= 0 ? 'rgba(68,138,255,0.90)' : 'rgba(229,57,53,0.85)';
                                 }),
                                 borderWidth: 1.5,
@@ -1731,29 +1901,29 @@
                             maintainAspectRatio: false,
                             plugins: {
                                 legend: {
-                                    labels: { boxWidth: 12, padding: 12, font: { size: 11 } }
+                                    labels: {boxWidth: 12, padding: 12, font: {size: 11}}
                                 }
                             },
                             scales: {
-                                x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
-                                y: { grid: { color: 'rgba(0,0,0,0.04)' } }
+                                x: {beginAtZero: true, grid: {color: 'rgba(0,0,0,0.04)'}},
+                                y: {grid: {color: 'rgba(0,0,0,0.04)'}}
                             }
                         }
                     });
                 },
 
-                timesdy: function() {
+                timesdy: function () {
                     this.mrzc();
                 },
 
-                fetchHitokoto: function() {
+                fetchHitokoto: function () {
                     fetch('https://v1.hitokoto.cn/?max_length=10')
-                        .then(function(res) { return res.json(); })
-                        .then(function(data) {
+                        .then(function (res) {return res.json();})
+                        .then(function (data) {
                             if (data && data.hitokoto) document.getElementById('opText').textContent = data
                                 .hitokoto;
                         })
-                        .catch(function() {
+                        .catch(function () {
                             document.getElementById('opText').textContent = '今天你吃了么';
                         });
                 }
